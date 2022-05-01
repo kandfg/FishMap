@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateImages extends Migration
+class CreateClasses extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,10 @@ class CreateImages extends Migration
      */
     public function up()
     {
-        Schema::create('images', function (Blueprint $table) {
+        Schema::create('classes', function (Blueprint $table) {
             $table->id();
-            $table->string('attachable_type',255)->comment('來源model');
-            $table->string('attachable_id',255)->comment('來源表ID');
-            $table->string('path', 255)->comment('路徑');
-            $table->string('filename', 255)->comment('檔名');
+            $table->string('section_name')->unique()->comment('科名');
+            $table->string('taiwan_distribution')->comment('台灣原生分佈');
             $table->timestamps();
         });
     }
@@ -30,6 +28,6 @@ class CreateImages extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('images');
+        Schema::dropIfExists('classes');
     }
 }
