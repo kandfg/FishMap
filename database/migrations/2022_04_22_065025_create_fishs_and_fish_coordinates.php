@@ -29,7 +29,7 @@ class CreateFishsAndFishCoordinates extends Migration
             $table->integer('survey_hours')->comment('勘查時數');
             $table->date('survey_day')->comment('勘查日期');
             $table->integer('abundance')->comment('豐度(數量)');
-            $table->string('country')->comment('縣市');
+            $table->string('survey_place')->comment('採集地點');
             $table->decimal('longitude',10,6)->comment('經度');
             $table->decimal('latitude',10,6)->comment('緯度');
             $table->timestamps();
