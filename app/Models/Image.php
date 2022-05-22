@@ -9,6 +9,7 @@ class Image extends Model
 {
     use HasFactory;
     protected $guarded = [''];
+    protected $table = 'images';
     public function attachable()
     {
         return $this->morphTo();

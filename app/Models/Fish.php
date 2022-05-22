@@ -9,11 +9,12 @@ class Fish extends Model
 {
     use HasFactory;
     protected $guarded = [''];
+    protected $table = 'fishs';
     public function fishCoordinates(){
         return $this->hasMany(FishCoordinate::class);
     }
     public function fishClasses(){
-        return $this->belongsTo(fishClass::class);
+        return $this->belongsTo(fishClass::class,'class_id');
     }
     public function images()
     {
