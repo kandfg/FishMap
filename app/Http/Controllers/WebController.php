@@ -7,7 +7,7 @@ use App\Models\FishClass;
 class WebController extends Controller
 {
     public function getFish(){
-        $fishclasses=FishClass::all();
+        $fishclasses=FishClass::orderBy('id', 'asc')->get();
         foreach($fishclasses as $fishclass){
             $fishclass->fishs;
         }
