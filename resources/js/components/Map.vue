@@ -2,7 +2,7 @@
   <div>
     <div class="input-group mb-3">
       <span class="input-group-text" id="inputGroup-sizing-default">選擇科名</span>
-      <select class="form-select" aria-label="Default select example" v-model="selclass" name="class_id">
+      <select class="form-select" aria-label="Default select example" v-model="selclass" id="selectclass" name="class_id">
               <option :value="cla.id" v-for="(cla, index) in fishdata.data.class" :key="index">{{cla.section_name}}</option>
       </select>
       <span class="input-group-text" id="inputGroup-sizing-default">選擇魚類</span>
@@ -97,30 +97,31 @@ export default {
       })()
       const style = {
         variables: {
-          filterShape: 'all',
+          filterFish: 'all',
         },
         filter: [
           'case',
-          ['!=', ['var', 'filterShape'], 'all'],
-          ['==', ['get', 'shape'], ['var', 'filterShape']],
+          ['!=', ['var', 'filterFish'], 'all'],
+          ['==', ['get', 'fishName'], ['var', 'filterFish']],
           true,
         ],
         symbol: {
           symbolType: 'circle',
           size: 14,
-          color: 'rgb(255, 0, 0)',
+          color: 'black',
           opacity: 0.5,
         },
       };
-      const shapeSelect = document.getElementById('selectfish');
+      const chagefish= document.getElementById('selectclass');
+      const fishSelect = document.getElementById('selectfish');
       const shapeTypes = {
         all: 0,
       };
-      shapeSelect.addEventListener('input', function () {
-        style.variables.filterShape =shapeSelect.options[shapeSelect.selectedIndex].value;
+      fishSelect.addEventListener('change', function () {
+        style.variables.filterFish =fishSelect.options[fishSelect.selectedIndex].innerText;
+        console.log(style);
         map.render();
       });
-      // console.log(style);
       map.addLayer(
         new WebGLPointsLayer({
         source: vectorSource,

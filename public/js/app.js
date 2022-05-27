@@ -5401,25 +5401,26 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
       var style = {
         variables: {
-          filterShape: 'all'
+          filterFish: 'all'
         },
-        filter: ['case', ['!=', ['var', 'filterShape'], 'all'], ['==', ['get', 'shape'], ['var', 'filterShape']], true],
+        filter: ['case', ['!=', ['var', 'filterFish'], 'all'], ['==', ['get', 'fishName'], ['var', 'filterFish']], true],
         symbol: {
           symbolType: 'circle',
           size: 14,
-          color: 'rgb(255, 0, 0)',
+          color: 'black',
           opacity: 0.5
         }
       };
-      var shapeSelect = document.getElementById('selectfish');
+      var chagefish = document.getElementById('selectclass');
+      var fishSelect = document.getElementById('selectfish');
       var shapeTypes = {
         all: 0
       };
-      shapeSelect.addEventListener('input', function () {
-        style.variables.filterShape = shapeSelect.options[shapeSelect.selectedIndex].value;
+      fishSelect.addEventListener('change', function () {
+        style.variables.filterFish = fishSelect.options[fishSelect.selectedIndex].innerText;
+        console.log(style);
         map.render();
-      }); // console.log(style);
-
+      });
       map.addLayer(new ol_layer_WebGLPoints__WEBPACK_IMPORTED_MODULE_10__["default"]({
         source: vectorSource,
         style: style
@@ -42625,7 +42626,11 @@ var render = function () {
             },
           ],
           staticClass: "form-select",
-          attrs: { "aria-label": "Default select example", name: "class_id" },
+          attrs: {
+            "aria-label": "Default select example",
+            id: "selectclass",
+            name: "class_id",
+          },
           on: {
             change: function ($event) {
               var $$selectedVal = Array.prototype.filter
