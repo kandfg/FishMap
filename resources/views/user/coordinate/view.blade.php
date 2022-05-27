@@ -41,7 +41,7 @@
                 <td>{{$coordinate->created_at}}</td>
             <tr>
     </table>
-    <a class="btn btn-primary" href="{{ route('destory_coordinate') }}" role="button">刪除</a>
+    <a class="btn btn-primary" href="{{ route('destory_coordinate',$coordinate->id) }}" role="button">刪除</a>
     <a class="btn btn-primary" href="{{ route('coordinate') }}" role="button">回上頁</a>
     
 </div>

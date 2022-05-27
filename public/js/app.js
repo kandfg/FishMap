@@ -5328,6 +5328,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     return {
       map: null,
       selclass: 1,
+      selfish: 0,
       fishdata: {
         data: {
           "class": [{
@@ -5411,14 +5412,17 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           opacity: 0.5
         }
       };
-      var chagefish = document.getElementById('selectclass');
       var fishSelect = document.getElementById('selectfish');
+      var fishClass = document.getElementById('selectclass');
       var shapeTypes = {
         all: 0
       };
+      fishClass.addEventListener('change', function () {
+        style.variables.filterFish = 'all';
+        map.render();
+      });
       fishSelect.addEventListener('change', function () {
         style.variables.filterFish = fishSelect.options[fishSelect.selectedIndex].innerText;
-        console.log(style);
         map.render();
       });
       map.addLayer(new ol_layer_WebGLPoints__WEBPACK_IMPORTED_MODULE_10__["default"]({
@@ -5426,7 +5430,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         style: style
       }));
       map.on('moveend', function () {
-        var info = document.getElementById('info');
         var view = map.getView();
         var center = view.getCenter();
       });
@@ -5437,7 +5440,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
         if (feature) {
           var coordinate = feature.getGeometry().getCoordinates();
-          var a = feature.getGeometry().get('flatCoordinates');
           popup.setPosition([coordinate[0] + Math.round(event.coordinate[0] / 360) * 360, coordinate[1]]);
           $(element).popover({
             container: element,
@@ -42667,11 +42669,34 @@ var render = function () {
       _c(
         "select",
         {
+          directives: [
+            {
+              name: "model",
+              rawName: "v-model",
+              value: _vm.selfish,
+              expression: "selfish",
+            },
+          ],
           staticClass: "form-select",
           attrs: {
             "aria-label": "Default select example",
             id: "selectfish",
             name: "fish_id",
+          },
+          on: {
+            change: function ($event) {
+              var $$selectedVal = Array.prototype.filter
+                .call($event.target.options, function (o) {
+                  return o.selected
+                })
+                .map(function (o) {
+                  var val = "_value" in o ? o._value : o.value
+                  return val
+                })
+              _vm.selfish = $event.target.multiple
+                ? $$selectedVal
+                : $$selectedVal[0]
+            },
           },
         },
         _vm._l(

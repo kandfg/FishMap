@@ -52,7 +52,7 @@ class CoordinateController extends Controller
      */
     public function show($id)
     {
-        $coordinate=FishCoordinate::where("id",$id)->find(1);
+        $coordinate=FishCoordinate::find($id);
         return view("user.coordinate.view",["coordinate"=>$coordinate]);
     }
 
@@ -88,6 +88,6 @@ class CoordinateController extends Controller
      */
     public function destroy($id)
     {
-        
+        return 123;
     }
 }
