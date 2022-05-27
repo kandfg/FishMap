@@ -35,6 +35,8 @@
                         <div class="input-group mb-3">
                             <span class="input-group-text" id="inputGroup-sizing-default">採集地點</span>
                             <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" name="survey_place">
+                        </div>
+                        <div class="input-group mb-3">
                             <span class="input-group-text" id="inputGroup-sizing-default">緯度</span>
                             <input type="text" id="longitude"id="latitude" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" name="latitude">
                             <span class="input-group-text" id="inputGroup-sizing-default">經度</span>
@@ -42,6 +44,7 @@
                             <gecord></gecord>
                         </div>
                         <button type="submit" class="btn btn-primary">建立</button>
+                        
                     </form>
                 </div>
                 </div>

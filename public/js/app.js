@@ -5280,19 +5280,16 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var ol_ol_css__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ol/ol.css */ "./node_modules/ol/ol.css");
-/* harmony import */ var ol_style__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ol/style */ "./node_modules/ol/style/Style.js");
-/* harmony import */ var ol_style__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ol/style */ "./node_modules/ol/style/Circle.js");
-/* harmony import */ var ol_style__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ol/style */ "./node_modules/ol/style/Fill.js");
-/* harmony import */ var ol_index__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ol/index */ "./node_modules/ol/Feature.js");
-/* harmony import */ var ol_index__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ol/index */ "./node_modules/ol/Map.js");
-/* harmony import */ var ol_index__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ol/index */ "./node_modules/ol/View.js");
-/* harmony import */ var ol_index__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ol/index */ "./node_modules/ol/Overlay.js");
-/* harmony import */ var ol_source__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ol/source */ "./node_modules/ol/source/OSM.js");
-/* harmony import */ var ol_source__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ol/source */ "./node_modules/ol/source/Vector.js");
-/* harmony import */ var ol_geom__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ol/geom */ "./node_modules/ol/geom/Point.js");
-/* harmony import */ var ol_layer__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ol/layer */ "./node_modules/ol/layer/Tile.js");
-/* harmony import */ var ol_layer__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ol/layer */ "./node_modules/ol/layer/Vector.js");
+/* harmony import */ var ol_index__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ol/index */ "./node_modules/ol/Map.js");
+/* harmony import */ var ol_index__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ol/index */ "./node_modules/ol/View.js");
+/* harmony import */ var ol_index__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ol/index */ "./node_modules/ol/Feature.js");
+/* harmony import */ var ol_index__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ol/index */ "./node_modules/ol/Overlay.js");
+/* harmony import */ var ol_source__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ol/source */ "./node_modules/ol/source/OSM.js");
+/* harmony import */ var ol_geom__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ol/geom */ "./node_modules/ol/geom/Point.js");
+/* harmony import */ var ol_source__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ol/source */ "./node_modules/ol/source/Vector.js");
+/* harmony import */ var ol_layer__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ol/layer */ "./node_modules/ol/layer/Tile.js");
 /* harmony import */ var ol_proj__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ol/proj */ "./node_modules/ol/proj.js");
+/* harmony import */ var ol_layer_WebGLPoints__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ol/layer/WebGLPoints */ "./node_modules/ol/layer/WebGLPoints.js");
 
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
@@ -5316,7 +5313,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
-//
+
+
 
 
 
@@ -5339,76 +5337,129 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       },
       fishcoordinate: {
         data: {
-          fishcoordinates: []
+          fishCoordinates: ["latitude", "longitude"]
         }
       }
     };
   },
   methods: {
     initMap: function initMap() {
-      var element = document.getElementById('popup');
       var place = [120.863887, 24.657074];
-      var cordinates = [];
-      var point = new ol_geom__WEBPACK_IMPORTED_MODULE_3__["default"](place);
-      var feature = new ol_index__WEBPACK_IMPORTED_MODULE_4__["default"]({
-        geometry: new ol_geom__WEBPACK_IMPORTED_MODULE_3__["default"]((0,ol_proj__WEBPACK_IMPORTED_MODULE_2__.fromLonLat)([]))
-      });
-      var map = new ol_index__WEBPACK_IMPORTED_MODULE_5__["default"]({
+      var map = new ol_index__WEBPACK_IMPORTED_MODULE_3__["default"]({
         target: "map",
         //對應div id
-        view: new ol_index__WEBPACK_IMPORTED_MODULE_6__["default"]({
+        view: new ol_index__WEBPACK_IMPORTED_MODULE_4__["default"]({
           projection: "EPSG:4326",
           //使用这个坐标系
           center: [120.863887, 24.657074],
           //台灣台一座標
-          zoom: 14
+          zoom: 8
         }),
-        layers: [new ol_layer__WEBPACK_IMPORTED_MODULE_7__["default"]({
-          source: new ol_source__WEBPACK_IMPORTED_MODULE_8__["default"]() //圖片源頭OpenStreetMap
+        layers: [new ol_layer__WEBPACK_IMPORTED_MODULE_5__["default"]({
+          source: new ol_source__WEBPACK_IMPORTED_MODULE_6__["default"]() //圖片源頭OpenStreetMap
 
-        }), new ol_layer__WEBPACK_IMPORTED_MODULE_9__["default"]({
-          source: new ol_source__WEBPACK_IMPORTED_MODULE_10__["default"]({
-            features: [new ol_index__WEBPACK_IMPORTED_MODULE_4__["default"](point)]
-          }),
-          style: new ol_style__WEBPACK_IMPORTED_MODULE_11__["default"]({
-            image: new ol_style__WEBPACK_IMPORTED_MODULE_12__["default"]({
-              radius: 4,
-              fill: new ol_style__WEBPACK_IMPORTED_MODULE_13__["default"]({
-                color: 'black'
-              })
-            })
-          })
         })]
       });
-      var popup = new ol_index__WEBPACK_IMPORTED_MODULE_14__["default"]({
-        element: element,
-        positioning: 'bottom-center',
-        stopEvent: false,
-        offset: [0, -10]
+      var vectorSource = new ol_source__WEBPACK_IMPORTED_MODULE_7__["default"]({
+        features: [],
+        attributions: 'Fish Coordinate'
       });
-      map.addOverlay(popup);
+      ;
+
+      _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
+        var fishcoordinate, features;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                _context.next = 2;
+                return axios({
+                  url: 'http://localhost:8000/get-coordinate',
+                  method: 'get'
+                });
+
+              case 2:
+                fishcoordinate = _context.sent;
+                features = [];
+                Object.values(fishcoordinate.data.fishCoordinates).forEach(function (element) {
+                  var coords = [element.longitude, element.latitude];
+                  features.push(new ol_index__WEBPACK_IMPORTED_MODULE_8__["default"]({
+                    fishName: element.fishs.name,
+                    place: element.survey_place,
+                    geometry: new ol_geom__WEBPACK_IMPORTED_MODULE_9__["default"](coords)
+                  }));
+                });
+                vectorSource.addFeatures(features);
+
+              case 6:
+              case "end":
+                return _context.stop();
+            }
+          }
+        }, _callee);
+      }))();
+
+      var style = {
+        variables: {
+          filterShape: 'all'
+        },
+        filter: ['case', ['!=', ['var', 'filterShape'], 'all'], ['==', ['get', 'shape'], ['var', 'filterShape']], true],
+        symbol: {
+          symbolType: 'circle',
+          size: 14,
+          color: 'rgb(255, 0, 0)',
+          opacity: 0.5
+        }
+      };
+      var shapeSelect = document.getElementById('selectfish');
+      var shapeTypes = {
+        all: 0
+      };
+      shapeSelect.addEventListener('input', function () {
+        style.variables.filterShape = shapeSelect.options[shapeSelect.selectedIndex].value;
+        map.render();
+      }); // console.log(style);
+
+      map.addLayer(new ol_layer_WebGLPoints__WEBPACK_IMPORTED_MODULE_10__["default"]({
+        source: vectorSource,
+        style: style
+      }));
       map.on('moveend', function () {
         var info = document.getElementById('info');
         var view = map.getView();
         var center = view.getCenter();
       });
+      var element = document.getElementById('popup');
       map.on('click', function (event) {
         $(element).popover('dispose');
         var feature = map.getFeaturesAtPixel(event.pixel)[0];
 
         if (feature) {
           var coordinate = feature.getGeometry().getCoordinates();
+          var a = feature.getGeometry().get('flatCoordinates');
           popup.setPosition([coordinate[0] + Math.round(event.coordinate[0] / 360) * 360, coordinate[1]]);
           $(element).popover({
-            container: element.parentElement,
+            container: element,
             html: true,
             sanitize: false,
-            content: formatCoordinate(coordinate),
+            content: content(feature.get('fishName'), feature.get('place'), coordinate),
             placement: 'top'
           });
           $(element).popover('show');
         }
       });
+      var popup = new ol_index__WEBPACK_IMPORTED_MODULE_11__["default"]({
+        element: element,
+        positioning: 'bottom-center',
+        stopEvent: false,
+        offset: [0, -10]
+      });
+
+      function content(name, place, coordinate) {
+        return "\n          <table>\n            <tbody>\n              <tr><th>\u9B5A\u540D</th><td>".concat(name, "</td></tr>\n              <tr><th>\u7E23\u5E02</th><td>").concat(place, "</td></tr>\n              <tr><th>\u7D93\u5EA6</th><td>").concat(coordinate[0], "</td></tr>\n              <tr><th>\u7DEF\u5EA6</th><td>").concat(coordinate[1], "</td></tr>\n            </tbody>\n          </table>");
+      }
+
+      map.addOverlay(popup);
       map.on('pointermove', function (event) {
         if (map.hasFeatureAtPixel(event.pixel)) {
           map.getViewport().style.cursor = 'pointer';
@@ -5422,29 +5473,16 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       map.on('loadend', function () {
         map.getTargetElement().classList.remove('spinner');
       });
-
-      function formatCoordinate(coordinate) {
-        return "\n          <table>\n            <tbody>\n              <tr><th>\u9B5A\u540D</th><td>\u98EF\u5CF6\u5F0F\u9280\u9B88</td></tr>\n              <tr><th>\u7E23\u5E02</th><td>\u82D7\u6817</td></tr>\n              <tr><th>\u7D93\u5EA6</th><td>".concat(coordinate[0].toFixed(6), "</td></tr>\n              <tr><th>\u7DEF\u5EA6</th><td>").concat(coordinate[1].toFixed(6), "</td></tr>\n            </tbody>\n          </table>");
-      }
     },
     loadData: function loadData() {
       var _this = this;
 
-      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
-        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee2() {
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee2$(_context2) {
           while (1) {
-            switch (_context.prev = _context.next) {
+            switch (_context2.prev = _context2.next) {
               case 0:
-                _context.next = 2;
-                return axios.get('http://localhost:8000/get-coordinate').then(function (response) {
-                  return _this.fishcoordinate = response;
-                })["catch"](function (error) {
-                  // 请求失败处理
-                  console.log(error);
-                });
-
-              case 2:
-                _context.next = 4;
+                _context2.next = 2;
                 return axios.get('http://localhost:8000/get-fish').then(function (response) {
                   return _this.fishdata = response;
                 })["catch"](function (error) {
@@ -5452,12 +5490,12 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                   console.log(error);
                 });
 
-              case 4:
+              case 2:
               case "end":
-                return _context.stop();
+                return _context2.stop();
             }
           }
-        }, _callee);
+        }, _callee2);
       }))();
     }
   },
@@ -5506,8 +5544,8 @@ __webpack_require__.r(__webpack_exports__);
       function showPosition(position) {
         var lo = document.getElementById("longitude");
         var la = document.getElementById("latitude");
-        lo.value = position.coords.latitude;
-        la.value = position.coords.longitude;
+        lo.value = position.coords.latitude.toFixed(6);
+        la.value = position.coords.longitude.toFixed(6);
       }
     }
   }
@@ -5667,6 +5705,167 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 //     cluster: process.env.MIX_PUSHER_APP_CLUSTER,
 //     forceTLS: true
 // });
+
+/***/ }),
+
+/***/ "./node_modules/base64-js/index.js":
+/*!*****************************************!*\
+  !*** ./node_modules/base64-js/index.js ***!
+  \*****************************************/
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+
+exports.byteLength = byteLength
+exports.toByteArray = toByteArray
+exports.fromByteArray = fromByteArray
+
+var lookup = []
+var revLookup = []
+var Arr = typeof Uint8Array !== 'undefined' ? Uint8Array : Array
+
+var code = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/'
+for (var i = 0, len = code.length; i < len; ++i) {
+  lookup[i] = code[i]
+  revLookup[code.charCodeAt(i)] = i
+}
+
+// Support decoding URL-safe base64 strings, as Node.js does.
+// See: https://en.wikipedia.org/wiki/Base64#URL_applications
+revLookup['-'.charCodeAt(0)] = 62
+revLookup['_'.charCodeAt(0)] = 63
+
+function getLens (b64) {
+  var len = b64.length
+
+  if (len % 4 > 0) {
+    throw new Error('Invalid string. Length must be a multiple of 4')
+  }
+
+  // Trim off extra bytes after placeholder bytes are found
+  // See: https://github.com/beatgammit/base64-js/issues/42
+  var validLen = b64.indexOf('=')
+  if (validLen === -1) validLen = len
+
+  var placeHoldersLen = validLen === len
+    ? 0
+    : 4 - (validLen % 4)
+
+  return [validLen, placeHoldersLen]
+}
+
+// base64 is 4/3 + up to two characters of the original data
+function byteLength (b64) {
+  var lens = getLens(b64)
+  var validLen = lens[0]
+  var placeHoldersLen = lens[1]
+  return ((validLen + placeHoldersLen) * 3 / 4) - placeHoldersLen
+}
+
+function _byteLength (b64, validLen, placeHoldersLen) {
+  return ((validLen + placeHoldersLen) * 3 / 4) - placeHoldersLen
+}
+
+function toByteArray (b64) {
+  var tmp
+  var lens = getLens(b64)
+  var validLen = lens[0]
+  var placeHoldersLen = lens[1]
+
+  var arr = new Arr(_byteLength(b64, validLen, placeHoldersLen))
+
+  var curByte = 0
+
+  // if there are placeholders, only get up to the last complete 4 chars
+  var len = placeHoldersLen > 0
+    ? validLen - 4
+    : validLen
+
+  var i
+  for (i = 0; i < len; i += 4) {
+    tmp =
+      (revLookup[b64.charCodeAt(i)] << 18) |
+      (revLookup[b64.charCodeAt(i + 1)] << 12) |
+      (revLookup[b64.charCodeAt(i + 2)] << 6) |
+      revLookup[b64.charCodeAt(i + 3)]
+    arr[curByte++] = (tmp >> 16) & 0xFF
+    arr[curByte++] = (tmp >> 8) & 0xFF
+    arr[curByte++] = tmp & 0xFF
+  }
+
+  if (placeHoldersLen === 2) {
+    tmp =
+      (revLookup[b64.charCodeAt(i)] << 2) |
+      (revLookup[b64.charCodeAt(i + 1)] >> 4)
+    arr[curByte++] = tmp & 0xFF
+  }
+
+  if (placeHoldersLen === 1) {
+    tmp =
+      (revLookup[b64.charCodeAt(i)] << 10) |
+      (revLookup[b64.charCodeAt(i + 1)] << 4) |
+      (revLookup[b64.charCodeAt(i + 2)] >> 2)
+    arr[curByte++] = (tmp >> 8) & 0xFF
+    arr[curByte++] = tmp & 0xFF
+  }
+
+  return arr
+}
+
+function tripletToBase64 (num) {
+  return lookup[num >> 18 & 0x3F] +
+    lookup[num >> 12 & 0x3F] +
+    lookup[num >> 6 & 0x3F] +
+    lookup[num & 0x3F]
+}
+
+function encodeChunk (uint8, start, end) {
+  var tmp
+  var output = []
+  for (var i = start; i < end; i += 3) {
+    tmp =
+      ((uint8[i] << 16) & 0xFF0000) +
+      ((uint8[i + 1] << 8) & 0xFF00) +
+      (uint8[i + 2] & 0xFF)
+    output.push(tripletToBase64(tmp))
+  }
+  return output.join('')
+}
+
+function fromByteArray (uint8) {
+  var tmp
+  var len = uint8.length
+  var extraBytes = len % 3 // if we have 1 byte left, pad 2 bytes
+  var parts = []
+  var maxChunkLength = 16383 // must be multiple of 3
+
+  // go through the array every three bytes, we'll deal with trailing stuff later
+  for (var i = 0, len2 = len - extraBytes; i < len2; i += maxChunkLength) {
+    parts.push(encodeChunk(uint8, i, (i + maxChunkLength) > len2 ? len2 : (i + maxChunkLength)))
+  }
+
+  // pad the end with zeros, but make sure to not forget the extra bytes
+  if (extraBytes === 1) {
+    tmp = uint8[len - 1]
+    parts.push(
+      lookup[tmp >> 2] +
+      lookup[(tmp << 4) & 0x3F] +
+      '=='
+    )
+  } else if (extraBytes === 2) {
+    tmp = (uint8[len - 2] << 8) + uint8[len - 1]
+    parts.push(
+      lookup[tmp >> 10] +
+      lookup[(tmp >> 4) & 0x3F] +
+      lookup[(tmp << 2) & 0x3F] +
+      '='
+    )
+  }
+
+  return parts.join('')
+}
+
 
 /***/ }),
 
@@ -10697,6 +10896,1806 @@ defineJQueryPlugin(Toast);
 
 /***/ }),
 
+/***/ "./node_modules/buffer/index.js":
+/*!**************************************!*\
+  !*** ./node_modules/buffer/index.js ***!
+  \**************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+/*!
+ * The buffer module from node.js, for the browser.
+ *
+ * @author   Feross Aboukhadijeh <http://feross.org>
+ * @license  MIT
+ */
+/* eslint-disable no-proto */
+
+
+
+var base64 = __webpack_require__(/*! base64-js */ "./node_modules/base64-js/index.js")
+var ieee754 = __webpack_require__(/*! ieee754 */ "./node_modules/ieee754/index.js")
+var isArray = __webpack_require__(/*! isarray */ "./node_modules/isarray/index.js")
+
+exports.Buffer = Buffer
+exports.SlowBuffer = SlowBuffer
+exports.INSPECT_MAX_BYTES = 50
+
+/**
+ * If `Buffer.TYPED_ARRAY_SUPPORT`:
+ *   === true    Use Uint8Array implementation (fastest)
+ *   === false   Use Object implementation (most compatible, even IE6)
+ *
+ * Browsers that support typed arrays are IE 10+, Firefox 4+, Chrome 7+, Safari 5.1+,
+ * Opera 11.6+, iOS 4.2+.
+ *
+ * Due to various browser bugs, sometimes the Object implementation will be used even
+ * when the browser supports typed arrays.
+ *
+ * Note:
+ *
+ *   - Firefox 4-29 lacks support for adding new properties to `Uint8Array` instances,
+ *     See: https://bugzilla.mozilla.org/show_bug.cgi?id=695438.
+ *
+ *   - Chrome 9-10 is missing the `TypedArray.prototype.subarray` function.
+ *
+ *   - IE10 has a broken `TypedArray.prototype.subarray` function which returns arrays of
+ *     incorrect length in some situations.
+
+ * We detect these buggy browsers and set `Buffer.TYPED_ARRAY_SUPPORT` to `false` so they
+ * get the Object implementation, which is slower but behaves correctly.
+ */
+Buffer.TYPED_ARRAY_SUPPORT = __webpack_require__.g.TYPED_ARRAY_SUPPORT !== undefined
+  ? __webpack_require__.g.TYPED_ARRAY_SUPPORT
+  : typedArraySupport()
+
+/*
+ * Export kMaxLength after typed array support is determined.
+ */
+exports.kMaxLength = kMaxLength()
+
+function typedArraySupport () {
+  try {
+    var arr = new Uint8Array(1)
+    arr.__proto__ = {__proto__: Uint8Array.prototype, foo: function () { return 42 }}
+    return arr.foo() === 42 && // typed array instances can be augmented
+        typeof arr.subarray === 'function' && // chrome 9-10 lack `subarray`
+        arr.subarray(1, 1).byteLength === 0 // ie10 has broken `subarray`
+  } catch (e) {
+    return false
+  }
+}
+
+function kMaxLength () {
+  return Buffer.TYPED_ARRAY_SUPPORT
+    ? 0x7fffffff
+    : 0x3fffffff
+}
+
+function createBuffer (that, length) {
+  if (kMaxLength() < length) {
+    throw new RangeError('Invalid typed array length')
+  }
+  if (Buffer.TYPED_ARRAY_SUPPORT) {
+    // Return an augmented `Uint8Array` instance, for best performance
+    that = new Uint8Array(length)
+    that.__proto__ = Buffer.prototype
+  } else {
+    // Fallback: Return an object instance of the Buffer class
+    if (that === null) {
+      that = new Buffer(length)
+    }
+    that.length = length
+  }
+
+  return that
+}
+
+/**
+ * The Buffer constructor returns instances of `Uint8Array` that have their
+ * prototype changed to `Buffer.prototype`. Furthermore, `Buffer` is a subclass of
+ * `Uint8Array`, so the returned instances will have all the node `Buffer` methods
+ * and the `Uint8Array` methods. Square bracket notation works as expected -- it
+ * returns a single octet.
+ *
+ * The `Uint8Array` prototype remains unmodified.
+ */
+
+function Buffer (arg, encodingOrOffset, length) {
+  if (!Buffer.TYPED_ARRAY_SUPPORT && !(this instanceof Buffer)) {
+    return new Buffer(arg, encodingOrOffset, length)
+  }
+
+  // Common case.
+  if (typeof arg === 'number') {
+    if (typeof encodingOrOffset === 'string') {
+      throw new Error(
+        'If encoding is specified then the first argument must be a string'
+      )
+    }
+    return allocUnsafe(this, arg)
+  }
+  return from(this, arg, encodingOrOffset, length)
+}
+
+Buffer.poolSize = 8192 // not used by this implementation
+
+// TODO: Legacy, not needed anymore. Remove in next major version.
+Buffer._augment = function (arr) {
+  arr.__proto__ = Buffer.prototype
+  return arr
+}
+
+function from (that, value, encodingOrOffset, length) {
+  if (typeof value === 'number') {
+    throw new TypeError('"value" argument must not be a number')
+  }
+
+  if (typeof ArrayBuffer !== 'undefined' && value instanceof ArrayBuffer) {
+    return fromArrayBuffer(that, value, encodingOrOffset, length)
+  }
+
+  if (typeof value === 'string') {
+    return fromString(that, value, encodingOrOffset)
+  }
+
+  return fromObject(that, value)
+}
+
+/**
+ * Functionally equivalent to Buffer(arg, encoding) but throws a TypeError
+ * if value is a number.
+ * Buffer.from(str[, encoding])
+ * Buffer.from(array)
+ * Buffer.from(buffer)
+ * Buffer.from(arrayBuffer[, byteOffset[, length]])
+ **/
+Buffer.from = function (value, encodingOrOffset, length) {
+  return from(null, value, encodingOrOffset, length)
+}
+
+if (Buffer.TYPED_ARRAY_SUPPORT) {
+  Buffer.prototype.__proto__ = Uint8Array.prototype
+  Buffer.__proto__ = Uint8Array
+  if (typeof Symbol !== 'undefined' && Symbol.species &&
+      Buffer[Symbol.species] === Buffer) {
+    // Fix subarray() in ES2016. See: https://github.com/feross/buffer/pull/97
+    Object.defineProperty(Buffer, Symbol.species, {
+      value: null,
+      configurable: true
+    })
+  }
+}
+
+function assertSize (size) {
+  if (typeof size !== 'number') {
+    throw new TypeError('"size" argument must be a number')
+  } else if (size < 0) {
+    throw new RangeError('"size" argument must not be negative')
+  }
+}
+
+function alloc (that, size, fill, encoding) {
+  assertSize(size)
+  if (size <= 0) {
+    return createBuffer(that, size)
+  }
+  if (fill !== undefined) {
+    // Only pay attention to encoding if it's a string. This
+    // prevents accidentally sending in a number that would
+    // be interpretted as a start offset.
+    return typeof encoding === 'string'
+      ? createBuffer(that, size).fill(fill, encoding)
+      : createBuffer(that, size).fill(fill)
+  }
+  return createBuffer(that, size)
+}
+
+/**
+ * Creates a new filled Buffer instance.
+ * alloc(size[, fill[, encoding]])
+ **/
+Buffer.alloc = function (size, fill, encoding) {
+  return alloc(null, size, fill, encoding)
+}
+
+function allocUnsafe (that, size) {
+  assertSize(size)
+  that = createBuffer(that, size < 0 ? 0 : checked(size) | 0)
+  if (!Buffer.TYPED_ARRAY_SUPPORT) {
+    for (var i = 0; i < size; ++i) {
+      that[i] = 0
+    }
+  }
+  return that
+}
+
+/**
+ * Equivalent to Buffer(num), by default creates a non-zero-filled Buffer instance.
+ * */
+Buffer.allocUnsafe = function (size) {
+  return allocUnsafe(null, size)
+}
+/**
+ * Equivalent to SlowBuffer(num), by default creates a non-zero-filled Buffer instance.
+ */
+Buffer.allocUnsafeSlow = function (size) {
+  return allocUnsafe(null, size)
+}
+
+function fromString (that, string, encoding) {
+  if (typeof encoding !== 'string' || encoding === '') {
+    encoding = 'utf8'
+  }
+
+  if (!Buffer.isEncoding(encoding)) {
+    throw new TypeError('"encoding" must be a valid string encoding')
+  }
+
+  var length = byteLength(string, encoding) | 0
+  that = createBuffer(that, length)
+
+  var actual = that.write(string, encoding)
+
+  if (actual !== length) {
+    // Writing a hex string, for example, that contains invalid characters will
+    // cause everything after the first invalid character to be ignored. (e.g.
+    // 'abxxcd' will be treated as 'ab')
+    that = that.slice(0, actual)
+  }
+
+  return that
+}
+
+function fromArrayLike (that, array) {
+  var length = array.length < 0 ? 0 : checked(array.length) | 0
+  that = createBuffer(that, length)
+  for (var i = 0; i < length; i += 1) {
+    that[i] = array[i] & 255
+  }
+  return that
+}
+
+function fromArrayBuffer (that, array, byteOffset, length) {
+  array.byteLength // this throws if `array` is not a valid ArrayBuffer
+
+  if (byteOffset < 0 || array.byteLength < byteOffset) {
+    throw new RangeError('\'offset\' is out of bounds')
+  }
+
+  if (array.byteLength < byteOffset + (length || 0)) {
+    throw new RangeError('\'length\' is out of bounds')
+  }
+
+  if (byteOffset === undefined && length === undefined) {
+    array = new Uint8Array(array)
+  } else if (length === undefined) {
+    array = new Uint8Array(array, byteOffset)
+  } else {
+    array = new Uint8Array(array, byteOffset, length)
+  }
+
+  if (Buffer.TYPED_ARRAY_SUPPORT) {
+    // Return an augmented `Uint8Array` instance, for best performance
+    that = array
+    that.__proto__ = Buffer.prototype
+  } else {
+    // Fallback: Return an object instance of the Buffer class
+    that = fromArrayLike(that, array)
+  }
+  return that
+}
+
+function fromObject (that, obj) {
+  if (Buffer.isBuffer(obj)) {
+    var len = checked(obj.length) | 0
+    that = createBuffer(that, len)
+
+    if (that.length === 0) {
+      return that
+    }
+
+    obj.copy(that, 0, 0, len)
+    return that
+  }
+
+  if (obj) {
+    if ((typeof ArrayBuffer !== 'undefined' &&
+        obj.buffer instanceof ArrayBuffer) || 'length' in obj) {
+      if (typeof obj.length !== 'number' || isnan(obj.length)) {
+        return createBuffer(that, 0)
+      }
+      return fromArrayLike(that, obj)
+    }
+
+    if (obj.type === 'Buffer' && isArray(obj.data)) {
+      return fromArrayLike(that, obj.data)
+    }
+  }
+
+  throw new TypeError('First argument must be a string, Buffer, ArrayBuffer, Array, or array-like object.')
+}
+
+function checked (length) {
+  // Note: cannot use `length < kMaxLength()` here because that fails when
+  // length is NaN (which is otherwise coerced to zero.)
+  if (length >= kMaxLength()) {
+    throw new RangeError('Attempt to allocate Buffer larger than maximum ' +
+                         'size: 0x' + kMaxLength().toString(16) + ' bytes')
+  }
+  return length | 0
+}
+
+function SlowBuffer (length) {
+  if (+length != length) { // eslint-disable-line eqeqeq
+    length = 0
+  }
+  return Buffer.alloc(+length)
+}
+
+Buffer.isBuffer = function isBuffer (b) {
+  return !!(b != null && b._isBuffer)
+}
+
+Buffer.compare = function compare (a, b) {
+  if (!Buffer.isBuffer(a) || !Buffer.isBuffer(b)) {
+    throw new TypeError('Arguments must be Buffers')
+  }
+
+  if (a === b) return 0
+
+  var x = a.length
+  var y = b.length
+
+  for (var i = 0, len = Math.min(x, y); i < len; ++i) {
+    if (a[i] !== b[i]) {
+      x = a[i]
+      y = b[i]
+      break
+    }
+  }
+
+  if (x < y) return -1
+  if (y < x) return 1
+  return 0
+}
+
+Buffer.isEncoding = function isEncoding (encoding) {
+  switch (String(encoding).toLowerCase()) {
+    case 'hex':
+    case 'utf8':
+    case 'utf-8':
+    case 'ascii':
+    case 'latin1':
+    case 'binary':
+    case 'base64':
+    case 'ucs2':
+    case 'ucs-2':
+    case 'utf16le':
+    case 'utf-16le':
+      return true
+    default:
+      return false
+  }
+}
+
+Buffer.concat = function concat (list, length) {
+  if (!isArray(list)) {
+    throw new TypeError('"list" argument must be an Array of Buffers')
+  }
+
+  if (list.length === 0) {
+    return Buffer.alloc(0)
+  }
+
+  var i
+  if (length === undefined) {
+    length = 0
+    for (i = 0; i < list.length; ++i) {
+      length += list[i].length
+    }
+  }
+
+  var buffer = Buffer.allocUnsafe(length)
+  var pos = 0
+  for (i = 0; i < list.length; ++i) {
+    var buf = list[i]
+    if (!Buffer.isBuffer(buf)) {
+      throw new TypeError('"list" argument must be an Array of Buffers')
+    }
+    buf.copy(buffer, pos)
+    pos += buf.length
+  }
+  return buffer
+}
+
+function byteLength (string, encoding) {
+  if (Buffer.isBuffer(string)) {
+    return string.length
+  }
+  if (typeof ArrayBuffer !== 'undefined' && typeof ArrayBuffer.isView === 'function' &&
+      (ArrayBuffer.isView(string) || string instanceof ArrayBuffer)) {
+    return string.byteLength
+  }
+  if (typeof string !== 'string') {
+    string = '' + string
+  }
+
+  var len = string.length
+  if (len === 0) return 0
+
+  // Use a for loop to avoid recursion
+  var loweredCase = false
+  for (;;) {
+    switch (encoding) {
+      case 'ascii':
+      case 'latin1':
+      case 'binary':
+        return len
+      case 'utf8':
+      case 'utf-8':
+      case undefined:
+        return utf8ToBytes(string).length
+      case 'ucs2':
+      case 'ucs-2':
+      case 'utf16le':
+      case 'utf-16le':
+        return len * 2
+      case 'hex':
+        return len >>> 1
+      case 'base64':
+        return base64ToBytes(string).length
+      default:
+        if (loweredCase) return utf8ToBytes(string).length // assume utf8
+        encoding = ('' + encoding).toLowerCase()
+        loweredCase = true
+    }
+  }
+}
+Buffer.byteLength = byteLength
+
+function slowToString (encoding, start, end) {
+  var loweredCase = false
+
+  // No need to verify that "this.length <= MAX_UINT32" since it's a read-only
+  // property of a typed array.
+
+  // This behaves neither like String nor Uint8Array in that we set start/end
+  // to their upper/lower bounds if the value passed is out of range.
+  // undefined is handled specially as per ECMA-262 6th Edition,
+  // Section 13.3.3.7 Runtime Semantics: KeyedBindingInitialization.
+  if (start === undefined || start < 0) {
+    start = 0
+  }
+  // Return early if start > this.length. Done here to prevent potential uint32
+  // coercion fail below.
+  if (start > this.length) {
+    return ''
+  }
+
+  if (end === undefined || end > this.length) {
+    end = this.length
+  }
+
+  if (end <= 0) {
+    return ''
+  }
+
+  // Force coersion to uint32. This will also coerce falsey/NaN values to 0.
+  end >>>= 0
+  start >>>= 0
+
+  if (end <= start) {
+    return ''
+  }
+
+  if (!encoding) encoding = 'utf8'
+
+  while (true) {
+    switch (encoding) {
+      case 'hex':
+        return hexSlice(this, start, end)
+
+      case 'utf8':
+      case 'utf-8':
+        return utf8Slice(this, start, end)
+
+      case 'ascii':
+        return asciiSlice(this, start, end)
+
+      case 'latin1':
+      case 'binary':
+        return latin1Slice(this, start, end)
+
+      case 'base64':
+        return base64Slice(this, start, end)
+
+      case 'ucs2':
+      case 'ucs-2':
+      case 'utf16le':
+      case 'utf-16le':
+        return utf16leSlice(this, start, end)
+
+      default:
+        if (loweredCase) throw new TypeError('Unknown encoding: ' + encoding)
+        encoding = (encoding + '').toLowerCase()
+        loweredCase = true
+    }
+  }
+}
+
+// The property is used by `Buffer.isBuffer` and `is-buffer` (in Safari 5-7) to detect
+// Buffer instances.
+Buffer.prototype._isBuffer = true
+
+function swap (b, n, m) {
+  var i = b[n]
+  b[n] = b[m]
+  b[m] = i
+}
+
+Buffer.prototype.swap16 = function swap16 () {
+  var len = this.length
+  if (len % 2 !== 0) {
+    throw new RangeError('Buffer size must be a multiple of 16-bits')
+  }
+  for (var i = 0; i < len; i += 2) {
+    swap(this, i, i + 1)
+  }
+  return this
+}
+
+Buffer.prototype.swap32 = function swap32 () {
+  var len = this.length
+  if (len % 4 !== 0) {
+    throw new RangeError('Buffer size must be a multiple of 32-bits')
+  }
+  for (var i = 0; i < len; i += 4) {
+    swap(this, i, i + 3)
+    swap(this, i + 1, i + 2)
+  }
+  return this
+}
+
+Buffer.prototype.swap64 = function swap64 () {
+  var len = this.length
+  if (len % 8 !== 0) {
+    throw new RangeError('Buffer size must be a multiple of 64-bits')
+  }
+  for (var i = 0; i < len; i += 8) {
+    swap(this, i, i + 7)
+    swap(this, i + 1, i + 6)
+    swap(this, i + 2, i + 5)
+    swap(this, i + 3, i + 4)
+  }
+  return this
+}
+
+Buffer.prototype.toString = function toString () {
+  var length = this.length | 0
+  if (length === 0) return ''
+  if (arguments.length === 0) return utf8Slice(this, 0, length)
+  return slowToString.apply(this, arguments)
+}
+
+Buffer.prototype.equals = function equals (b) {
+  if (!Buffer.isBuffer(b)) throw new TypeError('Argument must be a Buffer')
+  if (this === b) return true
+  return Buffer.compare(this, b) === 0
+}
+
+Buffer.prototype.inspect = function inspect () {
+  var str = ''
+  var max = exports.INSPECT_MAX_BYTES
+  if (this.length > 0) {
+    str = this.toString('hex', 0, max).match(/.{2}/g).join(' ')
+    if (this.length > max) str += ' ... '
+  }
+  return '<Buffer ' + str + '>'
+}
+
+Buffer.prototype.compare = function compare (target, start, end, thisStart, thisEnd) {
+  if (!Buffer.isBuffer(target)) {
+    throw new TypeError('Argument must be a Buffer')
+  }
+
+  if (start === undefined) {
+    start = 0
+  }
+  if (end === undefined) {
+    end = target ? target.length : 0
+  }
+  if (thisStart === undefined) {
+    thisStart = 0
+  }
+  if (thisEnd === undefined) {
+    thisEnd = this.length
+  }
+
+  if (start < 0 || end > target.length || thisStart < 0 || thisEnd > this.length) {
+    throw new RangeError('out of range index')
+  }
+
+  if (thisStart >= thisEnd && start >= end) {
+    return 0
+  }
+  if (thisStart >= thisEnd) {
+    return -1
+  }
+  if (start >= end) {
+    return 1
+  }
+
+  start >>>= 0
+  end >>>= 0
+  thisStart >>>= 0
+  thisEnd >>>= 0
+
+  if (this === target) return 0
+
+  var x = thisEnd - thisStart
+  var y = end - start
+  var len = Math.min(x, y)
+
+  var thisCopy = this.slice(thisStart, thisEnd)
+  var targetCopy = target.slice(start, end)
+
+  for (var i = 0; i < len; ++i) {
+    if (thisCopy[i] !== targetCopy[i]) {
+      x = thisCopy[i]
+      y = targetCopy[i]
+      break
+    }
+  }
+
+  if (x < y) return -1
+  if (y < x) return 1
+  return 0
+}
+
+// Finds either the first index of `val` in `buffer` at offset >= `byteOffset`,
+// OR the last index of `val` in `buffer` at offset <= `byteOffset`.
+//
+// Arguments:
+// - buffer - a Buffer to search
+// - val - a string, Buffer, or number
+// - byteOffset - an index into `buffer`; will be clamped to an int32
+// - encoding - an optional encoding, relevant is val is a string
+// - dir - true for indexOf, false for lastIndexOf
+function bidirectionalIndexOf (buffer, val, byteOffset, encoding, dir) {
+  // Empty buffer means no match
+  if (buffer.length === 0) return -1
+
+  // Normalize byteOffset
+  if (typeof byteOffset === 'string') {
+    encoding = byteOffset
+    byteOffset = 0
+  } else if (byteOffset > 0x7fffffff) {
+    byteOffset = 0x7fffffff
+  } else if (byteOffset < -0x80000000) {
+    byteOffset = -0x80000000
+  }
+  byteOffset = +byteOffset  // Coerce to Number.
+  if (isNaN(byteOffset)) {
+    // byteOffset: it it's undefined, null, NaN, "foo", etc, search whole buffer
+    byteOffset = dir ? 0 : (buffer.length - 1)
+  }
+
+  // Normalize byteOffset: negative offsets start from the end of the buffer
+  if (byteOffset < 0) byteOffset = buffer.length + byteOffset
+  if (byteOffset >= buffer.length) {
+    if (dir) return -1
+    else byteOffset = buffer.length - 1
+  } else if (byteOffset < 0) {
+    if (dir) byteOffset = 0
+    else return -1
+  }
+
+  // Normalize val
+  if (typeof val === 'string') {
+    val = Buffer.from(val, encoding)
+  }
+
+  // Finally, search either indexOf (if dir is true) or lastIndexOf
+  if (Buffer.isBuffer(val)) {
+    // Special case: looking for empty string/buffer always fails
+    if (val.length === 0) {
+      return -1
+    }
+    return arrayIndexOf(buffer, val, byteOffset, encoding, dir)
+  } else if (typeof val === 'number') {
+    val = val & 0xFF // Search for a byte value [0-255]
+    if (Buffer.TYPED_ARRAY_SUPPORT &&
+        typeof Uint8Array.prototype.indexOf === 'function') {
+      if (dir) {
+        return Uint8Array.prototype.indexOf.call(buffer, val, byteOffset)
+      } else {
+        return Uint8Array.prototype.lastIndexOf.call(buffer, val, byteOffset)
+      }
+    }
+    return arrayIndexOf(buffer, [ val ], byteOffset, encoding, dir)
+  }
+
+  throw new TypeError('val must be string, number or Buffer')
+}
+
+function arrayIndexOf (arr, val, byteOffset, encoding, dir) {
+  var indexSize = 1
+  var arrLength = arr.length
+  var valLength = val.length
+
+  if (encoding !== undefined) {
+    encoding = String(encoding).toLowerCase()
+    if (encoding === 'ucs2' || encoding === 'ucs-2' ||
+        encoding === 'utf16le' || encoding === 'utf-16le') {
+      if (arr.length < 2 || val.length < 2) {
+        return -1
+      }
+      indexSize = 2
+      arrLength /= 2
+      valLength /= 2
+      byteOffset /= 2
+    }
+  }
+
+  function read (buf, i) {
+    if (indexSize === 1) {
+      return buf[i]
+    } else {
+      return buf.readUInt16BE(i * indexSize)
+    }
+  }
+
+  var i
+  if (dir) {
+    var foundIndex = -1
+    for (i = byteOffset; i < arrLength; i++) {
+      if (read(arr, i) === read(val, foundIndex === -1 ? 0 : i - foundIndex)) {
+        if (foundIndex === -1) foundIndex = i
+        if (i - foundIndex + 1 === valLength) return foundIndex * indexSize
+      } else {
+        if (foundIndex !== -1) i -= i - foundIndex
+        foundIndex = -1
+      }
+    }
+  } else {
+    if (byteOffset + valLength > arrLength) byteOffset = arrLength - valLength
+    for (i = byteOffset; i >= 0; i--) {
+      var found = true
+      for (var j = 0; j < valLength; j++) {
+        if (read(arr, i + j) !== read(val, j)) {
+          found = false
+          break
+        }
+      }
+      if (found) return i
+    }
+  }
+
+  return -1
+}
+
+Buffer.prototype.includes = function includes (val, byteOffset, encoding) {
+  return this.indexOf(val, byteOffset, encoding) !== -1
+}
+
+Buffer.prototype.indexOf = function indexOf (val, byteOffset, encoding) {
+  return bidirectionalIndexOf(this, val, byteOffset, encoding, true)
+}
+
+Buffer.prototype.lastIndexOf = function lastIndexOf (val, byteOffset, encoding) {
+  return bidirectionalIndexOf(this, val, byteOffset, encoding, false)
+}
+
+function hexWrite (buf, string, offset, length) {
+  offset = Number(offset) || 0
+  var remaining = buf.length - offset
+  if (!length) {
+    length = remaining
+  } else {
+    length = Number(length)
+    if (length > remaining) {
+      length = remaining
+    }
+  }
+
+  // must be an even number of digits
+  var strLen = string.length
+  if (strLen % 2 !== 0) throw new TypeError('Invalid hex string')
+
+  if (length > strLen / 2) {
+    length = strLen / 2
+  }
+  for (var i = 0; i < length; ++i) {
+    var parsed = parseInt(string.substr(i * 2, 2), 16)
+    if (isNaN(parsed)) return i
+    buf[offset + i] = parsed
+  }
+  return i
+}
+
+function utf8Write (buf, string, offset, length) {
+  return blitBuffer(utf8ToBytes(string, buf.length - offset), buf, offset, length)
+}
+
+function asciiWrite (buf, string, offset, length) {
+  return blitBuffer(asciiToBytes(string), buf, offset, length)
+}
+
+function latin1Write (buf, string, offset, length) {
+  return asciiWrite(buf, string, offset, length)
+}
+
+function base64Write (buf, string, offset, length) {
+  return blitBuffer(base64ToBytes(string), buf, offset, length)
+}
+
+function ucs2Write (buf, string, offset, length) {
+  return blitBuffer(utf16leToBytes(string, buf.length - offset), buf, offset, length)
+}
+
+Buffer.prototype.write = function write (string, offset, length, encoding) {
+  // Buffer#write(string)
+  if (offset === undefined) {
+    encoding = 'utf8'
+    length = this.length
+    offset = 0
+  // Buffer#write(string, encoding)
+  } else if (length === undefined && typeof offset === 'string') {
+    encoding = offset
+    length = this.length
+    offset = 0
+  // Buffer#write(string, offset[, length][, encoding])
+  } else if (isFinite(offset)) {
+    offset = offset | 0
+    if (isFinite(length)) {
+      length = length | 0
+      if (encoding === undefined) encoding = 'utf8'
+    } else {
+      encoding = length
+      length = undefined
+    }
+  // legacy write(string, encoding, offset, length) - remove in v0.13
+  } else {
+    throw new Error(
+      'Buffer.write(string, encoding, offset[, length]) is no longer supported'
+    )
+  }
+
+  var remaining = this.length - offset
+  if (length === undefined || length > remaining) length = remaining
+
+  if ((string.length > 0 && (length < 0 || offset < 0)) || offset > this.length) {
+    throw new RangeError('Attempt to write outside buffer bounds')
+  }
+
+  if (!encoding) encoding = 'utf8'
+
+  var loweredCase = false
+  for (;;) {
+    switch (encoding) {
+      case 'hex':
+        return hexWrite(this, string, offset, length)
+
+      case 'utf8':
+      case 'utf-8':
+        return utf8Write(this, string, offset, length)
+
+      case 'ascii':
+        return asciiWrite(this, string, offset, length)
+
+      case 'latin1':
+      case 'binary':
+        return latin1Write(this, string, offset, length)
+
+      case 'base64':
+        // Warning: maxLength not taken into account in base64Write
+        return base64Write(this, string, offset, length)
+
+      case 'ucs2':
+      case 'ucs-2':
+      case 'utf16le':
+      case 'utf-16le':
+        return ucs2Write(this, string, offset, length)
+
+      default:
+        if (loweredCase) throw new TypeError('Unknown encoding: ' + encoding)
+        encoding = ('' + encoding).toLowerCase()
+        loweredCase = true
+    }
+  }
+}
+
+Buffer.prototype.toJSON = function toJSON () {
+  return {
+    type: 'Buffer',
+    data: Array.prototype.slice.call(this._arr || this, 0)
+  }
+}
+
+function base64Slice (buf, start, end) {
+  if (start === 0 && end === buf.length) {
+    return base64.fromByteArray(buf)
+  } else {
+    return base64.fromByteArray(buf.slice(start, end))
+  }
+}
+
+function utf8Slice (buf, start, end) {
+  end = Math.min(buf.length, end)
+  var res = []
+
+  var i = start
+  while (i < end) {
+    var firstByte = buf[i]
+    var codePoint = null
+    var bytesPerSequence = (firstByte > 0xEF) ? 4
+      : (firstByte > 0xDF) ? 3
+      : (firstByte > 0xBF) ? 2
+      : 1
+
+    if (i + bytesPerSequence <= end) {
+      var secondByte, thirdByte, fourthByte, tempCodePoint
+
+      switch (bytesPerSequence) {
+        case 1:
+          if (firstByte < 0x80) {
+            codePoint = firstByte
+          }
+          break
+        case 2:
+          secondByte = buf[i + 1]
+          if ((secondByte & 0xC0) === 0x80) {
+            tempCodePoint = (firstByte & 0x1F) << 0x6 | (secondByte & 0x3F)
+            if (tempCodePoint > 0x7F) {
+              codePoint = tempCodePoint
+            }
+          }
+          break
+        case 3:
+          secondByte = buf[i + 1]
+          thirdByte = buf[i + 2]
+          if ((secondByte & 0xC0) === 0x80 && (thirdByte & 0xC0) === 0x80) {
+            tempCodePoint = (firstByte & 0xF) << 0xC | (secondByte & 0x3F) << 0x6 | (thirdByte & 0x3F)
+            if (tempCodePoint > 0x7FF && (tempCodePoint < 0xD800 || tempCodePoint > 0xDFFF)) {
+              codePoint = tempCodePoint
+            }
+          }
+          break
+        case 4:
+          secondByte = buf[i + 1]
+          thirdByte = buf[i + 2]
+          fourthByte = buf[i + 3]
+          if ((secondByte & 0xC0) === 0x80 && (thirdByte & 0xC0) === 0x80 && (fourthByte & 0xC0) === 0x80) {
+            tempCodePoint = (firstByte & 0xF) << 0x12 | (secondByte & 0x3F) << 0xC | (thirdByte & 0x3F) << 0x6 | (fourthByte & 0x3F)
+            if (tempCodePoint > 0xFFFF && tempCodePoint < 0x110000) {
+              codePoint = tempCodePoint
+            }
+          }
+      }
+    }
+
+    if (codePoint === null) {
+      // we did not generate a valid codePoint so insert a
+      // replacement char (U+FFFD) and advance only 1 byte
+      codePoint = 0xFFFD
+      bytesPerSequence = 1
+    } else if (codePoint > 0xFFFF) {
+      // encode to utf16 (surrogate pair dance)
+      codePoint -= 0x10000
+      res.push(codePoint >>> 10 & 0x3FF | 0xD800)
+      codePoint = 0xDC00 | codePoint & 0x3FF
+    }
+
+    res.push(codePoint)
+    i += bytesPerSequence
+  }
+
+  return decodeCodePointsArray(res)
+}
+
+// Based on http://stackoverflow.com/a/22747272/680742, the browser with
+// the lowest limit is Chrome, with 0x10000 args.
+// We go 1 magnitude less, for safety
+var MAX_ARGUMENTS_LENGTH = 0x1000
+
+function decodeCodePointsArray (codePoints) {
+  var len = codePoints.length
+  if (len <= MAX_ARGUMENTS_LENGTH) {
+    return String.fromCharCode.apply(String, codePoints) // avoid extra slice()
+  }
+
+  // Decode in chunks to avoid "call stack size exceeded".
+  var res = ''
+  var i = 0
+  while (i < len) {
+    res += String.fromCharCode.apply(
+      String,
+      codePoints.slice(i, i += MAX_ARGUMENTS_LENGTH)
+    )
+  }
+  return res
+}
+
+function asciiSlice (buf, start, end) {
+  var ret = ''
+  end = Math.min(buf.length, end)
+
+  for (var i = start; i < end; ++i) {
+    ret += String.fromCharCode(buf[i] & 0x7F)
+  }
+  return ret
+}
+
+function latin1Slice (buf, start, end) {
+  var ret = ''
+  end = Math.min(buf.length, end)
+
+  for (var i = start; i < end; ++i) {
+    ret += String.fromCharCode(buf[i])
+  }
+  return ret
+}
+
+function hexSlice (buf, start, end) {
+  var len = buf.length
+
+  if (!start || start < 0) start = 0
+  if (!end || end < 0 || end > len) end = len
+
+  var out = ''
+  for (var i = start; i < end; ++i) {
+    out += toHex(buf[i])
+  }
+  return out
+}
+
+function utf16leSlice (buf, start, end) {
+  var bytes = buf.slice(start, end)
+  var res = ''
+  for (var i = 0; i < bytes.length; i += 2) {
+    res += String.fromCharCode(bytes[i] + bytes[i + 1] * 256)
+  }
+  return res
+}
+
+Buffer.prototype.slice = function slice (start, end) {
+  var len = this.length
+  start = ~~start
+  end = end === undefined ? len : ~~end
+
+  if (start < 0) {
+    start += len
+    if (start < 0) start = 0
+  } else if (start > len) {
+    start = len
+  }
+
+  if (end < 0) {
+    end += len
+    if (end < 0) end = 0
+  } else if (end > len) {
+    end = len
+  }
+
+  if (end < start) end = start
+
+  var newBuf
+  if (Buffer.TYPED_ARRAY_SUPPORT) {
+    newBuf = this.subarray(start, end)
+    newBuf.__proto__ = Buffer.prototype
+  } else {
+    var sliceLen = end - start
+    newBuf = new Buffer(sliceLen, undefined)
+    for (var i = 0; i < sliceLen; ++i) {
+      newBuf[i] = this[i + start]
+    }
+  }
+
+  return newBuf
+}
+
+/*
+ * Need to make sure that buffer isn't trying to write out of bounds.
+ */
+function checkOffset (offset, ext, length) {
+  if ((offset % 1) !== 0 || offset < 0) throw new RangeError('offset is not uint')
+  if (offset + ext > length) throw new RangeError('Trying to access beyond buffer length')
+}
+
+Buffer.prototype.readUIntLE = function readUIntLE (offset, byteLength, noAssert) {
+  offset = offset | 0
+  byteLength = byteLength | 0
+  if (!noAssert) checkOffset(offset, byteLength, this.length)
+
+  var val = this[offset]
+  var mul = 1
+  var i = 0
+  while (++i < byteLength && (mul *= 0x100)) {
+    val += this[offset + i] * mul
+  }
+
+  return val
+}
+
+Buffer.prototype.readUIntBE = function readUIntBE (offset, byteLength, noAssert) {
+  offset = offset | 0
+  byteLength = byteLength | 0
+  if (!noAssert) {
+    checkOffset(offset, byteLength, this.length)
+  }
+
+  var val = this[offset + --byteLength]
+  var mul = 1
+  while (byteLength > 0 && (mul *= 0x100)) {
+    val += this[offset + --byteLength] * mul
+  }
+
+  return val
+}
+
+Buffer.prototype.readUInt8 = function readUInt8 (offset, noAssert) {
+  if (!noAssert) checkOffset(offset, 1, this.length)
+  return this[offset]
+}
+
+Buffer.prototype.readUInt16LE = function readUInt16LE (offset, noAssert) {
+  if (!noAssert) checkOffset(offset, 2, this.length)
+  return this[offset] | (this[offset + 1] << 8)
+}
+
+Buffer.prototype.readUInt16BE = function readUInt16BE (offset, noAssert) {
+  if (!noAssert) checkOffset(offset, 2, this.length)
+  return (this[offset] << 8) | this[offset + 1]
+}
+
+Buffer.prototype.readUInt32LE = function readUInt32LE (offset, noAssert) {
+  if (!noAssert) checkOffset(offset, 4, this.length)
+
+  return ((this[offset]) |
+      (this[offset + 1] << 8) |
+      (this[offset + 2] << 16)) +
+      (this[offset + 3] * 0x1000000)
+}
+
+Buffer.prototype.readUInt32BE = function readUInt32BE (offset, noAssert) {
+  if (!noAssert) checkOffset(offset, 4, this.length)
+
+  return (this[offset] * 0x1000000) +
+    ((this[offset + 1] << 16) |
+    (this[offset + 2] << 8) |
+    this[offset + 3])
+}
+
+Buffer.prototype.readIntLE = function readIntLE (offset, byteLength, noAssert) {
+  offset = offset | 0
+  byteLength = byteLength | 0
+  if (!noAssert) checkOffset(offset, byteLength, this.length)
+
+  var val = this[offset]
+  var mul = 1
+  var i = 0
+  while (++i < byteLength && (mul *= 0x100)) {
+    val += this[offset + i] * mul
+  }
+  mul *= 0x80
+
+  if (val >= mul) val -= Math.pow(2, 8 * byteLength)
+
+  return val
+}
+
+Buffer.prototype.readIntBE = function readIntBE (offset, byteLength, noAssert) {
+  offset = offset | 0
+  byteLength = byteLength | 0
+  if (!noAssert) checkOffset(offset, byteLength, this.length)
+
+  var i = byteLength
+  var mul = 1
+  var val = this[offset + --i]
+  while (i > 0 && (mul *= 0x100)) {
+    val += this[offset + --i] * mul
+  }
+  mul *= 0x80
+
+  if (val >= mul) val -= Math.pow(2, 8 * byteLength)
+
+  return val
+}
+
+Buffer.prototype.readInt8 = function readInt8 (offset, noAssert) {
+  if (!noAssert) checkOffset(offset, 1, this.length)
+  if (!(this[offset] & 0x80)) return (this[offset])
+  return ((0xff - this[offset] + 1) * -1)
+}
+
+Buffer.prototype.readInt16LE = function readInt16LE (offset, noAssert) {
+  if (!noAssert) checkOffset(offset, 2, this.length)
+  var val = this[offset] | (this[offset + 1] << 8)
+  return (val & 0x8000) ? val | 0xFFFF0000 : val
+}
+
+Buffer.prototype.readInt16BE = function readInt16BE (offset, noAssert) {
+  if (!noAssert) checkOffset(offset, 2, this.length)
+  var val = this[offset + 1] | (this[offset] << 8)
+  return (val & 0x8000) ? val | 0xFFFF0000 : val
+}
+
+Buffer.prototype.readInt32LE = function readInt32LE (offset, noAssert) {
+  if (!noAssert) checkOffset(offset, 4, this.length)
+
+  return (this[offset]) |
+    (this[offset + 1] << 8) |
+    (this[offset + 2] << 16) |
+    (this[offset + 3] << 24)
+}
+
+Buffer.prototype.readInt32BE = function readInt32BE (offset, noAssert) {
+  if (!noAssert) checkOffset(offset, 4, this.length)
+
+  return (this[offset] << 24) |
+    (this[offset + 1] << 16) |
+    (this[offset + 2] << 8) |
+    (this[offset + 3])
+}
+
+Buffer.prototype.readFloatLE = function readFloatLE (offset, noAssert) {
+  if (!noAssert) checkOffset(offset, 4, this.length)
+  return ieee754.read(this, offset, true, 23, 4)
+}
+
+Buffer.prototype.readFloatBE = function readFloatBE (offset, noAssert) {
+  if (!noAssert) checkOffset(offset, 4, this.length)
+  return ieee754.read(this, offset, false, 23, 4)
+}
+
+Buffer.prototype.readDoubleLE = function readDoubleLE (offset, noAssert) {
+  if (!noAssert) checkOffset(offset, 8, this.length)
+  return ieee754.read(this, offset, true, 52, 8)
+}
+
+Buffer.prototype.readDoubleBE = function readDoubleBE (offset, noAssert) {
+  if (!noAssert) checkOffset(offset, 8, this.length)
+  return ieee754.read(this, offset, false, 52, 8)
+}
+
+function checkInt (buf, value, offset, ext, max, min) {
+  if (!Buffer.isBuffer(buf)) throw new TypeError('"buffer" argument must be a Buffer instance')
+  if (value > max || value < min) throw new RangeError('"value" argument is out of bounds')
+  if (offset + ext > buf.length) throw new RangeError('Index out of range')
+}
+
+Buffer.prototype.writeUIntLE = function writeUIntLE (value, offset, byteLength, noAssert) {
+  value = +value
+  offset = offset | 0
+  byteLength = byteLength | 0
+  if (!noAssert) {
+    var maxBytes = Math.pow(2, 8 * byteLength) - 1
+    checkInt(this, value, offset, byteLength, maxBytes, 0)
+  }
+
+  var mul = 1
+  var i = 0
+  this[offset] = value & 0xFF
+  while (++i < byteLength && (mul *= 0x100)) {
+    this[offset + i] = (value / mul) & 0xFF
+  }
+
+  return offset + byteLength
+}
+
+Buffer.prototype.writeUIntBE = function writeUIntBE (value, offset, byteLength, noAssert) {
+  value = +value
+  offset = offset | 0
+  byteLength = byteLength | 0
+  if (!noAssert) {
+    var maxBytes = Math.pow(2, 8 * byteLength) - 1
+    checkInt(this, value, offset, byteLength, maxBytes, 0)
+  }
+
+  var i = byteLength - 1
+  var mul = 1
+  this[offset + i] = value & 0xFF
+  while (--i >= 0 && (mul *= 0x100)) {
+    this[offset + i] = (value / mul) & 0xFF
+  }
+
+  return offset + byteLength
+}
+
+Buffer.prototype.writeUInt8 = function writeUInt8 (value, offset, noAssert) {
+  value = +value
+  offset = offset | 0
+  if (!noAssert) checkInt(this, value, offset, 1, 0xff, 0)
+  if (!Buffer.TYPED_ARRAY_SUPPORT) value = Math.floor(value)
+  this[offset] = (value & 0xff)
+  return offset + 1
+}
+
+function objectWriteUInt16 (buf, value, offset, littleEndian) {
+  if (value < 0) value = 0xffff + value + 1
+  for (var i = 0, j = Math.min(buf.length - offset, 2); i < j; ++i) {
+    buf[offset + i] = (value & (0xff << (8 * (littleEndian ? i : 1 - i)))) >>>
+      (littleEndian ? i : 1 - i) * 8
+  }
+}
+
+Buffer.prototype.writeUInt16LE = function writeUInt16LE (value, offset, noAssert) {
+  value = +value
+  offset = offset | 0
+  if (!noAssert) checkInt(this, value, offset, 2, 0xffff, 0)
+  if (Buffer.TYPED_ARRAY_SUPPORT) {
+    this[offset] = (value & 0xff)
+    this[offset + 1] = (value >>> 8)
+  } else {
+    objectWriteUInt16(this, value, offset, true)
+  }
+  return offset + 2
+}
+
+Buffer.prototype.writeUInt16BE = function writeUInt16BE (value, offset, noAssert) {
+  value = +value
+  offset = offset | 0
+  if (!noAssert) checkInt(this, value, offset, 2, 0xffff, 0)
+  if (Buffer.TYPED_ARRAY_SUPPORT) {
+    this[offset] = (value >>> 8)
+    this[offset + 1] = (value & 0xff)
+  } else {
+    objectWriteUInt16(this, value, offset, false)
+  }
+  return offset + 2
+}
+
+function objectWriteUInt32 (buf, value, offset, littleEndian) {
+  if (value < 0) value = 0xffffffff + value + 1
+  for (var i = 0, j = Math.min(buf.length - offset, 4); i < j; ++i) {
+    buf[offset + i] = (value >>> (littleEndian ? i : 3 - i) * 8) & 0xff
+  }
+}
+
+Buffer.prototype.writeUInt32LE = function writeUInt32LE (value, offset, noAssert) {
+  value = +value
+  offset = offset | 0
+  if (!noAssert) checkInt(this, value, offset, 4, 0xffffffff, 0)
+  if (Buffer.TYPED_ARRAY_SUPPORT) {
+    this[offset + 3] = (value >>> 24)
+    this[offset + 2] = (value >>> 16)
+    this[offset + 1] = (value >>> 8)
+    this[offset] = (value & 0xff)
+  } else {
+    objectWriteUInt32(this, value, offset, true)
+  }
+  return offset + 4
+}
+
+Buffer.prototype.writeUInt32BE = function writeUInt32BE (value, offset, noAssert) {
+  value = +value
+  offset = offset | 0
+  if (!noAssert) checkInt(this, value, offset, 4, 0xffffffff, 0)
+  if (Buffer.TYPED_ARRAY_SUPPORT) {
+    this[offset] = (value >>> 24)
+    this[offset + 1] = (value >>> 16)
+    this[offset + 2] = (value >>> 8)
+    this[offset + 3] = (value & 0xff)
+  } else {
+    objectWriteUInt32(this, value, offset, false)
+  }
+  return offset + 4
+}
+
+Buffer.prototype.writeIntLE = function writeIntLE (value, offset, byteLength, noAssert) {
+  value = +value
+  offset = offset | 0
+  if (!noAssert) {
+    var limit = Math.pow(2, 8 * byteLength - 1)
+
+    checkInt(this, value, offset, byteLength, limit - 1, -limit)
+  }
+
+  var i = 0
+  var mul = 1
+  var sub = 0
+  this[offset] = value & 0xFF
+  while (++i < byteLength && (mul *= 0x100)) {
+    if (value < 0 && sub === 0 && this[offset + i - 1] !== 0) {
+      sub = 1
+    }
+    this[offset + i] = ((value / mul) >> 0) - sub & 0xFF
+  }
+
+  return offset + byteLength
+}
+
+Buffer.prototype.writeIntBE = function writeIntBE (value, offset, byteLength, noAssert) {
+  value = +value
+  offset = offset | 0
+  if (!noAssert) {
+    var limit = Math.pow(2, 8 * byteLength - 1)
+
+    checkInt(this, value, offset, byteLength, limit - 1, -limit)
+  }
+
+  var i = byteLength - 1
+  var mul = 1
+  var sub = 0
+  this[offset + i] = value & 0xFF
+  while (--i >= 0 && (mul *= 0x100)) {
+    if (value < 0 && sub === 0 && this[offset + i + 1] !== 0) {
+      sub = 1
+    }
+    this[offset + i] = ((value / mul) >> 0) - sub & 0xFF
+  }
+
+  return offset + byteLength
+}
+
+Buffer.prototype.writeInt8 = function writeInt8 (value, offset, noAssert) {
+  value = +value
+  offset = offset | 0
+  if (!noAssert) checkInt(this, value, offset, 1, 0x7f, -0x80)
+  if (!Buffer.TYPED_ARRAY_SUPPORT) value = Math.floor(value)
+  if (value < 0) value = 0xff + value + 1
+  this[offset] = (value & 0xff)
+  return offset + 1
+}
+
+Buffer.prototype.writeInt16LE = function writeInt16LE (value, offset, noAssert) {
+  value = +value
+  offset = offset | 0
+  if (!noAssert) checkInt(this, value, offset, 2, 0x7fff, -0x8000)
+  if (Buffer.TYPED_ARRAY_SUPPORT) {
+    this[offset] = (value & 0xff)
+    this[offset + 1] = (value >>> 8)
+  } else {
+    objectWriteUInt16(this, value, offset, true)
+  }
+  return offset + 2
+}
+
+Buffer.prototype.writeInt16BE = function writeInt16BE (value, offset, noAssert) {
+  value = +value
+  offset = offset | 0
+  if (!noAssert) checkInt(this, value, offset, 2, 0x7fff, -0x8000)
+  if (Buffer.TYPED_ARRAY_SUPPORT) {
+    this[offset] = (value >>> 8)
+    this[offset + 1] = (value & 0xff)
+  } else {
+    objectWriteUInt16(this, value, offset, false)
+  }
+  return offset + 2
+}
+
+Buffer.prototype.writeInt32LE = function writeInt32LE (value, offset, noAssert) {
+  value = +value
+  offset = offset | 0
+  if (!noAssert) checkInt(this, value, offset, 4, 0x7fffffff, -0x80000000)
+  if (Buffer.TYPED_ARRAY_SUPPORT) {
+    this[offset] = (value & 0xff)
+    this[offset + 1] = (value >>> 8)
+    this[offset + 2] = (value >>> 16)
+    this[offset + 3] = (value >>> 24)
+  } else {
+    objectWriteUInt32(this, value, offset, true)
+  }
+  return offset + 4
+}
+
+Buffer.prototype.writeInt32BE = function writeInt32BE (value, offset, noAssert) {
+  value = +value
+  offset = offset | 0
+  if (!noAssert) checkInt(this, value, offset, 4, 0x7fffffff, -0x80000000)
+  if (value < 0) value = 0xffffffff + value + 1
+  if (Buffer.TYPED_ARRAY_SUPPORT) {
+    this[offset] = (value >>> 24)
+    this[offset + 1] = (value >>> 16)
+    this[offset + 2] = (value >>> 8)
+    this[offset + 3] = (value & 0xff)
+  } else {
+    objectWriteUInt32(this, value, offset, false)
+  }
+  return offset + 4
+}
+
+function checkIEEE754 (buf, value, offset, ext, max, min) {
+  if (offset + ext > buf.length) throw new RangeError('Index out of range')
+  if (offset < 0) throw new RangeError('Index out of range')
+}
+
+function writeFloat (buf, value, offset, littleEndian, noAssert) {
+  if (!noAssert) {
+    checkIEEE754(buf, value, offset, 4, 3.4028234663852886e+38, -3.4028234663852886e+38)
+  }
+  ieee754.write(buf, value, offset, littleEndian, 23, 4)
+  return offset + 4
+}
+
+Buffer.prototype.writeFloatLE = function writeFloatLE (value, offset, noAssert) {
+  return writeFloat(this, value, offset, true, noAssert)
+}
+
+Buffer.prototype.writeFloatBE = function writeFloatBE (value, offset, noAssert) {
+  return writeFloat(this, value, offset, false, noAssert)
+}
+
+function writeDouble (buf, value, offset, littleEndian, noAssert) {
+  if (!noAssert) {
+    checkIEEE754(buf, value, offset, 8, 1.7976931348623157E+308, -1.7976931348623157E+308)
+  }
+  ieee754.write(buf, value, offset, littleEndian, 52, 8)
+  return offset + 8
+}
+
+Buffer.prototype.writeDoubleLE = function writeDoubleLE (value, offset, noAssert) {
+  return writeDouble(this, value, offset, true, noAssert)
+}
+
+Buffer.prototype.writeDoubleBE = function writeDoubleBE (value, offset, noAssert) {
+  return writeDouble(this, value, offset, false, noAssert)
+}
+
+// copy(targetBuffer, targetStart=0, sourceStart=0, sourceEnd=buffer.length)
+Buffer.prototype.copy = function copy (target, targetStart, start, end) {
+  if (!start) start = 0
+  if (!end && end !== 0) end = this.length
+  if (targetStart >= target.length) targetStart = target.length
+  if (!targetStart) targetStart = 0
+  if (end > 0 && end < start) end = start
+
+  // Copy 0 bytes; we're done
+  if (end === start) return 0
+  if (target.length === 0 || this.length === 0) return 0
+
+  // Fatal error conditions
+  if (targetStart < 0) {
+    throw new RangeError('targetStart out of bounds')
+  }
+  if (start < 0 || start >= this.length) throw new RangeError('sourceStart out of bounds')
+  if (end < 0) throw new RangeError('sourceEnd out of bounds')
+
+  // Are we oob?
+  if (end > this.length) end = this.length
+  if (target.length - targetStart < end - start) {
+    end = target.length - targetStart + start
+  }
+
+  var len = end - start
+  var i
+
+  if (this === target && start < targetStart && targetStart < end) {
+    // descending copy from end
+    for (i = len - 1; i >= 0; --i) {
+      target[i + targetStart] = this[i + start]
+    }
+  } else if (len < 1000 || !Buffer.TYPED_ARRAY_SUPPORT) {
+    // ascending copy from start
+    for (i = 0; i < len; ++i) {
+      target[i + targetStart] = this[i + start]
+    }
+  } else {
+    Uint8Array.prototype.set.call(
+      target,
+      this.subarray(start, start + len),
+      targetStart
+    )
+  }
+
+  return len
+}
+
+// Usage:
+//    buffer.fill(number[, offset[, end]])
+//    buffer.fill(buffer[, offset[, end]])
+//    buffer.fill(string[, offset[, end]][, encoding])
+Buffer.prototype.fill = function fill (val, start, end, encoding) {
+  // Handle string cases:
+  if (typeof val === 'string') {
+    if (typeof start === 'string') {
+      encoding = start
+      start = 0
+      end = this.length
+    } else if (typeof end === 'string') {
+      encoding = end
+      end = this.length
+    }
+    if (val.length === 1) {
+      var code = val.charCodeAt(0)
+      if (code < 256) {
+        val = code
+      }
+    }
+    if (encoding !== undefined && typeof encoding !== 'string') {
+      throw new TypeError('encoding must be a string')
+    }
+    if (typeof encoding === 'string' && !Buffer.isEncoding(encoding)) {
+      throw new TypeError('Unknown encoding: ' + encoding)
+    }
+  } else if (typeof val === 'number') {
+    val = val & 255
+  }
+
+  // Invalid ranges are not set to a default, so can range check early.
+  if (start < 0 || this.length < start || this.length < end) {
+    throw new RangeError('Out of range index')
+  }
+
+  if (end <= start) {
+    return this
+  }
+
+  start = start >>> 0
+  end = end === undefined ? this.length : end >>> 0
+
+  if (!val) val = 0
+
+  var i
+  if (typeof val === 'number') {
+    for (i = start; i < end; ++i) {
+      this[i] = val
+    }
+  } else {
+    var bytes = Buffer.isBuffer(val)
+      ? val
+      : utf8ToBytes(new Buffer(val, encoding).toString())
+    var len = bytes.length
+    for (i = 0; i < end - start; ++i) {
+      this[i + start] = bytes[i % len]
+    }
+  }
+
+  return this
+}
+
+// HELPER FUNCTIONS
+// ================
+
+var INVALID_BASE64_RE = /[^+\/0-9A-Za-z-_]/g
+
+function base64clean (str) {
+  // Node strips out invalid characters like \n and \t from the string, base64-js does not
+  str = stringtrim(str).replace(INVALID_BASE64_RE, '')
+  // Node converts strings with length < 2 to ''
+  if (str.length < 2) return ''
+  // Node allows for non-padded base64 strings (missing trailing ===), base64-js does not
+  while (str.length % 4 !== 0) {
+    str = str + '='
+  }
+  return str
+}
+
+function stringtrim (str) {
+  if (str.trim) return str.trim()
+  return str.replace(/^\s+|\s+$/g, '')
+}
+
+function toHex (n) {
+  if (n < 16) return '0' + n.toString(16)
+  return n.toString(16)
+}
+
+function utf8ToBytes (string, units) {
+  units = units || Infinity
+  var codePoint
+  var length = string.length
+  var leadSurrogate = null
+  var bytes = []
+
+  for (var i = 0; i < length; ++i) {
+    codePoint = string.charCodeAt(i)
+
+    // is surrogate component
+    if (codePoint > 0xD7FF && codePoint < 0xE000) {
+      // last char was a lead
+      if (!leadSurrogate) {
+        // no lead yet
+        if (codePoint > 0xDBFF) {
+          // unexpected trail
+          if ((units -= 3) > -1) bytes.push(0xEF, 0xBF, 0xBD)
+          continue
+        } else if (i + 1 === length) {
+          // unpaired lead
+          if ((units -= 3) > -1) bytes.push(0xEF, 0xBF, 0xBD)
+          continue
+        }
+
+        // valid lead
+        leadSurrogate = codePoint
+
+        continue
+      }
+
+      // 2 leads in a row
+      if (codePoint < 0xDC00) {
+        if ((units -= 3) > -1) bytes.push(0xEF, 0xBF, 0xBD)
+        leadSurrogate = codePoint
+        continue
+      }
+
+      // valid surrogate pair
+      codePoint = (leadSurrogate - 0xD800 << 10 | codePoint - 0xDC00) + 0x10000
+    } else if (leadSurrogate) {
+      // valid bmp char, but last char was a lead
+      if ((units -= 3) > -1) bytes.push(0xEF, 0xBF, 0xBD)
+    }
+
+    leadSurrogate = null
+
+    // encode utf8
+    if (codePoint < 0x80) {
+      if ((units -= 1) < 0) break
+      bytes.push(codePoint)
+    } else if (codePoint < 0x800) {
+      if ((units -= 2) < 0) break
+      bytes.push(
+        codePoint >> 0x6 | 0xC0,
+        codePoint & 0x3F | 0x80
+      )
+    } else if (codePoint < 0x10000) {
+      if ((units -= 3) < 0) break
+      bytes.push(
+        codePoint >> 0xC | 0xE0,
+        codePoint >> 0x6 & 0x3F | 0x80,
+        codePoint & 0x3F | 0x80
+      )
+    } else if (codePoint < 0x110000) {
+      if ((units -= 4) < 0) break
+      bytes.push(
+        codePoint >> 0x12 | 0xF0,
+        codePoint >> 0xC & 0x3F | 0x80,
+        codePoint >> 0x6 & 0x3F | 0x80,
+        codePoint & 0x3F | 0x80
+      )
+    } else {
+      throw new Error('Invalid code point')
+    }
+  }
+
+  return bytes
+}
+
+function asciiToBytes (str) {
+  var byteArray = []
+  for (var i = 0; i < str.length; ++i) {
+    // Node's code seems to be doing this and not & 0x7F..
+    byteArray.push(str.charCodeAt(i) & 0xFF)
+  }
+  return byteArray
+}
+
+function utf16leToBytes (str, units) {
+  var c, hi, lo
+  var byteArray = []
+  for (var i = 0; i < str.length; ++i) {
+    if ((units -= 2) < 0) break
+
+    c = str.charCodeAt(i)
+    hi = c >> 8
+    lo = c % 256
+    byteArray.push(lo)
+    byteArray.push(hi)
+  }
+
+  return byteArray
+}
+
+function base64ToBytes (str) {
+  return base64.toByteArray(base64clean(str))
+}
+
+function blitBuffer (src, dst, offset, length) {
+  for (var i = 0; i < length; ++i) {
+    if ((i + offset >= dst.length) || (i >= src.length)) break
+    dst[i + offset] = src[i]
+  }
+  return i
+}
+
+function isnan (val) {
+  return val !== val // eslint-disable-line no-self-compare
+}
+
+
+/***/ }),
+
 /***/ "./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/ol/ol.css":
 /*!****************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/css-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[1]!./node_modules/postcss-loader/dist/cjs.js??clonedRuleSet-9[0].rules[0].use[2]!./node_modules/ol/ol.css ***!
@@ -10738,7 +12737,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.ol-map {\n  height: 100%;\n  width: 100%;\n  position:absolute;\n}\n@-webkit-keyframes spinner {\nto {\n    transform: rotate(360deg);\n}\n}\n@keyframes spinner {\nto {\n    transform: rotate(360deg);\n}\n}\n.spinner:after {\n  content: \"\";\n  box-sizing: border-box;\n  position: absolute;\n  top: 50%;\n  left: 50%;\n  width: 40px;\n  height: 40px;\n  margin-top: -20px;\n  margin-left: -20px;\n  border-radius: 50%;\n  border: 5px solid rgba(180, 180, 180, 0.6);\n  border-top-color: rgba(0, 0, 0, 0.6);\n  -webkit-animation: spinner 0.6s linear infinite;\n          animation: spinner 0.6s linear infinite;\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.ol-map {\n  height: 100%;\n  width: 100%;\n  position:absolute;\n}\n@-webkit-keyframes spinner {\nto {\n    transform: rotate(360deg);\n}\n}\n@keyframes spinner {\nto {\n    transform: rotate(360deg);\n}\n}\n.ol-popup {\n  min-width: 280px;\n}\n.spinner:after {\n  content: \"\";\n  box-sizing: border-box;\n  position: absolute;\n  top: 50%;\n  left: 50%;\n  width: 40px;\n  height: 40px;\n  margin-top: -20px;\n  margin-left: -20px;\n  border-radius: 50%;\n  border: 5px solid rgba(180, 180, 180, 0.6);\n  border-top-color: rgba(0, 0, 0, 0.6);\n  -webkit-animation: spinner 0.6s linear infinite;\n          animation: spinner 0.6s linear infinite;\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -10818,6 +12817,116 @@ module.exports = function (cssWithMappingToString) {
 
   return list;
 };
+
+/***/ }),
+
+/***/ "./node_modules/ieee754/index.js":
+/*!***************************************!*\
+  !*** ./node_modules/ieee754/index.js ***!
+  \***************************************/
+/***/ ((__unused_webpack_module, exports) => {
+
+/*! ieee754. BSD-3-Clause License. Feross Aboukhadijeh <https://feross.org/opensource> */
+exports.read = function (buffer, offset, isLE, mLen, nBytes) {
+  var e, m
+  var eLen = (nBytes * 8) - mLen - 1
+  var eMax = (1 << eLen) - 1
+  var eBias = eMax >> 1
+  var nBits = -7
+  var i = isLE ? (nBytes - 1) : 0
+  var d = isLE ? -1 : 1
+  var s = buffer[offset + i]
+
+  i += d
+
+  e = s & ((1 << (-nBits)) - 1)
+  s >>= (-nBits)
+  nBits += eLen
+  for (; nBits > 0; e = (e * 256) + buffer[offset + i], i += d, nBits -= 8) {}
+
+  m = e & ((1 << (-nBits)) - 1)
+  e >>= (-nBits)
+  nBits += mLen
+  for (; nBits > 0; m = (m * 256) + buffer[offset + i], i += d, nBits -= 8) {}
+
+  if (e === 0) {
+    e = 1 - eBias
+  } else if (e === eMax) {
+    return m ? NaN : ((s ? -1 : 1) * Infinity)
+  } else {
+    m = m + Math.pow(2, mLen)
+    e = e - eBias
+  }
+  return (s ? -1 : 1) * m * Math.pow(2, e - mLen)
+}
+
+exports.write = function (buffer, value, offset, isLE, mLen, nBytes) {
+  var e, m, c
+  var eLen = (nBytes * 8) - mLen - 1
+  var eMax = (1 << eLen) - 1
+  var eBias = eMax >> 1
+  var rt = (mLen === 23 ? Math.pow(2, -24) - Math.pow(2, -77) : 0)
+  var i = isLE ? 0 : (nBytes - 1)
+  var d = isLE ? 1 : -1
+  var s = value < 0 || (value === 0 && 1 / value < 0) ? 1 : 0
+
+  value = Math.abs(value)
+
+  if (isNaN(value) || value === Infinity) {
+    m = isNaN(value) ? 1 : 0
+    e = eMax
+  } else {
+    e = Math.floor(Math.log(value) / Math.LN2)
+    if (value * (c = Math.pow(2, -e)) < 1) {
+      e--
+      c *= 2
+    }
+    if (e + eBias >= 1) {
+      value += rt / c
+    } else {
+      value += rt * Math.pow(2, 1 - eBias)
+    }
+    if (value * c >= 2) {
+      e++
+      c /= 2
+    }
+
+    if (e + eBias >= eMax) {
+      m = 0
+      e = eMax
+    } else if (e + eBias >= 1) {
+      m = ((value * c) - 1) * Math.pow(2, mLen)
+      e = e + eBias
+    } else {
+      m = value * Math.pow(2, eBias - 1) * Math.pow(2, mLen)
+      e = 0
+    }
+  }
+
+  for (; mLen >= 8; buffer[offset + i] = m & 0xff, i += d, m /= 256, mLen -= 8) {}
+
+  e = (e << mLen) | m
+  eLen += mLen
+  for (; eLen > 0; buffer[offset + i] = e & 0xff, i += d, e /= 256, eLen -= 8) {}
+
+  buffer[offset + i - d] |= s * 128
+}
+
+
+/***/ }),
+
+/***/ "./node_modules/isarray/index.js":
+/*!***************************************!*\
+  !*** ./node_modules/isarray/index.js ***!
+  \***************************************/
+/***/ ((module) => {
+
+var toString = {}.toString;
+
+module.exports = Array.isArray || function (arr) {
+  return toString.call(arr) == '[object Array]';
+};
+
 
 /***/ }),
 
@@ -40571,7 +42680,7 @@ var render = function () {
         0
       ),
     ]),
-    _vm._v("\n  " + _vm._s(_vm.fishcoordinate.data.fishcoordinates) + "\n  "),
+    _vm._v(" "),
     _vm._m(0),
   ])
 }
@@ -40615,7 +42724,7 @@ var render = function () {
         attrs: { type: "button" },
         on: { click: _vm.getLocation },
       },
-      [_vm._v("取得您目前所在位置的經緯度")]
+      [_vm._v("取得目前位置經緯度(誤差值1000公尺內)")]
     ),
   ])
 }
@@ -53333,6 +55442,126 @@ __webpack_require__.r(__webpack_exports__);
     REMOVE: 'remove',
 });
 //# sourceMappingURL=CollectionEventType.js.map
+
+/***/ }),
+
+/***/ "./node_modules/ol/DataTile.js":
+/*!*************************************!*\
+  !*** ./node_modules/ol/DataTile.js ***!
+  \*************************************/
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _Tile_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Tile.js */ "./node_modules/ol/Tile.js");
+/* harmony import */ var _TileState_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./TileState.js */ "./node_modules/ol/TileState.js");
+var __extends = (undefined && undefined.__extends) || (function () {
+    var extendStatics = function (d, b) {
+        extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (Object.prototype.hasOwnProperty.call(b, p)) d[p] = b[p]; };
+        return extendStatics(d, b);
+    };
+    return function (d, b) {
+        if (typeof b !== "function" && b !== null)
+            throw new TypeError("Class extends value " + String(b) + " is not a constructor or null");
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+/**
+ * @module ol/DataTile
+ */
+
+
+/**
+ * Data that can be used with a DataTile.  For increased browser compatibility, use
+ * Uint8Array instead of Uint8ClampedArray where possible.
+ * @typedef {Uint8Array|Uint8ClampedArray|Float32Array|DataView} Data
+ */
+/**
+ * @typedef {Object} Options
+ * @property {import("./tilecoord.js").TileCoord} tileCoord Tile coordinate.
+ * @property {function(): Promise<Data>} loader Data loader.
+ * @property {number} [transition=250] A duration for tile opacity
+ * transitions in milliseconds. A duration of 0 disables the opacity transition.
+ * @property {boolean} [interpolate=false] Use interpolated values when resampling.  By default,
+ * the nearest neighbor is used when resampling.
+ * @api
+ */
+var DataTile = /** @class */ (function (_super) {
+    __extends(DataTile, _super);
+    /**
+     * @param {Options} options Tile options.
+     */
+    function DataTile(options) {
+        var _this = this;
+        var state = _TileState_js__WEBPACK_IMPORTED_MODULE_0__["default"].IDLE;
+        _this = _super.call(this, options.tileCoord, state, {
+            transition: options.transition,
+            interpolate: options.interpolate,
+        }) || this;
+        /**
+         * @type {function(): Promise<Data>}
+         * @private
+         */
+        _this.loader_ = options.loader;
+        /**
+         * @type {Data}
+         * @private
+         */
+        _this.data_ = null;
+        /**
+         * @type {Error}
+         * @private
+         */
+        _this.error_ = null;
+        return _this;
+    }
+    /**
+     * Get the data for the tile.
+     * @return {Data} Tile data.
+     * @api
+     */
+    DataTile.prototype.getData = function () {
+        return this.data_;
+    };
+    /**
+     * Get any loading error.
+     * @return {Error} Loading error.
+     * @api
+     */
+    DataTile.prototype.getError = function () {
+        return this.error_;
+    };
+    /**
+     * Load not yet loaded URI.
+     * @api
+     */
+    DataTile.prototype.load = function () {
+        this.state = _TileState_js__WEBPACK_IMPORTED_MODULE_0__["default"].LOADING;
+        this.changed();
+        var self = this;
+        this.loader_()
+            .then(function (data) {
+            self.data_ = data;
+            self.state = _TileState_js__WEBPACK_IMPORTED_MODULE_0__["default"].LOADED;
+            self.changed();
+        })
+            .catch(function (error) {
+            self.error_ = error;
+            self.state = _TileState_js__WEBPACK_IMPORTED_MODULE_0__["default"].ERROR;
+            self.changed();
+        });
+    };
+    return DataTile;
+}(_Tile_js__WEBPACK_IMPORTED_MODULE_1__["default"]));
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (DataTile);
+//# sourceMappingURL=DataTile.js.map
 
 /***/ }),
 
@@ -81829,6 +84058,161 @@ var VectorLayer = /** @class */ (function (_super) {
 
 /***/ }),
 
+/***/ "./node_modules/ol/layer/WebGLPoints.js":
+/*!**********************************************!*\
+  !*** ./node_modules/ol/layer/WebGLPoints.js ***!
+  \**********************************************/
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _Layer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./Layer.js */ "./node_modules/ol/layer/Layer.js");
+/* harmony import */ var _renderer_webgl_PointsLayer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../renderer/webgl/PointsLayer.js */ "./node_modules/ol/renderer/webgl/PointsLayer.js");
+/* harmony import */ var _obj_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../obj.js */ "./node_modules/ol/obj.js");
+/* harmony import */ var _webgl_ShaderBuilder_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../webgl/ShaderBuilder.js */ "./node_modules/ol/webgl/ShaderBuilder.js");
+var __extends = (undefined && undefined.__extends) || (function () {
+    var extendStatics = function (d, b) {
+        extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (Object.prototype.hasOwnProperty.call(b, p)) d[p] = b[p]; };
+        return extendStatics(d, b);
+    };
+    return function (d, b) {
+        if (typeof b !== "function" && b !== null)
+            throw new TypeError("Class extends value " + String(b) + " is not a constructor or null");
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+/**
+ * @module ol/layer/WebGLPoints
+ */
+
+
+
+
+/**
+ * @template {import("../source/Vector.js").default<import("../geom/Point.js").default>} VectorSourceType
+ * @typedef {Object} Options
+ * @property {import('../style/literal.js').LiteralStyle} style Literal style to apply to the layer features.
+ * @property {string} [className='ol-layer'] A CSS class name to set to the layer element.
+ * @property {number} [opacity=1] Opacity (0, 1).
+ * @property {boolean} [visible=true] Visibility.
+ * @property {import("../extent.js").Extent} [extent] The bounding extent for layer rendering.  The layer will not be
+ * rendered outside of this extent.
+ * @property {number} [zIndex] The z-index for layer rendering.  At rendering time, the layers
+ * will be ordered, first by Z-index and then by position. When `undefined`, a `zIndex` of 0 is assumed
+ * for layers that are added to the map's `layers` collection, or `Infinity` when the layer's `setMap()`
+ * method was used.
+ * @property {number} [minResolution] The minimum resolution (inclusive) at which this layer will be
+ * visible.
+ * @property {number} [maxResolution] The maximum resolution (exclusive) below which this layer will
+ * be visible.
+ * @property {number} [minZoom] The minimum view zoom level (exclusive) above which this layer will be
+ * visible.
+ * @property {number} [maxZoom] The maximum view zoom level (inclusive) at which this layer will
+ * be visible.
+ * @property {VectorSourceType} [source] Point source.
+ * @property {boolean} [disableHitDetection=false] Setting this to true will provide a slight performance boost, but will
+ * prevent all hit detection on the layer.
+ * @property {Object<string, *>} [properties] Arbitrary observable properties. Can be accessed with `#get()` and `#set()`.
+ */
+/**
+ * @classdesc
+ * Layer optimized for rendering large point datasets. Takes a `style` property which
+ * is a serializable JSON object describing how the layer should be rendered.
+ *
+ * Here are a few samples of literal style objects:
+ * ```js
+ * const style = {
+ *   symbol: {
+ *     symbolType: 'circle',
+ *     size: 8,
+ *     color: '#33AAFF',
+ *     opacity: 0.9
+ *   }
+ * }
+ * ```
+ *
+ * ```js
+ * const style = {
+ *   symbol: {
+ *     symbolType: 'image',
+ *     offset: [0, 12],
+ *     size: [4, 8],
+ *     src: '../static/exclamation-mark.png'
+ *   }
+ * }
+ * ```
+ *
+ * **Important: a `WebGLPoints` layer must be manually disposed when removed, otherwise the underlying WebGL context
+ * will not be garbage collected.**
+ *
+ * Note that any property set in the options is set as a {@link module:ol/Object~BaseObject}
+ * property on the layer object; for example, setting `title: 'My Title'` in the
+ * options means that `title` is observable, and has get/set accessors.
+ *
+ * @template {import("../source/Vector.js").default<import("../geom/Point.js").default>} VectorSourceType
+ * @extends {Layer<VectorSourceType, WebGLPointsLayerRenderer>}
+ * @fires import("../render/Event.js").RenderEvent
+ */
+var WebGLPointsLayer = /** @class */ (function (_super) {
+    __extends(WebGLPointsLayer, _super);
+    /**
+     * @param {Options<VectorSourceType>} options Options.
+     */
+    function WebGLPointsLayer(options) {
+        var _this = this;
+        var baseOptions = (0,_obj_js__WEBPACK_IMPORTED_MODULE_0__.assign)({}, options);
+        _this = _super.call(this, baseOptions) || this;
+        /**
+         * @private
+         * @type {import('../webgl/ShaderBuilder.js').StyleParseResult}
+         */
+        _this.parseResult_ = (0,_webgl_ShaderBuilder_js__WEBPACK_IMPORTED_MODULE_1__.parseLiteralStyle)(options.style);
+        /**
+         * @type {Object<string, (string|number)>}
+         * @private
+         */
+        _this.styleVariables_ = options.style.variables || {};
+        /**
+         * @private
+         * @type {boolean}
+         */
+        _this.hitDetectionDisabled_ = !!options.disableHitDetection;
+        return _this;
+    }
+    WebGLPointsLayer.prototype.createRenderer = function () {
+        return new _renderer_webgl_PointsLayer_js__WEBPACK_IMPORTED_MODULE_2__["default"](this, {
+            vertexShader: this.parseResult_.builder.getSymbolVertexShader(),
+            fragmentShader: this.parseResult_.builder.getSymbolFragmentShader(),
+            hitVertexShader: !this.hitDetectionDisabled_ &&
+                this.parseResult_.builder.getSymbolVertexShader(true),
+            hitFragmentShader: !this.hitDetectionDisabled_ &&
+                this.parseResult_.builder.getSymbolFragmentShader(true),
+            uniforms: this.parseResult_.uniforms,
+            attributes: this.parseResult_.attributes,
+        });
+    };
+    /**
+     * Update any variables used by the layer style and trigger a re-render.
+     * @param {Object<string, number>} variables Variables to update.
+     */
+    WebGLPointsLayer.prototype.updateStyleVariables = function (variables) {
+        (0,_obj_js__WEBPACK_IMPORTED_MODULE_0__.assign)(this.styleVariables_, variables);
+        this.changed();
+    };
+    return WebGLPointsLayer;
+}(_Layer_js__WEBPACK_IMPORTED_MODULE_3__["default"]));
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (WebGLPointsLayer);
+//# sourceMappingURL=WebGLPoints.js.map
+
+/***/ }),
+
 /***/ "./node_modules/ol/loadingstrategy.js":
 /*!********************************************!*\
   !*** ./node_modules/ol/loadingstrategy.js ***!
@@ -91770,6 +94154,1715 @@ function renderPolygonGeometry(builderGroup, geometry, style, feature, opt_declu
 
 /***/ }),
 
+/***/ "./node_modules/ol/renderer/webgl/Layer.js":
+/*!*************************************************!*\
+  !*** ./node_modules/ol/renderer/webgl/Layer.js ***!
+  \*************************************************/
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "WebGLWorkerMessageType": () => (/* binding */ WebGLWorkerMessageType),
+/* harmony export */   "colorDecodeId": () => (/* binding */ colorDecodeId),
+/* harmony export */   "colorEncodeId": () => (/* binding */ colorEncodeId),
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__),
+/* harmony export */   "getBlankImageData": () => (/* binding */ getBlankImageData),
+/* harmony export */   "writePointFeatureToBuffers": () => (/* binding */ writePointFeatureToBuffers)
+/* harmony export */ });
+/* harmony import */ var _layer_Property_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../layer/Property.js */ "./node_modules/ol/layer/Property.js");
+/* harmony import */ var _Layer_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../Layer.js */ "./node_modules/ol/renderer/Layer.js");
+/* harmony import */ var _render_Event_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../render/Event.js */ "./node_modules/ol/render/Event.js");
+/* harmony import */ var _render_EventType_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../render/EventType.js */ "./node_modules/ol/render/EventType.js");
+/* harmony import */ var _webgl_Helper_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../webgl/Helper.js */ "./node_modules/ol/webgl/Helper.js");
+/* harmony import */ var _transform_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../transform.js */ "./node_modules/ol/transform.js");
+/* harmony import */ var _extent_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../extent.js */ "./node_modules/ol/extent.js");
+var __extends = (undefined && undefined.__extends) || (function () {
+    var extendStatics = function (d, b) {
+        extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (Object.prototype.hasOwnProperty.call(b, p)) d[p] = b[p]; };
+        return extendStatics(d, b);
+    };
+    return function (d, b) {
+        if (typeof b !== "function" && b !== null)
+            throw new TypeError("Class extends value " + String(b) + " is not a constructor or null");
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+/**
+ * @module ol/renderer/webgl/Layer
+ */
+
+
+
+
+
+
+
+/**
+ * @enum {string}
+ */
+var WebGLWorkerMessageType = {
+    GENERATE_BUFFERS: 'GENERATE_BUFFERS',
+};
+/**
+ * @typedef {Object} WebGLWorkerGenerateBuffersMessage
+ * This message will trigger the generation of a vertex and an index buffer based on the given render instructions.
+ * When the buffers are generated, the worked will send a message of the same type to the main thread, with
+ * the generated buffers in it.
+ * Note that any addition properties present in the message *will* be sent back to the main thread.
+ * @property {WebGLWorkerMessageType} type Message type
+ * @property {ArrayBuffer} renderInstructions Render instructions raw binary buffer.
+ * @property {ArrayBuffer} [vertexBuffer] Vertices array raw binary buffer (sent by the worker).
+ * @property {ArrayBuffer} [indexBuffer] Indices array raw binary buffer (sent by the worker).
+ * @property {number} [customAttributesCount] Amount of custom attributes count in the render instructions.
+ */
+/**
+ * @typedef {Object} PostProcessesOptions
+ * @property {number} [scaleRatio] Scale ratio; if < 1, the post process will render to a texture smaller than
+ * the main canvas that will then be sampled up (useful for saving resource on blur steps).
+ * @property {string} [vertexShader] Vertex shader source
+ * @property {string} [fragmentShader] Fragment shader source
+ * @property {Object<string,import("../../webgl/Helper").UniformValue>} [uniforms] Uniform definitions for the post process step
+ */
+/**
+ * @typedef {Object} Options
+ * @property {Object<string,import("../../webgl/Helper").UniformValue>} [uniforms] Uniform definitions for the post process steps
+ * @property {Array<PostProcessesOptions>} [postProcesses] Post-processes definitions
+ */
+/**
+ * @classdesc
+ * Base WebGL renderer class.
+ * Holds all logic related to data manipulation & some common rendering logic
+ * @template {import("../../layer/Layer.js").default} LayerType
+ * @extends {LayerRenderer<LayerType>}
+ */
+var WebGLLayerRenderer = /** @class */ (function (_super) {
+    __extends(WebGLLayerRenderer, _super);
+    /**
+     * @param {LayerType} layer Layer.
+     * @param {Options} [opt_options] Options.
+     */
+    function WebGLLayerRenderer(layer, opt_options) {
+        var _this = _super.call(this, layer) || this;
+        var options = opt_options || {};
+        /**
+         * The transform for viewport CSS pixels to rendered pixels.  This transform is only
+         * set before dispatching rendering events.
+         * @private
+         * @type {import("../../transform.js").Transform}
+         */
+        _this.inversePixelTransform_ = (0,_transform_js__WEBPACK_IMPORTED_MODULE_0__.create)();
+        /**
+         * @private
+         * @type {CanvasRenderingContext2D}
+         */
+        _this.pixelContext_ = null;
+        /**
+         * @private
+         */
+        _this.postProcesses_ = options.postProcesses;
+        /**
+         * @private
+         */
+        _this.uniforms_ = options.uniforms;
+        /**
+         * @type {WebGLHelper}
+         * @protected
+         */
+        _this.helper;
+        layer.addChangeListener(_layer_Property_js__WEBPACK_IMPORTED_MODULE_1__["default"].MAP, _this.removeHelper.bind(_this));
+        _this.dispatchPreComposeEvent = _this.dispatchPreComposeEvent.bind(_this);
+        _this.dispatchPostComposeEvent = _this.dispatchPostComposeEvent.bind(_this);
+        return _this;
+    }
+    /**
+     * @param {WebGLRenderingContext} context The WebGL rendering context.
+     * @param {import("../../PluggableMap.js").FrameState} frameState Frame state.
+     * @protected
+     */
+    WebGLLayerRenderer.prototype.dispatchPreComposeEvent = function (context, frameState) {
+        var layer = this.getLayer();
+        if (layer.hasListener(_render_EventType_js__WEBPACK_IMPORTED_MODULE_2__["default"].PRECOMPOSE)) {
+            var event_1 = new _render_Event_js__WEBPACK_IMPORTED_MODULE_3__["default"](_render_EventType_js__WEBPACK_IMPORTED_MODULE_2__["default"].PRECOMPOSE, undefined, frameState, context);
+            layer.dispatchEvent(event_1);
+        }
+    };
+    /**
+     * @param {WebGLRenderingContext} context The WebGL rendering context.
+     * @param {import("../../PluggableMap.js").FrameState} frameState Frame state.
+     * @protected
+     */
+    WebGLLayerRenderer.prototype.dispatchPostComposeEvent = function (context, frameState) {
+        var layer = this.getLayer();
+        if (layer.hasListener(_render_EventType_js__WEBPACK_IMPORTED_MODULE_2__["default"].POSTCOMPOSE)) {
+            var event_2 = new _render_Event_js__WEBPACK_IMPORTED_MODULE_3__["default"](_render_EventType_js__WEBPACK_IMPORTED_MODULE_2__["default"].POSTCOMPOSE, undefined, frameState, context);
+            layer.dispatchEvent(event_2);
+        }
+    };
+    /**
+     * Reset options (only handles uniforms).
+     * @param {Options} options Options.
+     */
+    WebGLLayerRenderer.prototype.reset = function (options) {
+        this.uniforms_ = options.uniforms;
+        if (this.helper) {
+            this.helper.setUniforms(this.uniforms_);
+        }
+    };
+    /**
+     * @protected
+     */
+    WebGLLayerRenderer.prototype.removeHelper = function () {
+        if (this.helper) {
+            this.helper.dispose();
+            delete this.helper;
+        }
+    };
+    /**
+     * Determine whether renderFrame should be called.
+     * @param {import("../../PluggableMap.js").FrameState} frameState Frame state.
+     * @return {boolean} Layer is ready to be rendered.
+     */
+    WebGLLayerRenderer.prototype.prepareFrame = function (frameState) {
+        if (this.getLayer().getRenderSource()) {
+            var incrementGroup = true;
+            var groupNumber = -1;
+            var className = void 0;
+            for (var i = 0, ii = frameState.layerStatesArray.length; i < ii; i++) {
+                var layer = frameState.layerStatesArray[i].layer;
+                var renderer = layer.getRenderer();
+                if (!(renderer instanceof WebGLLayerRenderer)) {
+                    incrementGroup = true;
+                    continue;
+                }
+                var layerClassName = layer.getClassName();
+                if (incrementGroup || layerClassName !== className) {
+                    groupNumber += 1;
+                    incrementGroup = false;
+                }
+                className = layerClassName;
+                if (renderer === this) {
+                    break;
+                }
+            }
+            var canvasCacheKey = 'map/' + frameState.mapId + '/group/' + groupNumber;
+            if (!this.helper || !this.helper.canvasCacheKeyMatches(canvasCacheKey)) {
+                this.removeHelper();
+                this.helper = new _webgl_Helper_js__WEBPACK_IMPORTED_MODULE_4__["default"]({
+                    postProcesses: this.postProcesses_,
+                    uniforms: this.uniforms_,
+                    canvasCacheKey: canvasCacheKey,
+                });
+                if (className) {
+                    this.helper.getCanvas().className = className;
+                }
+                this.afterHelperCreated();
+            }
+        }
+        return this.prepareFrameInternal(frameState);
+    };
+    /**
+     * @protected
+     */
+    WebGLLayerRenderer.prototype.afterHelperCreated = function () { };
+    /**
+     * Determine whether renderFrame should be called.
+     * @param {import("../../PluggableMap.js").FrameState} frameState Frame state.
+     * @return {boolean} Layer is ready to be rendered.
+     * @protected
+     */
+    WebGLLayerRenderer.prototype.prepareFrameInternal = function (frameState) {
+        return true;
+    };
+    /**
+     * Clean up.
+     */
+    WebGLLayerRenderer.prototype.disposeInternal = function () {
+        this.removeHelper();
+        _super.prototype.disposeInternal.call(this);
+    };
+    /**
+     * @param {import("../../render/EventType.js").default} type Event type.
+     * @param {WebGLRenderingContext} context The rendering context.
+     * @param {import("../../PluggableMap.js").FrameState} frameState Frame state.
+     * @private
+     */
+    WebGLLayerRenderer.prototype.dispatchRenderEvent_ = function (type, context, frameState) {
+        var layer = this.getLayer();
+        if (layer.hasListener(type)) {
+            (0,_transform_js__WEBPACK_IMPORTED_MODULE_0__.compose)(this.inversePixelTransform_, 0, 0, frameState.pixelRatio, -frameState.pixelRatio, 0, 0, -frameState.size[1]);
+            var event_3 = new _render_Event_js__WEBPACK_IMPORTED_MODULE_3__["default"](type, this.inversePixelTransform_, frameState, context);
+            layer.dispatchEvent(event_3);
+        }
+    };
+    /**
+     * @param {WebGLRenderingContext} context The rendering context.
+     * @param {import("../../PluggableMap.js").FrameState} frameState Frame state.
+     * @protected
+     */
+    WebGLLayerRenderer.prototype.preRender = function (context, frameState) {
+        this.dispatchRenderEvent_(_render_EventType_js__WEBPACK_IMPORTED_MODULE_2__["default"].PRERENDER, context, frameState);
+    };
+    /**
+     * @param {WebGLRenderingContext} context The rendering context.
+     * @param {import("../../PluggableMap.js").FrameState} frameState Frame state.
+     * @protected
+     */
+    WebGLLayerRenderer.prototype.postRender = function (context, frameState) {
+        this.dispatchRenderEvent_(_render_EventType_js__WEBPACK_IMPORTED_MODULE_2__["default"].POSTRENDER, context, frameState);
+    };
+    /**
+     * @param {import("../../pixel.js").Pixel} pixel Pixel.
+     * @param {import("../../PluggableMap.js").FrameState} frameState FrameState.
+     * @param {number} hitTolerance Hit tolerance in pixels.
+     * @return {Uint8ClampedArray|Uint8Array} The result.  If there is no data at the pixel
+     *    location, null will be returned.  If there is data, but pixel values cannot be
+     *    returned, and empty array will be returned.
+     */
+    WebGLLayerRenderer.prototype.getDataAtPixel = function (pixel, frameState, hitTolerance) {
+        var renderPixel = (0,_transform_js__WEBPACK_IMPORTED_MODULE_0__.apply)([frameState.pixelRatio, 0, 0, frameState.pixelRatio, 0, 0], pixel.slice());
+        var gl = this.helper.getGL();
+        if (!gl) {
+            return null;
+        }
+        var layer = this.getLayer();
+        var layerExtent = layer.getExtent();
+        if (layerExtent) {
+            var renderCoordinate = (0,_transform_js__WEBPACK_IMPORTED_MODULE_0__.apply)(frameState.pixelToCoordinateTransform, pixel.slice());
+            /** get only data inside of the layer extent */
+            if (!(0,_extent_js__WEBPACK_IMPORTED_MODULE_5__.containsCoordinate)(layerExtent, renderCoordinate)) {
+                return null;
+            }
+        }
+        var attributes = gl.getContextAttributes();
+        if (!attributes || !attributes.preserveDrawingBuffer) {
+            // we assume there is data at the given pixel (although there might not be)
+            return new Uint8Array();
+        }
+        var x = Math.round(renderPixel[0]);
+        var y = Math.round(renderPixel[1]);
+        var pixelContext = this.pixelContext_;
+        if (!pixelContext) {
+            var pixelCanvas = document.createElement('canvas');
+            pixelCanvas.width = 1;
+            pixelCanvas.height = 1;
+            pixelContext = pixelCanvas.getContext('2d');
+            this.pixelContext_ = pixelContext;
+        }
+        pixelContext.clearRect(0, 0, 1, 1);
+        var data;
+        try {
+            pixelContext.drawImage(gl.canvas, x, y, 1, 1, 0, 0, 1, 1);
+            data = pixelContext.getImageData(0, 0, 1, 1).data;
+        }
+        catch (err) {
+            return data;
+        }
+        if (data[3] === 0) {
+            return null;
+        }
+        return data;
+    };
+    return WebGLLayerRenderer;
+}(_Layer_js__WEBPACK_IMPORTED_MODULE_6__["default"]));
+var tmpArray_ = [];
+var bufferPositions_ = { vertexPosition: 0, indexPosition: 0 };
+function writePointVertex(buffer, pos, x, y, index) {
+    buffer[pos + 0] = x;
+    buffer[pos + 1] = y;
+    buffer[pos + 2] = index;
+}
+/**
+ * An object holding positions both in an index and a vertex buffer.
+ * @typedef {Object} BufferPositions
+ * @property {number} vertexPosition Position in the vertex buffer
+ * @property {number} indexPosition Position in the index buffer
+ */
+/**
+ * Pushes a quad (two triangles) based on a point geometry
+ * @param {Float32Array} instructions Array of render instructions for points.
+ * @param {number} elementIndex Index from which render instructions will be read.
+ * @param {Float32Array} vertexBuffer Buffer in the form of a typed array.
+ * @param {Uint32Array} indexBuffer Buffer in the form of a typed array.
+ * @param {number} customAttributesCount Amount of custom attributes for each element.
+ * @param {BufferPositions} [bufferPositions] Buffer write positions; if not specified, positions will be set at 0.
+ * @return {BufferPositions} New buffer positions where to write next
+ * @property {number} vertexPosition New position in the vertex buffer where future writes should start.
+ * @property {number} indexPosition New position in the index buffer where future writes should start.
+ * @private
+ */
+function writePointFeatureToBuffers(instructions, elementIndex, vertexBuffer, indexBuffer, customAttributesCount, bufferPositions) {
+    // This is for x, y and index
+    var baseVertexAttrsCount = 3;
+    var baseInstructionsCount = 2;
+    var stride = baseVertexAttrsCount + customAttributesCount;
+    var x = instructions[elementIndex + 0];
+    var y = instructions[elementIndex + 1];
+    // read custom numerical attributes on the feature
+    var customAttrs = tmpArray_;
+    customAttrs.length = customAttributesCount;
+    for (var i = 0; i < customAttrs.length; i++) {
+        customAttrs[i] = instructions[elementIndex + baseInstructionsCount + i];
+    }
+    var vPos = bufferPositions ? bufferPositions.vertexPosition : 0;
+    var iPos = bufferPositions ? bufferPositions.indexPosition : 0;
+    var baseIndex = vPos / stride;
+    // push vertices for each of the four quad corners (first standard then custom attributes)
+    writePointVertex(vertexBuffer, vPos, x, y, 0);
+    customAttrs.length &&
+        vertexBuffer.set(customAttrs, vPos + baseVertexAttrsCount);
+    vPos += stride;
+    writePointVertex(vertexBuffer, vPos, x, y, 1);
+    customAttrs.length &&
+        vertexBuffer.set(customAttrs, vPos + baseVertexAttrsCount);
+    vPos += stride;
+    writePointVertex(vertexBuffer, vPos, x, y, 2);
+    customAttrs.length &&
+        vertexBuffer.set(customAttrs, vPos + baseVertexAttrsCount);
+    vPos += stride;
+    writePointVertex(vertexBuffer, vPos, x, y, 3);
+    customAttrs.length &&
+        vertexBuffer.set(customAttrs, vPos + baseVertexAttrsCount);
+    vPos += stride;
+    indexBuffer[iPos++] = baseIndex;
+    indexBuffer[iPos++] = baseIndex + 1;
+    indexBuffer[iPos++] = baseIndex + 3;
+    indexBuffer[iPos++] = baseIndex + 1;
+    indexBuffer[iPos++] = baseIndex + 2;
+    indexBuffer[iPos++] = baseIndex + 3;
+    bufferPositions_.vertexPosition = vPos;
+    bufferPositions_.indexPosition = iPos;
+    return bufferPositions_;
+}
+/**
+ * Returns a texture of 1x1 pixel, white
+ * @private
+ * @return {ImageData} Image data.
+ */
+function getBlankImageData() {
+    var canvas = document.createElement('canvas');
+    var image = canvas.getContext('2d').createImageData(1, 1);
+    image.data[0] = 255;
+    image.data[1] = 255;
+    image.data[2] = 255;
+    image.data[3] = 255;
+    return image;
+}
+/**
+ * Generates a color array based on a numerical id
+ * Note: the range for each component is 0 to 1 with 256 steps
+ * @param {number} id Id
+ * @param {Array<number>} [opt_array] Reusable array
+ * @return {Array<number>} Color array containing the encoded id
+ */
+function colorEncodeId(id, opt_array) {
+    var array = opt_array || [];
+    var radix = 256;
+    var divide = radix - 1;
+    array[0] = Math.floor(id / radix / radix / radix) / divide;
+    array[1] = (Math.floor(id / radix / radix) % radix) / divide;
+    array[2] = (Math.floor(id / radix) % radix) / divide;
+    array[3] = (id % radix) / divide;
+    return array;
+}
+/**
+ * Reads an id from a color-encoded array
+ * Note: the expected range for each component is 0 to 1 with 256 steps.
+ * @param {Array<number>} color Color array containing the encoded id
+ * @return {number} Decoded id
+ */
+function colorDecodeId(color) {
+    var id = 0;
+    var radix = 256;
+    var mult = radix - 1;
+    id += Math.round(color[0] * radix * radix * radix * mult);
+    id += Math.round(color[1] * radix * radix * mult);
+    id += Math.round(color[2] * radix * mult);
+    id += Math.round(color[3] * mult);
+    return id;
+}
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (WebGLLayerRenderer);
+//# sourceMappingURL=Layer.js.map
+
+/***/ }),
+
+/***/ "./node_modules/ol/renderer/webgl/PointsLayer.js":
+/*!*******************************************************!*\
+  !*** ./node_modules/ol/renderer/webgl/PointsLayer.js ***!
+  \*******************************************************/
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _layer_BaseVector_js__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ../../layer/BaseVector.js */ "./node_modules/ol/layer/BaseVector.js");
+/* harmony import */ var _geom_GeometryType_js__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ../../geom/GeometryType.js */ "./node_modules/ol/geom/GeometryType.js");
+/* harmony import */ var _source_VectorEventType_js__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../source/VectorEventType.js */ "./node_modules/ol/source/VectorEventType.js");
+/* harmony import */ var _ViewHint_js__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../../ViewHint.js */ "./node_modules/ol/ViewHint.js");
+/* harmony import */ var _webgl_Buffer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../webgl/Buffer.js */ "./node_modules/ol/webgl/Buffer.js");
+/* harmony import */ var _Layer_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./Layer.js */ "./node_modules/ol/renderer/webgl/Layer.js");
+/* harmony import */ var _webgl_RenderTarget_js__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../../webgl/RenderTarget.js */ "./node_modules/ol/webgl/RenderTarget.js");
+/* harmony import */ var _webgl_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../webgl.js */ "./node_modules/ol/webgl.js");
+/* harmony import */ var _webgl_Helper_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../webgl/Helper.js */ "./node_modules/ol/webgl/Helper.js");
+/* harmony import */ var _transform_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../transform.js */ "./node_modules/ol/transform.js");
+/* harmony import */ var _asserts_js__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ../../asserts.js */ "./node_modules/ol/asserts.js");
+/* harmony import */ var _extent_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../extent.js */ "./node_modules/ol/extent.js");
+/* harmony import */ var _worker_webgl_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../worker/webgl.js */ "./node_modules/ol/worker/webgl.js");
+/* harmony import */ var _util_js__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../../util.js */ "./node_modules/ol/util.js");
+/* harmony import */ var _events_js__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../events.js */ "./node_modules/ol/events.js");
+var __extends = (undefined && undefined.__extends) || (function () {
+    var extendStatics = function (d, b) {
+        extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (Object.prototype.hasOwnProperty.call(b, p)) d[p] = b[p]; };
+        return extendStatics(d, b);
+    };
+    return function (d, b) {
+        if (typeof b !== "function" && b !== null)
+            throw new TypeError("Class extends value " + String(b) + " is not a constructor or null");
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+/**
+ * @module ol/renderer/webgl/PointsLayer
+ */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/**
+ * @typedef {Object} CustomAttribute A description of a custom attribute to be passed on to the GPU, with a value different
+ * for each feature.
+ * @property {string} name Attribute name.
+ * @property {function(import("../../Feature").default, Object<string, *>):number} callback This callback computes the numerical value of the
+ * attribute for a given feature (properties are available as 2nd arg for quicker access).
+ */
+/**
+ * @typedef {Object} FeatureCacheItem Object that holds a reference to a feature, its geometry and properties. Used to optimize
+ * rebuildBuffers by accessing these objects quicker.
+ * @property {import("../../Feature").default} feature Feature
+ * @property {Object<string, *>} properties Feature properties
+ * @property {import("../../geom").Geometry} geometry Feature geometry
+ */
+/**
+ * @typedef {Object} Options
+ * @property {string} [className='ol-layer'] A CSS class name to set to the canvas element.
+ * @property {Array<CustomAttribute>} [attributes] These attributes will be read from the features in the source and then
+ * passed to the GPU. The `name` property of each attribute will serve as its identifier:
+ *  * In the vertex shader as an `attribute` by prefixing it with `a_`
+ *  * In the fragment shader as a `varying` by prefixing it with `v_`
+ * Please note that these can only be numerical values.
+ * @property {string} vertexShader Vertex shader source, mandatory.
+ * @property {string} fragmentShader Fragment shader source, mandatory.
+ * @property {string} [hitVertexShader] Vertex shader source for hit detection rendering.
+ * @property {string} [hitFragmentShader] Fragment shader source for hit detection rendering.
+ * @property {Object<string,import("../../webgl/Helper").UniformValue>} [uniforms] Uniform definitions for the post process steps
+ * Please note that `u_texture` is reserved for the main texture slot and `u_opacity` is reserved for the layer opacity.
+ * @property {Array<import("./Layer").PostProcessesOptions>} [postProcesses] Post-processes definitions
+ */
+/**
+ * @classdesc
+ * WebGL vector renderer optimized for points.
+ * All features will be rendered as quads (two triangles forming a square). New data will be flushed to the GPU
+ * every time the vector source changes.
+ *
+ * You need to provide vertex and fragment shaders for rendering. This can be done using
+ * {@link module:ol/webgl/ShaderBuilder~ShaderBuilder} utilities. These shaders shall expect a `a_position` attribute
+ * containing the screen-space projected center of the quad, as well as a `a_index` attribute
+ * whose value (0, 1, 2 or 3) indicates which quad vertex is currently getting processed (see structure below).
+ *
+ * To include variable attributes in the shaders, you need to declare them using the `attributes` property of
+ * the options object like so:
+ * ```js
+ * new WebGLPointsLayerRenderer(layer, {
+ *   attributes: [
+ *     {
+ *       name: 'size',
+ *       callback: function(feature) {
+ *         // compute something with the feature
+ *       }
+ *     },
+ *     {
+ *       name: 'weight',
+ *       callback: function(feature) {
+ *         // compute something with the feature
+ *       }
+ *     },
+ *   ],
+ *   vertexShader:
+ *     // shader using attribute a_weight and a_size
+ *   fragmentShader:
+ *     // shader using varying v_weight and v_size
+ * ```
+ *
+ * To enable hit detection, you must as well provide dedicated shaders using the `hitVertexShader`
+ * and `hitFragmentShader` properties. These shall expect the `a_hitColor` attribute to contain
+ * the final color that will have to be output for hit detection to work.
+ *
+ * The following uniform is used for the main texture: `u_texture`.
+ * The following uniform is used for the layer opacity: `u_opacity`.
+ *
+ * Please note that the main shader output should have premultiplied alpha, otherwise visual anomalies may occur.
+ *
+ * Points are rendered as quads with the following structure:
+ *
+ * ```
+ *   (u0, v1)      (u1, v1)
+ *  [3]----------[2]
+ *   |`           |
+ *   |  `         |
+ *   |    `       |
+ *   |      `     |
+ *   |        `   |
+ *   |          ` |
+ *  [0]----------[1]
+ *   (u0, v0)      (u1, v0)
+ *  ```
+ *
+ * This uses {@link module:ol/webgl/Helper~WebGLHelper} internally.
+ *
+ * @api
+ */
+var WebGLPointsLayerRenderer = /** @class */ (function (_super) {
+    __extends(WebGLPointsLayerRenderer, _super);
+    /**
+     * @param {import("../../layer/Layer.js").default} layer Layer.
+     * @param {Options} options Options.
+     */
+    function WebGLPointsLayerRenderer(layer, options) {
+        var _this = this;
+        var uniforms = options.uniforms || {};
+        var projectionMatrixTransform = (0,_transform_js__WEBPACK_IMPORTED_MODULE_0__.create)();
+        uniforms[_webgl_Helper_js__WEBPACK_IMPORTED_MODULE_1__.DefaultUniform.PROJECTION_MATRIX] = projectionMatrixTransform;
+        _this = _super.call(this, layer, {
+            uniforms: uniforms,
+            postProcesses: options.postProcesses,
+        }) || this;
+        _this.ready = false;
+        _this.sourceRevision_ = -1;
+        _this.verticesBuffer_ = new _webgl_Buffer_js__WEBPACK_IMPORTED_MODULE_2__["default"](_webgl_js__WEBPACK_IMPORTED_MODULE_3__.ARRAY_BUFFER, _webgl_js__WEBPACK_IMPORTED_MODULE_3__.DYNAMIC_DRAW);
+        _this.hitVerticesBuffer_ = new _webgl_Buffer_js__WEBPACK_IMPORTED_MODULE_2__["default"](_webgl_js__WEBPACK_IMPORTED_MODULE_3__.ARRAY_BUFFER, _webgl_js__WEBPACK_IMPORTED_MODULE_3__.DYNAMIC_DRAW);
+        _this.indicesBuffer_ = new _webgl_Buffer_js__WEBPACK_IMPORTED_MODULE_2__["default"](_webgl_js__WEBPACK_IMPORTED_MODULE_3__.ELEMENT_ARRAY_BUFFER, _webgl_js__WEBPACK_IMPORTED_MODULE_3__.DYNAMIC_DRAW);
+        /**
+         * @private
+         */
+        _this.vertexShader_ = options.vertexShader;
+        /**
+         * @private
+         */
+        _this.fragmentShader_ = options.fragmentShader;
+        /**
+         * @type {WebGLProgram}
+         * @private
+         */
+        _this.program_;
+        /**
+         * @type {boolean}
+         * @private
+         */
+        _this.hitDetectionEnabled_ =
+            options.hitFragmentShader && options.hitVertexShader ? true : false;
+        /**
+         * @private
+         */
+        _this.hitVertexShader_ = options.hitVertexShader;
+        /**
+         * @private
+         */
+        _this.hitFragmentShader_ = options.hitFragmentShader;
+        /**
+         * @type {WebGLProgram}
+         * @private
+         */
+        _this.hitProgram_;
+        var customAttributes = options.attributes
+            ? options.attributes.map(function (attribute) {
+                return {
+                    name: 'a_' + attribute.name,
+                    size: 1,
+                    type: _webgl_Helper_js__WEBPACK_IMPORTED_MODULE_1__.AttributeType.FLOAT,
+                };
+            })
+            : [];
+        /**
+         * A list of attributes used by the renderer. By default only the position and
+         * index of the vertex (0 to 3) are required.
+         * @type {Array<import('../../webgl/Helper.js').AttributeDescription>}
+         */
+        _this.attributes = [
+            {
+                name: 'a_position',
+                size: 2,
+                type: _webgl_Helper_js__WEBPACK_IMPORTED_MODULE_1__.AttributeType.FLOAT,
+            },
+            {
+                name: 'a_index',
+                size: 1,
+                type: _webgl_Helper_js__WEBPACK_IMPORTED_MODULE_1__.AttributeType.FLOAT,
+            },
+        ].concat(customAttributes);
+        /**
+         * A list of attributes used for hit detection.
+         * @type {Array<import('../../webgl/Helper.js').AttributeDescription>}
+         */
+        _this.hitDetectionAttributes = [
+            {
+                name: 'a_position',
+                size: 2,
+                type: _webgl_Helper_js__WEBPACK_IMPORTED_MODULE_1__.AttributeType.FLOAT,
+            },
+            {
+                name: 'a_index',
+                size: 1,
+                type: _webgl_Helper_js__WEBPACK_IMPORTED_MODULE_1__.AttributeType.FLOAT,
+            },
+            {
+                name: 'a_hitColor',
+                size: 4,
+                type: _webgl_Helper_js__WEBPACK_IMPORTED_MODULE_1__.AttributeType.FLOAT,
+            },
+            {
+                name: 'a_featureUid',
+                size: 1,
+                type: _webgl_Helper_js__WEBPACK_IMPORTED_MODULE_1__.AttributeType.FLOAT,
+            },
+        ].concat(customAttributes);
+        _this.customAttributes = options.attributes ? options.attributes : [];
+        _this.previousExtent_ = (0,_extent_js__WEBPACK_IMPORTED_MODULE_4__.createEmpty)();
+        /**
+         * This transform is updated on every frame and is the composition of:
+         * - invert of the world->screen transform that was used when rebuilding buffers (see `this.renderTransform_`)
+         * - current world->screen transform
+         * @type {import("../../transform.js").Transform}
+         * @private
+         */
+        _this.currentTransform_ = projectionMatrixTransform;
+        /**
+         * This transform is updated when buffers are rebuilt and converts world space coordinates to screen space
+         * @type {import("../../transform.js").Transform}
+         * @private
+         */
+        _this.renderTransform_ = (0,_transform_js__WEBPACK_IMPORTED_MODULE_0__.create)();
+        /**
+         * @type {import("../../transform.js").Transform}
+         * @private
+         */
+        _this.invertRenderTransform_ = (0,_transform_js__WEBPACK_IMPORTED_MODULE_0__.create)();
+        /**
+         * @type {Float32Array}
+         * @private
+         */
+        _this.renderInstructions_ = new Float32Array(0);
+        /**
+         * These instructions are used for hit detection
+         * @type {Float32Array}
+         * @private
+         */
+        _this.hitRenderInstructions_ = new Float32Array(0);
+        /**
+         * @type {WebGLRenderTarget}
+         * @private
+         */
+        _this.hitRenderTarget_;
+        /**
+         * Keep track of latest message sent to worker
+         * @type {number}
+         * @private
+         */
+        _this.generateBuffersRun_ = 0;
+        _this.worker_ = (0,_worker_webgl_js__WEBPACK_IMPORTED_MODULE_5__.create)();
+        _this.worker_.addEventListener('message', 
+        /**
+         * @param {*} event Event.
+         * @this {WebGLPointsLayerRenderer}
+         */
+        function (event) {
+            var received = event.data;
+            if (received.type === _Layer_js__WEBPACK_IMPORTED_MODULE_6__.WebGLWorkerMessageType.GENERATE_BUFFERS) {
+                var projectionTransform = received.projectionTransform;
+                if (received.hitDetection) {
+                    this.hitVerticesBuffer_.fromArrayBuffer(received.vertexBuffer);
+                    this.helper.flushBufferData(this.hitVerticesBuffer_);
+                }
+                else {
+                    this.verticesBuffer_.fromArrayBuffer(received.vertexBuffer);
+                    this.helper.flushBufferData(this.verticesBuffer_);
+                }
+                this.indicesBuffer_.fromArrayBuffer(received.indexBuffer);
+                this.helper.flushBufferData(this.indicesBuffer_);
+                this.renderTransform_ = projectionTransform;
+                (0,_transform_js__WEBPACK_IMPORTED_MODULE_0__.makeInverse)(this.invertRenderTransform_, this.renderTransform_);
+                if (received.hitDetection) {
+                    this.hitRenderInstructions_ = new Float32Array(event.data.renderInstructions);
+                }
+                else {
+                    this.renderInstructions_ = new Float32Array(event.data.renderInstructions);
+                    if (received.generateBuffersRun === this.generateBuffersRun_) {
+                        this.ready = true;
+                    }
+                }
+                this.getLayer().changed();
+            }
+        }.bind(_this));
+        /**
+         * This object will be updated when the source changes. Key is uid.
+         * @type {Object<string, FeatureCacheItem>}
+         * @private
+         */
+        _this.featureCache_ = {};
+        /**
+         * Amount of features in the cache.
+         * @type {number}
+         * @private
+         */
+        _this.featureCount_ = 0;
+        var source = _this.getLayer().getSource();
+        _this.sourceListenKeys_ = [
+            (0,_events_js__WEBPACK_IMPORTED_MODULE_7__.listen)(source, _source_VectorEventType_js__WEBPACK_IMPORTED_MODULE_8__["default"].ADDFEATURE, _this.handleSourceFeatureAdded_, _this),
+            (0,_events_js__WEBPACK_IMPORTED_MODULE_7__.listen)(source, _source_VectorEventType_js__WEBPACK_IMPORTED_MODULE_8__["default"].CHANGEFEATURE, _this.handleSourceFeatureChanged_, _this),
+            (0,_events_js__WEBPACK_IMPORTED_MODULE_7__.listen)(source, _source_VectorEventType_js__WEBPACK_IMPORTED_MODULE_8__["default"].REMOVEFEATURE, _this.handleSourceFeatureDelete_, _this),
+            (0,_events_js__WEBPACK_IMPORTED_MODULE_7__.listen)(source, _source_VectorEventType_js__WEBPACK_IMPORTED_MODULE_8__["default"].CLEAR, _this.handleSourceFeatureClear_, _this),
+        ];
+        source.forEachFeature(function (feature) {
+            this.featureCache_[(0,_util_js__WEBPACK_IMPORTED_MODULE_9__.getUid)(feature)] = {
+                feature: feature,
+                properties: feature.getProperties(),
+                geometry: feature.getGeometry(),
+            };
+            this.featureCount_++;
+        }.bind(_this));
+        return _this;
+    }
+    WebGLPointsLayerRenderer.prototype.afterHelperCreated = function () {
+        this.program_ = this.helper.getProgram(this.fragmentShader_, this.vertexShader_);
+        if (this.hitDetectionEnabled_) {
+            this.hitProgram_ = this.helper.getProgram(this.hitFragmentShader_, this.hitVertexShader_);
+            this.hitRenderTarget_ = new _webgl_RenderTarget_js__WEBPACK_IMPORTED_MODULE_10__["default"](this.helper);
+        }
+    };
+    /**
+     * @param {import("../../source/Vector.js").VectorSourceEvent} event Event.
+     * @private
+     */
+    WebGLPointsLayerRenderer.prototype.handleSourceFeatureAdded_ = function (event) {
+        var feature = event.feature;
+        this.featureCache_[(0,_util_js__WEBPACK_IMPORTED_MODULE_9__.getUid)(feature)] = {
+            feature: feature,
+            properties: feature.getProperties(),
+            geometry: feature.getGeometry(),
+        };
+        this.featureCount_++;
+    };
+    /**
+     * @param {import("../../source/Vector.js").VectorSourceEvent} event Event.
+     * @private
+     */
+    WebGLPointsLayerRenderer.prototype.handleSourceFeatureChanged_ = function (event) {
+        var feature = event.feature;
+        this.featureCache_[(0,_util_js__WEBPACK_IMPORTED_MODULE_9__.getUid)(feature)] = {
+            feature: feature,
+            properties: feature.getProperties(),
+            geometry: feature.getGeometry(),
+        };
+    };
+    /**
+     * @param {import("../../source/Vector.js").VectorSourceEvent} event Event.
+     * @private
+     */
+    WebGLPointsLayerRenderer.prototype.handleSourceFeatureDelete_ = function (event) {
+        var feature = event.feature;
+        delete this.featureCache_[(0,_util_js__WEBPACK_IMPORTED_MODULE_9__.getUid)(feature)];
+        this.featureCount_--;
+    };
+    /**
+     * @private
+     */
+    WebGLPointsLayerRenderer.prototype.handleSourceFeatureClear_ = function () {
+        this.featureCache_ = {};
+        this.featureCount_ = 0;
+    };
+    /**
+     * Render the layer.
+     * @param {import("../../PluggableMap.js").FrameState} frameState Frame state.
+     * @return {HTMLElement} The rendered element.
+     */
+    WebGLPointsLayerRenderer.prototype.renderFrame = function (frameState) {
+        var gl = this.helper.getGL();
+        this.preRender(gl, frameState);
+        var renderCount = this.indicesBuffer_.getSize();
+        this.helper.drawElements(0, renderCount);
+        this.helper.finalizeDraw(frameState, this.dispatchPreComposeEvent, this.dispatchPostComposeEvent);
+        var canvas = this.helper.getCanvas();
+        if (this.hitDetectionEnabled_) {
+            this.renderHitDetection(frameState);
+            this.hitRenderTarget_.clearCachedData();
+        }
+        this.postRender(gl, frameState);
+        return canvas;
+    };
+    /**
+     * Determine whether renderFrame should be called.
+     * @param {import("../../PluggableMap.js").FrameState} frameState Frame state.
+     * @return {boolean} Layer is ready to be rendered.
+     */
+    WebGLPointsLayerRenderer.prototype.prepareFrameInternal = function (frameState) {
+        var layer = this.getLayer();
+        var vectorSource = layer.getSource();
+        var viewState = frameState.viewState;
+        var viewNotMoving = !frameState.viewHints[_ViewHint_js__WEBPACK_IMPORTED_MODULE_11__["default"].ANIMATING] &&
+            !frameState.viewHints[_ViewHint_js__WEBPACK_IMPORTED_MODULE_11__["default"].INTERACTING];
+        var extentChanged = !(0,_extent_js__WEBPACK_IMPORTED_MODULE_4__.equals)(this.previousExtent_, frameState.extent);
+        var sourceChanged = this.sourceRevision_ < vectorSource.getRevision();
+        if (sourceChanged) {
+            this.sourceRevision_ = vectorSource.getRevision();
+        }
+        if (viewNotMoving && (extentChanged || sourceChanged)) {
+            var projection = viewState.projection;
+            var resolution = viewState.resolution;
+            var renderBuffer = layer instanceof _layer_BaseVector_js__WEBPACK_IMPORTED_MODULE_12__["default"] ? layer.getRenderBuffer() : 0;
+            var extent = (0,_extent_js__WEBPACK_IMPORTED_MODULE_4__.buffer)(frameState.extent, renderBuffer * resolution);
+            vectorSource.loadFeatures(extent, resolution, projection);
+            this.rebuildBuffers_(frameState);
+            this.previousExtent_ = frameState.extent.slice();
+        }
+        // apply the current projection transform with the invert of the one used to fill buffers
+        this.helper.makeProjectionTransform(frameState, this.currentTransform_);
+        (0,_transform_js__WEBPACK_IMPORTED_MODULE_0__.multiply)(this.currentTransform_, this.invertRenderTransform_);
+        this.helper.useProgram(this.program_);
+        this.helper.prepareDraw(frameState);
+        // write new data
+        this.helper.bindBuffer(this.verticesBuffer_);
+        this.helper.bindBuffer(this.indicesBuffer_);
+        this.helper.enableAttributes(this.attributes);
+        return true;
+    };
+    /**
+     * Rebuild internal webgl buffers based on current view extent; costly, should not be called too much
+     * @param {import("../../PluggableMap").FrameState} frameState Frame state.
+     * @private
+     */
+    WebGLPointsLayerRenderer.prototype.rebuildBuffers_ = function (frameState) {
+        // saves the projection transform for the current frame state
+        var projectionTransform = (0,_transform_js__WEBPACK_IMPORTED_MODULE_0__.create)();
+        this.helper.makeProjectionTransform(frameState, projectionTransform);
+        // here we anticipate the amount of render instructions that we well generate
+        // this can be done since we know that for normal render we only have x, y as base instructions,
+        // and x, y, r, g, b, a and featureUid for hit render instructions
+        // and we also know the amount of custom attributes to append to these
+        var totalInstructionsCount = (2 + this.customAttributes.length) * this.featureCount_;
+        if (!this.renderInstructions_ ||
+            this.renderInstructions_.length !== totalInstructionsCount) {
+            this.renderInstructions_ = new Float32Array(totalInstructionsCount);
+        }
+        if (this.hitDetectionEnabled_) {
+            var totalHitInstructionsCount = (7 + this.customAttributes.length) * this.featureCount_;
+            if (!this.hitRenderInstructions_ ||
+                this.hitRenderInstructions_.length !== totalHitInstructionsCount) {
+                this.hitRenderInstructions_ = new Float32Array(totalHitInstructionsCount);
+            }
+        }
+        // loop on features to fill the buffer
+        var featureCache, geometry;
+        var tmpCoords = [];
+        var tmpColor = [];
+        var renderIndex = 0;
+        var hitIndex = 0;
+        var hitColor;
+        for (var featureUid in this.featureCache_) {
+            featureCache = this.featureCache_[featureUid];
+            geometry = /** @type {import("../../geom").Point} */ (featureCache.geometry);
+            if (!geometry || geometry.getType() !== _geom_GeometryType_js__WEBPACK_IMPORTED_MODULE_13__["default"].POINT) {
+                continue;
+            }
+            tmpCoords[0] = geometry.getFlatCoordinates()[0];
+            tmpCoords[1] = geometry.getFlatCoordinates()[1];
+            (0,_transform_js__WEBPACK_IMPORTED_MODULE_0__.apply)(projectionTransform, tmpCoords);
+            hitColor = (0,_Layer_js__WEBPACK_IMPORTED_MODULE_6__.colorEncodeId)(hitIndex + 6, tmpColor);
+            this.renderInstructions_[renderIndex++] = tmpCoords[0];
+            this.renderInstructions_[renderIndex++] = tmpCoords[1];
+            // for hit detection, the feature uid is saved in the opacity value
+            // and the index of the opacity value is encoded in the color values
+            if (this.hitDetectionEnabled_) {
+                this.hitRenderInstructions_[hitIndex++] = tmpCoords[0];
+                this.hitRenderInstructions_[hitIndex++] = tmpCoords[1];
+                this.hitRenderInstructions_[hitIndex++] = hitColor[0];
+                this.hitRenderInstructions_[hitIndex++] = hitColor[1];
+                this.hitRenderInstructions_[hitIndex++] = hitColor[2];
+                this.hitRenderInstructions_[hitIndex++] = hitColor[3];
+                this.hitRenderInstructions_[hitIndex++] = Number(featureUid);
+            }
+            // pushing custom attributes
+            var value = void 0;
+            for (var j = 0; j < this.customAttributes.length; j++) {
+                value = this.customAttributes[j].callback(featureCache.feature, featureCache.properties);
+                this.renderInstructions_[renderIndex++] = value;
+                if (this.hitDetectionEnabled_) {
+                    this.hitRenderInstructions_[hitIndex++] = value;
+                }
+            }
+        }
+        /** @type {import('./Layer').WebGLWorkerGenerateBuffersMessage} */
+        var message = {
+            type: _Layer_js__WEBPACK_IMPORTED_MODULE_6__.WebGLWorkerMessageType.GENERATE_BUFFERS,
+            renderInstructions: this.renderInstructions_.buffer,
+            customAttributesCount: this.customAttributes.length,
+        };
+        // additional properties will be sent back as-is by the worker
+        message['projectionTransform'] = projectionTransform;
+        message['generateBuffersRun'] = ++this.generateBuffersRun_;
+        this.ready = false;
+        this.worker_.postMessage(message, [this.renderInstructions_.buffer]);
+        this.renderInstructions_ = null;
+        /** @type {import('./Layer').WebGLWorkerGenerateBuffersMessage} */
+        if (this.hitDetectionEnabled_) {
+            var hitMessage = {
+                type: _Layer_js__WEBPACK_IMPORTED_MODULE_6__.WebGLWorkerMessageType.GENERATE_BUFFERS,
+                renderInstructions: this.hitRenderInstructions_.buffer,
+                customAttributesCount: 5 + this.customAttributes.length,
+            };
+            hitMessage['projectionTransform'] = projectionTransform;
+            hitMessage['hitDetection'] = true;
+            this.worker_.postMessage(hitMessage, [
+                this.hitRenderInstructions_.buffer,
+            ]);
+            this.hitRenderInstructions_ = null;
+        }
+    };
+    /**
+     * @param {import("../../coordinate.js").Coordinate} coordinate Coordinate.
+     * @param {import("../../PluggableMap.js").FrameState} frameState Frame state.
+     * @param {number} hitTolerance Hit tolerance in pixels.
+     * @param {import("../vector.js").FeatureCallback<T>} callback Feature callback.
+     * @param {Array<import("../Map.js").HitMatch<T>>} matches The hit detected matches with tolerance.
+     * @return {T|undefined} Callback result.
+     * @template T
+     */
+    WebGLPointsLayerRenderer.prototype.forEachFeatureAtCoordinate = function (coordinate, frameState, hitTolerance, callback, matches) {
+        (0,_asserts_js__WEBPACK_IMPORTED_MODULE_14__.assert)(this.hitDetectionEnabled_, 66);
+        if (!this.hitRenderInstructions_) {
+            return undefined;
+        }
+        var pixel = (0,_transform_js__WEBPACK_IMPORTED_MODULE_0__.apply)(frameState.coordinateToPixelTransform, coordinate.slice());
+        var data = this.hitRenderTarget_.readPixel(pixel[0] / 2, pixel[1] / 2);
+        var color = [data[0] / 255, data[1] / 255, data[2] / 255, data[3] / 255];
+        var index = (0,_Layer_js__WEBPACK_IMPORTED_MODULE_6__.colorDecodeId)(color);
+        var opacity = this.hitRenderInstructions_[index];
+        var uid = Math.floor(opacity).toString();
+        var source = this.getLayer().getSource();
+        var feature = source.getFeatureByUid(uid);
+        if (feature) {
+            return callback(feature, this.getLayer(), null);
+        }
+        return undefined;
+    };
+    /**
+     * Render the hit detection data to the corresponding render target
+     * @param {import("../../PluggableMap.js").FrameState} frameState current frame state
+     */
+    WebGLPointsLayerRenderer.prototype.renderHitDetection = function (frameState) {
+        // skip render entirely if vertex buffers not ready/generated yet
+        if (!this.hitVerticesBuffer_.getSize()) {
+            return;
+        }
+        this.hitRenderTarget_.setSize([
+            Math.floor(frameState.size[0] / 2),
+            Math.floor(frameState.size[1] / 2),
+        ]);
+        this.helper.useProgram(this.hitProgram_);
+        this.helper.prepareDrawToRenderTarget(frameState, this.hitRenderTarget_, true);
+        this.helper.bindBuffer(this.hitVerticesBuffer_);
+        this.helper.bindBuffer(this.indicesBuffer_);
+        this.helper.enableAttributes(this.hitDetectionAttributes);
+        var renderCount = this.indicesBuffer_.getSize();
+        this.helper.drawElements(0, renderCount);
+    };
+    /**
+     * Clean up.
+     */
+    WebGLPointsLayerRenderer.prototype.disposeInternal = function () {
+        this.worker_.terminate();
+        this.layer_ = null;
+        this.sourceListenKeys_.forEach(function (key) {
+            (0,_events_js__WEBPACK_IMPORTED_MODULE_7__.unlistenByKey)(key);
+        });
+        this.sourceListenKeys_ = null;
+        _super.prototype.disposeInternal.call(this);
+    };
+    return WebGLPointsLayerRenderer;
+}(_Layer_js__WEBPACK_IMPORTED_MODULE_6__["default"]));
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (WebGLPointsLayerRenderer);
+//# sourceMappingURL=PointsLayer.js.map
+
+/***/ }),
+
+/***/ "./node_modules/ol/renderer/webgl/TileLayer.js":
+/*!*****************************************************!*\
+  !*** ./node_modules/ol/renderer/webgl/TileLayer.js ***!
+  \*****************************************************/
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "Attributes": () => (/* binding */ Attributes),
+/* harmony export */   "Uniforms": () => (/* binding */ Uniforms),
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _structs_LRUCache_js__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../../structs/LRUCache.js */ "./node_modules/ol/structs/LRUCache.js");
+/* harmony import */ var _source_State_js__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../../source/State.js */ "./node_modules/ol/source/State.js");
+/* harmony import */ var _TileRange_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../TileRange.js */ "./node_modules/ol/TileRange.js");
+/* harmony import */ var _TileState_js__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../../TileState.js */ "./node_modules/ol/TileState.js");
+/* harmony import */ var _webgl_TileTexture_js__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ../../webgl/TileTexture.js */ "./node_modules/ol/webgl/TileTexture.js");
+/* harmony import */ var _webgl_Buffer_js__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../webgl/Buffer.js */ "./node_modules/ol/webgl/Buffer.js");
+/* harmony import */ var _Layer_js__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./Layer.js */ "./node_modules/ol/renderer/webgl/Layer.js");
+/* harmony import */ var _webgl_Helper_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../webgl/Helper.js */ "./node_modules/ol/webgl/Helper.js");
+/* harmony import */ var _webgl_js__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../webgl.js */ "./node_modules/ol/webgl.js");
+/* harmony import */ var _transform_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../transform.js */ "./node_modules/ol/transform.js");
+/* harmony import */ var _extent_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../extent.js */ "./node_modules/ol/extent.js");
+/* harmony import */ var _vec_mat4_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../vec/mat4.js */ "./node_modules/ol/vec/mat4.js");
+/* harmony import */ var _tilecoord_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../tilecoord.js */ "./node_modules/ol/tilecoord.js");
+/* harmony import */ var _proj_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../proj.js */ "./node_modules/ol/proj.js");
+/* harmony import */ var _util_js__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ../../util.js */ "./node_modules/ol/util.js");
+/* harmony import */ var _array_js__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ../../array.js */ "./node_modules/ol/array.js");
+/* harmony import */ var _size_js__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ../../size.js */ "./node_modules/ol/size.js");
+var __extends = (undefined && undefined.__extends) || (function () {
+    var extendStatics = function (d, b) {
+        extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (Object.prototype.hasOwnProperty.call(b, p)) d[p] = b[p]; };
+        return extendStatics(d, b);
+    };
+    return function (d, b) {
+        if (typeof b !== "function" && b !== null)
+            throw new TypeError("Class extends value " + String(b) + " is not a constructor or null");
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+/**
+ * @module ol/renderer/webgl/TileLayer
+ */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+var Uniforms = {
+    TILE_TEXTURE_ARRAY: 'u_tileTextures',
+    TILE_TRANSFORM: 'u_tileTransform',
+    TRANSITION_ALPHA: 'u_transitionAlpha',
+    DEPTH: 'u_depth',
+    TEXTURE_PIXEL_WIDTH: 'u_texturePixelWidth',
+    TEXTURE_PIXEL_HEIGHT: 'u_texturePixelHeight',
+    TEXTURE_RESOLUTION: 'u_textureResolution',
+    TEXTURE_ORIGIN_X: 'u_textureOriginX',
+    TEXTURE_ORIGIN_Y: 'u_textureOriginY',
+    RENDER_EXTENT: 'u_renderExtent',
+    RESOLUTION: 'u_resolution',
+    ZOOM: 'u_zoom',
+};
+var Attributes = {
+    TEXTURE_COORD: 'a_textureCoord',
+};
+/**
+ * @type {Array<import('../../webgl/Helper.js').AttributeDescription>}
+ */
+var attributeDescriptions = [
+    {
+        name: Attributes.TEXTURE_COORD,
+        size: 2,
+        type: _webgl_Helper_js__WEBPACK_IMPORTED_MODULE_1__.AttributeType.FLOAT,
+    },
+];
+/**
+ * @type {Object<string, boolean>}
+ */
+var empty = {};
+/**
+ * Transform a zoom level into a depth value ranging from -1 to 1.
+ * @param {number} z A zoom level.
+ * @return {number} A depth value.
+ */
+function depthForZ(z) {
+    return 2 * (1 - 1 / (z + 1)) - 1;
+}
+/**
+ * Add a tile texture to the lookup.
+ * @param {Object<number, Array<import("../../webgl/TileTexture.js").default>>} tileTexturesByZ Lookup of
+ * tile textures by zoom level.
+ * @param {import("../../webgl/TileTexture.js").default} tileTexture A tile texture.
+ * @param {number} z The zoom level.
+ */
+function addTileTextureToLookup(tileTexturesByZ, tileTexture, z) {
+    if (!(z in tileTexturesByZ)) {
+        tileTexturesByZ[z] = [];
+    }
+    tileTexturesByZ[z].push(tileTexture);
+}
+/**
+ * @param {import("../../PluggableMap.js").FrameState} frameState Frame state.
+ * @param {import("../../extent.js").Extent} extent The frame extent.
+ * @return {import("../../extent.js").Extent} Frame extent intersected with layer extents.
+ */
+function getRenderExtent(frameState, extent) {
+    var layerState = frameState.layerStatesArray[frameState.layerIndex];
+    if (layerState.extent) {
+        extent = (0,_extent_js__WEBPACK_IMPORTED_MODULE_2__.getIntersection)(extent, (0,_proj_js__WEBPACK_IMPORTED_MODULE_0__.fromUserExtent)(layerState.extent, frameState.viewState.projection));
+    }
+    var source = /** @type {import("../../source/Tile.js").default} */ (layerState.layer.getRenderSource());
+    if (!source.getWrapX()) {
+        var gridExtent = source
+            .getTileGridForProjection(frameState.viewState.projection)
+            .getExtent();
+        if (gridExtent) {
+            extent = (0,_extent_js__WEBPACK_IMPORTED_MODULE_2__.getIntersection)(extent, gridExtent);
+        }
+    }
+    return extent;
+}
+function getCacheKey(source, tileCoord) {
+    return "".concat(source.getKey(), ",").concat((0,_tilecoord_js__WEBPACK_IMPORTED_MODULE_3__.getKey)(tileCoord));
+}
+/**
+ * @typedef {Object} Options
+ * @property {string} vertexShader Vertex shader source.
+ * @property {string} fragmentShader Fragment shader source.
+ * @property {Object<string, import("../../webgl/Helper").UniformValue>} [uniforms] Additional uniforms
+ * made available to shaders.
+ * @property {Array<import("../../webgl/PaletteTexture.js").default>} [paletteTextures] Palette textures.
+ * @property {number} [cacheSize=512] The texture cache size.
+ */
+/**
+ * @typedef {import("../../layer/WebGLTile.js").default} LayerType
+ */
+/**
+ * @classdesc
+ * WebGL renderer for tile layers.
+ * @extends {WebGLLayerRenderer<LayerType>}
+ * @api
+ */
+var WebGLTileLayerRenderer = /** @class */ (function (_super) {
+    __extends(WebGLTileLayerRenderer, _super);
+    /**
+     * @param {LayerType} tileLayer Tile layer.
+     * @param {Options} options Options.
+     */
+    function WebGLTileLayerRenderer(tileLayer, options) {
+        var _this = _super.call(this, tileLayer, {
+            uniforms: options.uniforms,
+        }) || this;
+        /**
+         * The last call to `renderFrame` was completed with all tiles loaded
+         * @type {boolean}
+         */
+        _this.renderComplete = false;
+        /**
+         * This transform converts texture coordinates to screen coordinates.
+         * @type {import("../../transform.js").Transform}
+         * @private
+         */
+        _this.tileTransform_ = (0,_transform_js__WEBPACK_IMPORTED_MODULE_4__.create)();
+        /**
+         * @type {Array<number>}
+         * @private
+         */
+        _this.tempMat4_ = (0,_vec_mat4_js__WEBPACK_IMPORTED_MODULE_5__.create)();
+        /**
+         * @type {import("../../TileRange.js").default}
+         * @private
+         */
+        _this.tempTileRange_ = new _TileRange_js__WEBPACK_IMPORTED_MODULE_6__["default"](0, 0, 0, 0);
+        /**
+         * @type {import("../../tilecoord.js").TileCoord}
+         * @private
+         */
+        _this.tempTileCoord_ = (0,_tilecoord_js__WEBPACK_IMPORTED_MODULE_3__.createOrUpdate)(0, 0, 0);
+        /**
+         * @type {import("../../size.js").Size}
+         * @private
+         */
+        _this.tempSize_ = [0, 0];
+        /**
+         * @type {WebGLProgram}
+         * @private
+         */
+        _this.program_;
+        /**
+         * @private
+         */
+        _this.vertexShader_ = options.vertexShader;
+        /**
+         * @private
+         */
+        _this.fragmentShader_ = options.fragmentShader;
+        /**
+         * Tiles are rendered as a quad with the following structure:
+         *
+         *  [P3]---------[P2]
+         *   |`           |
+         *   |  `     B   |
+         *   |    `       |
+         *   |      `     |
+         *   |   A    `   |
+         *   |          ` |
+         *  [P0]---------[P1]
+         *
+         * Triangle A: P0, P1, P3
+         * Triangle B: P1, P2, P3
+         *
+         * @private
+         */
+        _this.indices_ = new _webgl_Buffer_js__WEBPACK_IMPORTED_MODULE_7__["default"](_webgl_js__WEBPACK_IMPORTED_MODULE_8__.ELEMENT_ARRAY_BUFFER, _webgl_js__WEBPACK_IMPORTED_MODULE_8__.STATIC_DRAW);
+        _this.indices_.fromArray([0, 1, 3, 1, 2, 3]);
+        var cacheSize = options.cacheSize !== undefined ? options.cacheSize : 512;
+        /**
+         * @type {import("../../structs/LRUCache.js").default<import("../../webgl/TileTexture.js").default>}
+         * @private
+         */
+        _this.tileTextureCache_ = new _structs_LRUCache_js__WEBPACK_IMPORTED_MODULE_9__["default"](cacheSize);
+        /**
+         * @type {Array<import("../../webgl/PaletteTexture.js").default>}
+         * @private
+         */
+        _this.paletteTextures_ = options.paletteTextures || [];
+        /**
+         * @private
+         * @type {import("../../PluggableMap.js").FrameState|null}
+         */
+        _this.frameState_ = null;
+        return _this;
+    }
+    /**
+     * @param {Options} options Options.
+     */
+    WebGLTileLayerRenderer.prototype.reset = function (options) {
+        _super.prototype.reset.call(this, {
+            uniforms: options.uniforms,
+        });
+        this.vertexShader_ = options.vertexShader;
+        this.fragmentShader_ = options.fragmentShader;
+        this.paletteTextures_ = options.paletteTextures || [];
+        if (this.helper) {
+            this.program_ = this.helper.getProgram(this.fragmentShader_, this.vertexShader_);
+        }
+    };
+    WebGLTileLayerRenderer.prototype.afterHelperCreated = function () {
+        this.program_ = this.helper.getProgram(this.fragmentShader_, this.vertexShader_);
+        this.helper.flushBufferData(this.indices_);
+    };
+    /**
+     * @param {import("../../webgl/TileTexture").TileType} tile Tile.
+     * @return {boolean} Tile is drawable.
+     * @private
+     */
+    WebGLTileLayerRenderer.prototype.isDrawableTile_ = function (tile) {
+        var tileLayer = this.getLayer();
+        var tileState = tile.getState();
+        var useInterimTilesOnError = tileLayer.getUseInterimTilesOnError();
+        return (tileState == _TileState_js__WEBPACK_IMPORTED_MODULE_10__["default"].LOADED ||
+            tileState == _TileState_js__WEBPACK_IMPORTED_MODULE_10__["default"].EMPTY ||
+            (tileState == _TileState_js__WEBPACK_IMPORTED_MODULE_10__["default"].ERROR && !useInterimTilesOnError));
+    };
+    /**
+     * Determine whether renderFrame should be called.
+     * @param {import("../../PluggableMap.js").FrameState} frameState Frame state.
+     * @return {boolean} Layer is ready to be rendered.
+     */
+    WebGLTileLayerRenderer.prototype.prepareFrameInternal = function (frameState) {
+        var layer = this.getLayer();
+        var source = layer.getRenderSource();
+        if (!source) {
+            return false;
+        }
+        if ((0,_extent_js__WEBPACK_IMPORTED_MODULE_2__.isEmpty)(getRenderExtent(frameState, frameState.extent))) {
+            return false;
+        }
+        return source.getState() === _source_State_js__WEBPACK_IMPORTED_MODULE_11__["default"].READY;
+    };
+    /**
+     * @param {import("../../PluggableMap.js").FrameState} frameState Frame state.
+     * @param {import("../../extent.js").Extent} extent The extent to be rendered.
+     * @param {number} initialZ The zoom level.
+     * @param {Object<number, Array<TileTexture>>} tileTexturesByZ The zoom level.
+     */
+    WebGLTileLayerRenderer.prototype.enqueueTiles = function (frameState, extent, initialZ, tileTexturesByZ) {
+        var viewState = frameState.viewState;
+        var tileLayer = this.getLayer();
+        var tileSource = tileLayer.getRenderSource();
+        var tileGrid = tileSource.getTileGridForProjection(viewState.projection);
+        var tilePixelRatio = tileSource.getTilePixelRatio(frameState.pixelRatio);
+        var gutter = tileSource.getGutterForProjection(viewState.projection);
+        var tileSourceKey = (0,_util_js__WEBPACK_IMPORTED_MODULE_12__.getUid)(tileSource);
+        if (!(tileSourceKey in frameState.wantedTiles)) {
+            frameState.wantedTiles[tileSourceKey] = {};
+        }
+        var wantedTiles = frameState.wantedTiles[tileSourceKey];
+        var tileTextureCache = this.tileTextureCache_;
+        var minZ = Math.max(initialZ - tileLayer.getPreload(), tileGrid.getMinZoom(), tileLayer.getMinZoom());
+        for (var z = initialZ; z >= minZ; --z) {
+            var tileRange = tileGrid.getTileRangeForExtentAndZ(extent, z, this.tempTileRange_);
+            var tileResolution = tileGrid.getResolution(z);
+            for (var x = tileRange.minX; x <= tileRange.maxX; ++x) {
+                for (var y = tileRange.minY; y <= tileRange.maxY; ++y) {
+                    var tileCoord = (0,_tilecoord_js__WEBPACK_IMPORTED_MODULE_3__.createOrUpdate)(z, x, y, this.tempTileCoord_);
+                    var cacheKey = getCacheKey(tileSource, tileCoord);
+                    /** @type {TileTexture} */
+                    var tileTexture = void 0;
+                    /** @type {import("../../webgl/TileTexture").TileType} */
+                    var tile = void 0;
+                    if (tileTextureCache.containsKey(cacheKey)) {
+                        tileTexture = tileTextureCache.get(cacheKey);
+                        tile = tileTexture.tile;
+                    }
+                    if (!tileTexture || tileTexture.tile.key !== tileSource.getKey()) {
+                        tile = tileSource.getTile(z, x, y, frameState.pixelRatio, viewState.projection);
+                        if (!tileTexture) {
+                            tileTexture = new _webgl_TileTexture_js__WEBPACK_IMPORTED_MODULE_13__["default"]({
+                                tile: tile,
+                                grid: tileGrid,
+                                helper: this.helper,
+                                tilePixelRatio: tilePixelRatio,
+                                gutter: gutter,
+                            });
+                            tileTextureCache.set(cacheKey, tileTexture);
+                        }
+                        else {
+                            if (this.isDrawableTile_(tile)) {
+                                tileTexture.setTile(tile);
+                            }
+                            else {
+                                var interimTile = 
+                                /** @type {import("../../webgl/TileTexture").TileType} */ (tile.getInterimTile());
+                                tileTexture.setTile(interimTile);
+                            }
+                        }
+                    }
+                    addTileTextureToLookup(tileTexturesByZ, tileTexture, z);
+                    var tileQueueKey = tile.getKey();
+                    wantedTiles[tileQueueKey] = true;
+                    if (tile.getState() === _TileState_js__WEBPACK_IMPORTED_MODULE_10__["default"].IDLE) {
+                        if (!frameState.tileQueue.isKeyQueued(tileQueueKey)) {
+                            frameState.tileQueue.enqueue([
+                                tile,
+                                tileSourceKey,
+                                tileGrid.getTileCoordCenter(tileCoord),
+                                tileResolution,
+                            ]);
+                        }
+                    }
+                }
+            }
+        }
+    };
+    /**
+     * Render the layer.
+     * @param {import("../../PluggableMap.js").FrameState} frameState Frame state.
+     * @return {HTMLElement} The rendered element.
+     */
+    WebGLTileLayerRenderer.prototype.renderFrame = function (frameState) {
+        this.frameState_ = frameState;
+        this.renderComplete = true;
+        var gl = this.helper.getGL();
+        this.preRender(gl, frameState);
+        var viewState = frameState.viewState;
+        var tileLayer = this.getLayer();
+        var tileSource = tileLayer.getRenderSource();
+        var tileGrid = tileSource.getTileGridForProjection(viewState.projection);
+        var extent = getRenderExtent(frameState, frameState.extent);
+        var z = tileGrid.getZForResolution(viewState.resolution, tileSource.zDirection);
+        /**
+         * @type {Object<number, Array<import("../../webgl/TileTexture.js").default>>}
+         */
+        var tileTexturesByZ = {};
+        if (frameState.nextExtent) {
+            var targetZ = tileGrid.getZForResolution(viewState.nextResolution, tileSource.zDirection);
+            var nextExtent = getRenderExtent(frameState, frameState.nextExtent);
+            this.enqueueTiles(frameState, nextExtent, targetZ, tileTexturesByZ);
+        }
+        this.enqueueTiles(frameState, extent, z, tileTexturesByZ);
+        /**
+         * A lookup of alpha values for tiles at the target rendering resolution
+         * for tiles that are in transition.  If a tile coord key is absent from
+         * this lookup, the tile should be rendered at alpha 1.
+         * @type {Object<string, number>}
+         */
+        var alphaLookup = {};
+        var uid = (0,_util_js__WEBPACK_IMPORTED_MODULE_12__.getUid)(this);
+        var time = frameState.time;
+        var blend = false;
+        // look for cached tiles to use if a target tile is not ready
+        var tileTextures = tileTexturesByZ[z];
+        for (var i = 0, ii = tileTextures.length; i < ii; ++i) {
+            var tileTexture = tileTextures[i];
+            var tile = tileTexture.tile;
+            var tileCoord = tile.tileCoord;
+            if (tileTexture.loaded) {
+                var alpha = tile.getAlpha(uid, time);
+                if (alpha === 1) {
+                    // no need to look for alt tiles
+                    tile.endTransition(uid);
+                    continue;
+                }
+                blend = true;
+                var tileCoordKey = (0,_tilecoord_js__WEBPACK_IMPORTED_MODULE_3__.getKey)(tileCoord);
+                alphaLookup[tileCoordKey] = alpha;
+            }
+            this.renderComplete = false;
+            // first look for child tiles (at z + 1)
+            var coveredByChildren = this.findAltTiles_(tileGrid, tileCoord, z + 1, tileTexturesByZ);
+            if (coveredByChildren) {
+                continue;
+            }
+            // next look for parent tiles
+            var minZoom = tileGrid.getMinZoom();
+            for (var parentZ = z - 1; parentZ >= minZoom; --parentZ) {
+                var coveredByParent = this.findAltTiles_(tileGrid, tileCoord, parentZ, tileTexturesByZ);
+                if (coveredByParent) {
+                    break;
+                }
+            }
+        }
+        this.helper.useProgram(this.program_);
+        this.helper.prepareDraw(frameState, !blend);
+        var zs = Object.keys(tileTexturesByZ)
+            .map(Number)
+            .sort(_array_js__WEBPACK_IMPORTED_MODULE_14__.numberSafeCompareFunction);
+        var centerX = viewState.center[0];
+        var centerY = viewState.center[1];
+        for (var j = 0, jj = zs.length; j < jj; ++j) {
+            var tileZ = zs[j];
+            var tileResolution = tileGrid.getResolution(tileZ);
+            var tileSize = (0,_size_js__WEBPACK_IMPORTED_MODULE_15__.toSize)(tileGrid.getTileSize(tileZ), this.tempSize_);
+            var tileOrigin = tileGrid.getOrigin(tileZ);
+            var centerI = (centerX - tileOrigin[0]) / (tileSize[0] * tileResolution);
+            var centerJ = (tileOrigin[1] - centerY) / (tileSize[1] * tileResolution);
+            var tileScale = viewState.resolution / tileResolution;
+            var depth = depthForZ(tileZ);
+            var tileTextures_1 = tileTexturesByZ[tileZ];
+            for (var i = 0, ii = tileTextures_1.length; i < ii; ++i) {
+                var tileTexture = tileTextures_1[i];
+                if (!tileTexture.loaded) {
+                    continue;
+                }
+                var tile = tileTexture.tile;
+                var tileCoord = tile.tileCoord;
+                var tileCoordKey = (0,_tilecoord_js__WEBPACK_IMPORTED_MODULE_3__.getKey)(tileCoord);
+                var tileCenterI = tileCoord[1];
+                var tileCenterJ = tileCoord[2];
+                (0,_transform_js__WEBPACK_IMPORTED_MODULE_4__.compose)(this.tileTransform_, 0, 0, 2 / ((frameState.size[0] * tileScale) / tileSize[0]), -2 / ((frameState.size[1] * tileScale) / tileSize[1]), viewState.rotation, -(centerI - tileCenterI), -(centerJ - tileCenterJ));
+                this.helper.setUniformMatrixValue(Uniforms.TILE_TRANSFORM, (0,_vec_mat4_js__WEBPACK_IMPORTED_MODULE_5__.fromTransform)(this.tempMat4_, this.tileTransform_));
+                this.helper.bindBuffer(tileTexture.coords);
+                this.helper.bindBuffer(this.indices_);
+                this.helper.enableAttributes(attributeDescriptions);
+                var textureSlot = 0;
+                while (textureSlot < tileTexture.textures.length) {
+                    var textureProperty = 'TEXTURE' + textureSlot;
+                    var uniformName = "".concat(Uniforms.TILE_TEXTURE_ARRAY, "[").concat(textureSlot, "]");
+                    gl.activeTexture(gl[textureProperty]);
+                    gl.bindTexture(gl.TEXTURE_2D, tileTexture.textures[textureSlot]);
+                    gl.uniform1i(this.helper.getUniformLocation(uniformName), textureSlot);
+                    ++textureSlot;
+                }
+                for (var paletteIndex = 0; paletteIndex < this.paletteTextures_.length; ++paletteIndex) {
+                    var paletteTexture = this.paletteTextures_[paletteIndex];
+                    gl.activeTexture(gl['TEXTURE' + textureSlot]);
+                    var texture = paletteTexture.getTexture(gl);
+                    gl.bindTexture(gl.TEXTURE_2D, texture);
+                    gl.uniform1i(this.helper.getUniformLocation(paletteTexture.name), textureSlot);
+                    ++textureSlot;
+                }
+                var alpha = tileCoordKey in alphaLookup ? alphaLookup[tileCoordKey] : 1;
+                if (alpha < 1) {
+                    frameState.animate = true;
+                }
+                this.helper.setUniformFloatValue(Uniforms.TRANSITION_ALPHA, alpha);
+                this.helper.setUniformFloatValue(Uniforms.DEPTH, depth);
+                this.helper.setUniformFloatValue(Uniforms.TEXTURE_PIXEL_WIDTH, tileSize[0]);
+                this.helper.setUniformFloatValue(Uniforms.TEXTURE_PIXEL_HEIGHT, tileSize[1]);
+                this.helper.setUniformFloatValue(Uniforms.TEXTURE_RESOLUTION, tileResolution);
+                this.helper.setUniformFloatValue(Uniforms.TEXTURE_ORIGIN_X, tileOrigin[0] + tileCenterI * tileSize[0] * tileResolution);
+                this.helper.setUniformFloatValue(Uniforms.TEXTURE_ORIGIN_Y, tileOrigin[1] - tileCenterJ * tileSize[1] * tileResolution);
+                this.helper.setUniformFloatVec4(Uniforms.RENDER_EXTENT, extent);
+                this.helper.setUniformFloatValue(Uniforms.RESOLUTION, viewState.resolution);
+                this.helper.setUniformFloatValue(Uniforms.ZOOM, viewState.zoom);
+                this.helper.drawElements(0, this.indices_.getSize());
+            }
+        }
+        this.helper.finalizeDraw(frameState, this.dispatchPreComposeEvent, this.dispatchPostComposeEvent);
+        var canvas = this.helper.getCanvas();
+        var tileTextureCache = this.tileTextureCache_;
+        while (tileTextureCache.canExpireCache()) {
+            var tileTexture = tileTextureCache.pop();
+            tileTexture.dispose();
+        }
+        // TODO: let the renderers manage their own cache instead of managing the source cache
+        /**
+         * Here we unconditionally expire the source cache since the renderer maintains
+         * its own cache.
+         * @param {import("../../PluggableMap.js").default} map Map.
+         * @param {import("../../PluggableMap.js").FrameState} frameState Frame state.
+         */
+        var postRenderFunction = function (map, frameState) {
+            tileSource.expireCache(frameState.viewState.projection, empty);
+        };
+        frameState.postRenderFunctions.push(postRenderFunction);
+        this.postRender(gl, frameState);
+        return canvas;
+    };
+    /**
+     * @param {import("../../pixel.js").Pixel} pixel Pixel.
+     * @return {Uint8ClampedArray|Uint8Array|Float32Array|DataView} Data at the pixel location.
+     */
+    WebGLTileLayerRenderer.prototype.getData = function (pixel) {
+        var gl = this.helper.getGL();
+        if (!gl) {
+            return null;
+        }
+        var frameState = this.frameState_;
+        if (!frameState) {
+            return null;
+        }
+        var layer = this.getLayer();
+        var coordinate = (0,_transform_js__WEBPACK_IMPORTED_MODULE_4__.apply)(frameState.pixelToCoordinateTransform, pixel.slice());
+        var viewState = frameState.viewState;
+        var layerExtent = layer.getExtent();
+        if (layerExtent) {
+            if (!(0,_extent_js__WEBPACK_IMPORTED_MODULE_2__.containsCoordinate)((0,_proj_js__WEBPACK_IMPORTED_MODULE_0__.fromUserExtent)(layerExtent, viewState.projection), coordinate)) {
+                return null;
+            }
+        }
+        var source = layer.getRenderSource();
+        var tileGrid = source.getTileGridForProjection(viewState.projection);
+        if (!source.getWrapX()) {
+            var gridExtent = tileGrid.getExtent();
+            if (gridExtent) {
+                if (!(0,_extent_js__WEBPACK_IMPORTED_MODULE_2__.containsCoordinate)(gridExtent, coordinate)) {
+                    return null;
+                }
+            }
+        }
+        var tileTextureCache = this.tileTextureCache_;
+        for (var z = tileGrid.getZForResolution(viewState.resolution); z >= tileGrid.getMinZoom(); --z) {
+            var tileCoord = tileGrid.getTileCoordForCoordAndZ(coordinate, z);
+            var cacheKey = getCacheKey(source, tileCoord);
+            if (!tileTextureCache.containsKey(cacheKey)) {
+                continue;
+            }
+            var tileTexture = tileTextureCache.get(cacheKey);
+            if (!tileTexture.loaded) {
+                continue;
+            }
+            var tileOrigin = tileGrid.getOrigin(z);
+            var tileSize = (0,_size_js__WEBPACK_IMPORTED_MODULE_15__.toSize)(tileGrid.getTileSize(z));
+            var tileResolution = tileGrid.getResolution(z);
+            var col = (coordinate[0] - tileOrigin[0]) / tileResolution -
+                tileCoord[1] * tileSize[0];
+            var row = (tileOrigin[1] - coordinate[1]) / tileResolution -
+                tileCoord[2] * tileSize[1];
+            return tileTexture.getPixelData(col, row);
+        }
+        return null;
+    };
+    /**
+     * Look for tiles covering the provided tile coordinate at an alternate
+     * zoom level.  Loaded tiles will be added to the provided tile texture lookup.
+     * @param {import("../../tilegrid/TileGrid.js").default} tileGrid The tile grid.
+     * @param {import("../../tilecoord.js").TileCoord} tileCoord The target tile coordinate.
+     * @param {number} altZ The alternate zoom level.
+     * @param {Object<number, Array<import("../../webgl/TileTexture.js").default>>} tileTexturesByZ Lookup of
+     * tile textures by zoom level.
+     * @return {boolean} The tile coordinate is covered by loaded tiles at the alternate zoom level.
+     * @private
+     */
+    WebGLTileLayerRenderer.prototype.findAltTiles_ = function (tileGrid, tileCoord, altZ, tileTexturesByZ) {
+        var tileRange = tileGrid.getTileRangeForTileCoordAndZ(tileCoord, altZ, this.tempTileRange_);
+        if (!tileRange) {
+            return false;
+        }
+        var covered = true;
+        var tileTextureCache = this.tileTextureCache_;
+        var source = this.getLayer().getRenderSource();
+        for (var x = tileRange.minX; x <= tileRange.maxX; ++x) {
+            for (var y = tileRange.minY; y <= tileRange.maxY; ++y) {
+                var cacheKey = getCacheKey(source, [altZ, x, y]);
+                var loaded = false;
+                if (tileTextureCache.containsKey(cacheKey)) {
+                    var tileTexture = tileTextureCache.get(cacheKey);
+                    if (tileTexture.loaded) {
+                        addTileTextureToLookup(tileTexturesByZ, tileTexture, altZ);
+                        loaded = true;
+                    }
+                }
+                if (!loaded) {
+                    covered = false;
+                }
+            }
+        }
+        return covered;
+    };
+    WebGLTileLayerRenderer.prototype.removeHelper = function () {
+        if (this.helper) {
+            var tileTextureCache = this.tileTextureCache_;
+            tileTextureCache.forEach(function (tileTexture) { return tileTexture.dispose(); });
+            tileTextureCache.clear();
+        }
+        _super.prototype.removeHelper.call(this);
+    };
+    /**
+     * Clean up.
+     */
+    WebGLTileLayerRenderer.prototype.disposeInternal = function () {
+        var helper = this.helper;
+        if (helper) {
+            var gl = helper.getGL();
+            gl.deleteProgram(this.program_);
+            delete this.program_;
+            helper.deleteBuffer(this.indices_);
+        }
+        _super.prototype.disposeInternal.call(this);
+        delete this.indices_;
+        delete this.tileTextureCache_;
+        delete this.frameState_;
+    };
+    return WebGLTileLayerRenderer;
+}(_Layer_js__WEBPACK_IMPORTED_MODULE_16__["default"]));
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (WebGLTileLayerRenderer);
+//# sourceMappingURL=TileLayer.js.map
+
+/***/ }),
+
 /***/ "./node_modules/ol/reproj.js":
 /*!***********************************!*\
   !*** ./node_modules/ol/reproj.js ***!
@@ -99796,6 +103889,899 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./node_modules/ol/style/expressions.js":
+/*!**********************************************!*\
+  !*** ./node_modules/ol/style/expressions.js ***!
+  \**********************************************/
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "Operators": () => (/* binding */ Operators),
+/* harmony export */   "PALETTE_TEXTURE_ARRAY": () => (/* binding */ PALETTE_TEXTURE_ARRAY),
+/* harmony export */   "ValueTypes": () => (/* binding */ ValueTypes),
+/* harmony export */   "arrayToGlsl": () => (/* binding */ arrayToGlsl),
+/* harmony export */   "colorToGlsl": () => (/* binding */ colorToGlsl),
+/* harmony export */   "expressionToGlsl": () => (/* binding */ expressionToGlsl),
+/* harmony export */   "getStringNumberEquivalent": () => (/* binding */ getStringNumberEquivalent),
+/* harmony export */   "getValueType": () => (/* binding */ getValueType),
+/* harmony export */   "isTypeUnique": () => (/* binding */ isTypeUnique),
+/* harmony export */   "numberToGlsl": () => (/* binding */ numberToGlsl),
+/* harmony export */   "stringToGlsl": () => (/* binding */ stringToGlsl),
+/* harmony export */   "uniformNameForVariable": () => (/* binding */ uniformNameForVariable)
+/* harmony export */ });
+/* harmony import */ var _webgl_PaletteTexture_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../webgl/PaletteTexture.js */ "./node_modules/ol/webgl/PaletteTexture.js");
+/* harmony import */ var _renderer_webgl_TileLayer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../renderer/webgl/TileLayer.js */ "./node_modules/ol/renderer/webgl/TileLayer.js");
+/* harmony import */ var _color_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../color.js */ "./node_modules/ol/color.js");
+/* harmony import */ var _math_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../math.js */ "./node_modules/ol/math.js");
+/**
+ * Operators and utilities used for style expressions
+ * @module ol/style/expressions
+ */
+
+
+
+
+/**
+ * Base type used for literal style parameters; can be a number literal or the output of an operator,
+ * which in turns takes {@link import("./expressions.js").ExpressionValue} arguments.
+ *
+ * The following operators can be used:
+ *
+ * * Reading operators:
+ *   * `['band', bandIndex, xOffset, yOffset]` For tile layers only. Fetches pixel values from band
+ *     `bandIndex` of the source's data. The first `bandIndex` of the source data is `1`. Fetched values
+ *     are in the 0..1 range. {@link import("../source/TileImage.js").default} sources have 4 bands: red,
+ *     green, blue and alpha. {@link import("../source/DataTile.js").default} sources can have any number
+ *     of bands, depending on the underlying data source and
+ *     {@link import("../source/GeoTIFF.js").Options configuration}. `xOffset` and `yOffset` are optional
+ *     and allow specifying pixel offsets for x and y. This is used for sampling data from neighboring pixels.
+ *   * `['get', 'attributeName']` fetches a feature attribute (it will be prefixed by `a_` in the shader)
+ *     Note: those will be taken from the attributes provided to the renderer
+ *   * `['resolution']` returns the current resolution
+ *   * `['time']` returns the time in seconds since the creation of the layer
+ *   * `['var', 'varName']` fetches a value from the style variables, or 0 if undefined
+ *   * `['zoom']` returns the current zoom level
+ *
+ * * Math operators:
+ *   * `['*', value1, value2]` multiplies `value1` by `value2`
+ *   * `['/', value1, value2]` divides `value1` by `value2`
+ *   * `['+', value1, value2]` adds `value1` and `value2`
+ *   * `['-', value1, value2]` subtracts `value2` from `value1`
+ *   * `['clamp', value, low, high]` clamps `value` between `low` and `high`
+ *   * `['%', value1, value2]` returns the result of `value1 % value2` (modulo)
+ *   * `['^', value1, value2]` returns the value of `value1` raised to the `value2` power
+ *   * `['abs', value1]` returns the absolute value of `value1`
+ *   * `['floor', value1]` returns the nearest integer less than or equal to `value1`
+ *   * `['round', value1]` returns the nearest integer to `value1`
+ *   * `['ceil', value1]` returns the nearest integer greater than or equal to `value1`
+ *   * `['sin', value1]` returns the sine of `value1`
+ *   * `['cos', value1]` returns the cosine of `value1`
+ *   * `['atan', value1, value2]` returns `atan2(value1, value2)`. If `value2` is not provided, returns `atan(value1)`
+ *
+ * * Transform operators:
+ *   * `['case', condition1, output1, ...conditionN, outputN, fallback]` selects the first output whose corresponding
+ *     condition evaluates to `true`. If no match is found, returns the `fallback` value.
+ *     All conditions should be `boolean`, output and fallback can be any kind.
+ *   * `['match', input, match1, output1, ...matchN, outputN, fallback]` compares the `input` value against all
+ *     provided `matchX` values, returning the output associated with the first valid match. If no match is found,
+ *     returns the `fallback` value.
+ *     `input` and `matchX` values must all be of the same type, and can be `number` or `string`. `outputX` and
+ *     `fallback` values must be of the same type, and can be of any kind.
+ *   * `['interpolate', interpolation, input, stop1, output1, ...stopN, outputN]` returns a value by interpolating between
+ *     pairs of inputs and outputs; `interpolation` can either be `['linear']` or `['exponential', base]` where `base` is
+ *     the rate of increase from stop A to stop B (i.e. power to which the interpolation ratio is raised); a value
+ *     of 1 is equivalent to `['linear']`.
+ *     `input` and `stopX` values must all be of type `number`. `outputX` values can be `number` or `color` values.
+ *     Note: `input` will be clamped between `stop1` and `stopN`, meaning that all output values will be comprised
+ *     between `output1` and `outputN`.
+ *
+ * * Logical operators:
+ *   * `['<', value1, value2]` returns `true` if `value1` is strictly lower than `value2`, or `false` otherwise.
+ *   * `['<=', value1, value2]` returns `true` if `value1` is lower than or equals `value2`, or `false` otherwise.
+ *   * `['>', value1, value2]` returns `true` if `value1` is strictly greater than `value2`, or `false` otherwise.
+ *   * `['>=', value1, value2]` returns `true` if `value1` is greater than or equals `value2`, or `false` otherwise.
+ *   * `['==', value1, value2]` returns `true` if `value1` equals `value2`, or `false` otherwise.
+ *   * `['!=', value1, value2]` returns `true` if `value1` does not equal `value2`, or `false` otherwise.
+ *   * `['!', value1]` returns `false` if `value1` is `true` or greater than `0`, or `true` otherwise.
+ *   * `['all', value1, value2, ...]` returns `true` if all the inputs are `true`, `false` otherwise.
+ *   * `['any', value1, value2, ...]` returns `true` if any of the inputs are `true`, `false` otherwise.
+ *   * `['between', value1, value2, value3]` returns `true` if `value1` is contained between `value2` and `value3`
+ *     (inclusively), or `false` otherwise.
+ *
+ * * Conversion operators:
+ *   * `['array', value1, ...valueN]` creates a numerical array from `number` values; please note that the amount of
+ *     values can currently only be 2, 3 or 4.
+ *   * `['color', red, green, blue, alpha]` creates a `color` value from `number` values; the `alpha` parameter is
+ *     optional; if not specified, it will be set to 1.
+ *     Note: `red`, `green` and `blue` components must be values between 0 and 255; `alpha` between 0 and 1.
+ *   * `['palette', index, colors]` picks a `color` value from an array of colors using the given index; the `index`
+ *     expression must evaluate to a number; the items in the `colors` array must be strings with hex colors
+ *     (e.g. `'#86A136'`), colors using the rgba[a] functional notation (e.g. `'rgb(134, 161, 54)'` or `'rgba(134, 161, 54, 1)'`),
+ *     named colors (e.g. `'red'`), or array literals with 3 ([r, g, b]) or 4 ([r, g, b, a]) values (with r, g, and b
+ *     in the 0-255 range and a in the 0-1 range).
+ *
+ * Values can either be literals or another operator, as they will be evaluated recursively.
+ * Literal values can be of the following types:
+ * * `boolean`
+ * * `number`
+ * * `string`
+ * * {@link module:ol/color~Color}
+ *
+ * @typedef {Array<*>|import("../color.js").Color|string|number|boolean} ExpressionValue
+ * @api
+ */
+/**
+ * Possible inferred types from a given value or expression.
+ * Note: these are binary flags.
+ * @enum {number}
+ */
+var ValueTypes = {
+    NUMBER: 1,
+    STRING: 2,
+    COLOR: 4,
+    BOOLEAN: 8,
+    NUMBER_ARRAY: 16,
+    ANY: 31,
+    NONE: 0,
+};
+/**
+ * An operator declaration must contain two methods: `getReturnType` which returns a type based on
+ * the operator arguments, and `toGlsl` which returns a GLSL-compatible string.
+ * Note: both methods can process arguments recursively.
+ * @typedef {Object} Operator
+ * @property {function(Array<ExpressionValue>): ValueTypes|number} getReturnType Returns one or several types
+ * @property {function(ParsingContext, Array<ExpressionValue>, ValueTypes=): string} toGlsl Returns a GLSL-compatible string
+ * Note: takes in an optional type hint as 3rd parameter
+ */
+/**
+ * Operator declarations
+ * @type {Object<string, Operator>}
+ */
+var Operators = {};
+/**
+ * Returns the possible types for a given value (each type being a binary flag)
+ * To test a value use e.g. `getValueType(v) & ValueTypes.BOOLEAN`
+ * @param {ExpressionValue} value Value
+ * @return {ValueTypes|number} Type or types inferred from the value
+ */
+function getValueType(value) {
+    if (typeof value === 'number') {
+        return ValueTypes.NUMBER;
+    }
+    if (typeof value === 'boolean') {
+        return ValueTypes.BOOLEAN;
+    }
+    if (typeof value === 'string') {
+        if ((0,_color_js__WEBPACK_IMPORTED_MODULE_0__.isStringColor)(value)) {
+            return ValueTypes.COLOR | ValueTypes.STRING;
+        }
+        return ValueTypes.STRING;
+    }
+    if (!Array.isArray(value)) {
+        throw new Error("Unhandled value type: ".concat(JSON.stringify(value)));
+    }
+    var valueArr = /** @type {Array<*>} */ (value);
+    var onlyNumbers = valueArr.every(function (v) {
+        return typeof v === 'number';
+    });
+    if (onlyNumbers) {
+        if (valueArr.length === 3 || valueArr.length === 4) {
+            return ValueTypes.COLOR | ValueTypes.NUMBER_ARRAY;
+        }
+        return ValueTypes.NUMBER_ARRAY;
+    }
+    if (typeof valueArr[0] !== 'string') {
+        throw new Error("Expected an expression operator but received: ".concat(JSON.stringify(valueArr)));
+    }
+    var operator = Operators[valueArr[0]];
+    if (operator === undefined) {
+        throw new Error("Unrecognized expression operator: ".concat(JSON.stringify(valueArr)));
+    }
+    return operator.getReturnType(valueArr.slice(1));
+}
+/**
+ * Checks if only one value type is enabled in the input number.
+ * @param {ValueTypes|number} valueType Number containing value type binary flags
+ * @return {boolean} True if only one type flag is enabled, false if zero or multiple
+ */
+function isTypeUnique(valueType) {
+    return (0,_math_js__WEBPACK_IMPORTED_MODULE_1__.log2)(valueType) % 1 === 0;
+}
+/**
+ * Context available during the parsing of an expression.
+ * @typedef {Object} ParsingContext
+ * @property {boolean} [inFragmentShader] If false, means the expression output should be made for a vertex shader
+ * @property {Array<string>} variables List of variables used in the expression; contains **unprefixed names**
+ * @property {Array<string>} attributes List of attributes used in the expression; contains **unprefixed names**
+ * @property {Object<string, number>} stringLiteralsMap This object maps all encountered string values to a number
+ * @property {Object<string, string>} functions Lookup of functions used by the style.
+ * @property {number} [bandCount] Number of bands per pixel.
+ * @property {Array<PaletteTexture>} [paletteTextures] List of palettes used by the style.
+ */
+/**
+ * Will return the number as a float with a dot separator, which is required by GLSL.
+ * @param {number} v Numerical value.
+ * @return {string} The value as string.
+ */
+function numberToGlsl(v) {
+    var s = v.toString();
+    return s.indexOf('.') === -1 ? s + '.0' : s;
+}
+/**
+ * Will return the number array as a float with a dot separator, concatenated with ', '.
+ * @param {Array<number>} array Numerical values array.
+ * @return {string} The array as a vector, e. g.: `vec3(1.0, 2.0, 3.0)`.
+ */
+function arrayToGlsl(array) {
+    if (array.length < 2 || array.length > 4) {
+        throw new Error('`formatArray` can only output `vec2`, `vec3` or `vec4` arrays.');
+    }
+    return "vec".concat(array.length, "(").concat(array.map(numberToGlsl).join(', '), ")");
+}
+/**
+ * Will normalize and converts to string a `vec4` color array compatible with GLSL.
+ * @param {string|import("../color.js").Color} color Color either in string format or [r, g, b, a] array format,
+ * with RGB components in the 0..255 range and the alpha component in the 0..1 range.
+ * Note that the final array will always have 4 components.
+ * @return {string} The color expressed in the `vec4(1.0, 1.0, 1.0, 1.0)` form.
+ */
+function colorToGlsl(color) {
+    var array = (0,_color_js__WEBPACK_IMPORTED_MODULE_0__.asArray)(color).slice();
+    if (array.length < 4) {
+        array.push(1);
+    }
+    return arrayToGlsl(array.map(function (c, i) {
+        return i < 3 ? c / 255 : c;
+    }));
+}
+/**
+ * Returns a stable equivalent number for the string literal.
+ * @param {ParsingContext} context Parsing context
+ * @param {string} string String literal value
+ * @return {number} Number equivalent
+ */
+function getStringNumberEquivalent(context, string) {
+    if (context.stringLiteralsMap[string] === undefined) {
+        context.stringLiteralsMap[string] = Object.keys(context.stringLiteralsMap).length;
+    }
+    return context.stringLiteralsMap[string];
+}
+/**
+ * Returns a stable equivalent number for the string literal, for use in shaders. This number is then
+ * converted to be a GLSL-compatible string.
+ * @param {ParsingContext} context Parsing context
+ * @param {string} string String literal value
+ * @return {string} GLSL-compatible string containing a number
+ */
+function stringToGlsl(context, string) {
+    return numberToGlsl(getStringNumberEquivalent(context, string));
+}
+/**
+ * Recursively parses a style expression and outputs a GLSL-compatible string. Takes in a parsing context that
+ * will be read and modified during the parsing operation.
+ * @param {ParsingContext} context Parsing context
+ * @param {ExpressionValue} value Value
+ * @param {ValueTypes|number} [typeHint] Hint for the expected final type (can be several types combined)
+ * @return {string} GLSL-compatible output
+ */
+function expressionToGlsl(context, value, typeHint) {
+    // operator
+    if (Array.isArray(value) && typeof value[0] === 'string') {
+        var operator = Operators[value[0]];
+        if (operator === undefined) {
+            throw new Error("Unrecognized expression operator: ".concat(JSON.stringify(value)));
+        }
+        return operator.toGlsl(context, value.slice(1), typeHint);
+    }
+    var valueType = getValueType(value);
+    if ((valueType & ValueTypes.NUMBER) > 0) {
+        return numberToGlsl(/** @type {number} */ (value));
+    }
+    if ((valueType & ValueTypes.BOOLEAN) > 0) {
+        return value.toString();
+    }
+    if ((valueType & ValueTypes.STRING) > 0 &&
+        (typeHint === undefined || typeHint == ValueTypes.STRING)) {
+        return stringToGlsl(context, value.toString());
+    }
+    if ((valueType & ValueTypes.COLOR) > 0 &&
+        (typeHint === undefined || typeHint == ValueTypes.COLOR)) {
+        return colorToGlsl(/** @type {Array<number> | string} */ (value));
+    }
+    if ((valueType & ValueTypes.NUMBER_ARRAY) > 0) {
+        return arrayToGlsl(/** @type {Array<number>} */ (value));
+    }
+    throw new Error("Unexpected expression ".concat(value, " (expected type ").concat(typeHint, ")"));
+}
+function assertNumber(value) {
+    if (!(getValueType(value) & ValueTypes.NUMBER)) {
+        throw new Error("A numeric value was expected, got ".concat(JSON.stringify(value), " instead"));
+    }
+}
+function assertNumbers(values) {
+    for (var i = 0; i < values.length; i++) {
+        assertNumber(values[i]);
+    }
+}
+function assertString(value) {
+    if (!(getValueType(value) & ValueTypes.STRING)) {
+        throw new Error("A string value was expected, got ".concat(JSON.stringify(value), " instead"));
+    }
+}
+function assertBoolean(value) {
+    if (!(getValueType(value) & ValueTypes.BOOLEAN)) {
+        throw new Error("A boolean value was expected, got ".concat(JSON.stringify(value), " instead"));
+    }
+}
+function assertArgsCount(args, count) {
+    if (args.length !== count) {
+        throw new Error("Exactly ".concat(count, " arguments were expected, got ").concat(args.length, " instead"));
+    }
+}
+function assertArgsMinCount(args, count) {
+    if (args.length < count) {
+        throw new Error("At least ".concat(count, " arguments were expected, got ").concat(args.length, " instead"));
+    }
+}
+function assertArgsMaxCount(args, count) {
+    if (args.length > count) {
+        throw new Error("At most ".concat(count, " arguments were expected, got ").concat(args.length, " instead"));
+    }
+}
+function assertArgsEven(args) {
+    if (args.length % 2 !== 0) {
+        throw new Error("An even amount of arguments was expected, got ".concat(args, " instead"));
+    }
+}
+function assertArgsOdd(args) {
+    if (args.length % 2 === 0) {
+        throw new Error("An odd amount of arguments was expected, got ".concat(args, " instead"));
+    }
+}
+function assertUniqueInferredType(args, types) {
+    if (!isTypeUnique(types)) {
+        throw new Error("Could not infer only one type from the following expression: ".concat(JSON.stringify(args)));
+    }
+}
+Operators['get'] = {
+    getReturnType: function (args) {
+        return ValueTypes.ANY;
+    },
+    toGlsl: function (context, args) {
+        assertArgsCount(args, 1);
+        assertString(args[0]);
+        var value = args[0].toString();
+        if (context.attributes.indexOf(value) === -1) {
+            context.attributes.push(value);
+        }
+        var prefix = context.inFragmentShader ? 'v_' : 'a_';
+        return prefix + value;
+    },
+};
+/**
+ * Get the uniform name given a variable name.
+ * @param {string} variableName The variable name.
+ * @return {string} The uniform name.
+ */
+function uniformNameForVariable(variableName) {
+    return 'u_var_' + variableName;
+}
+Operators['var'] = {
+    getReturnType: function (args) {
+        return ValueTypes.ANY;
+    },
+    toGlsl: function (context, args) {
+        assertArgsCount(args, 1);
+        assertString(args[0]);
+        var value = args[0].toString();
+        if (context.variables.indexOf(value) === -1) {
+            context.variables.push(value);
+        }
+        return uniformNameForVariable(value);
+    },
+};
+var PALETTE_TEXTURE_ARRAY = 'u_paletteTextures';
+// ['palette', index, colors]
+Operators['palette'] = {
+    getReturnType: function (args) {
+        return ValueTypes.COLOR;
+    },
+    toGlsl: function (context, args) {
+        assertArgsCount(args, 2);
+        assertNumber(args[0]);
+        var index = expressionToGlsl(context, args[0]);
+        var colors = args[1];
+        if (!Array.isArray(colors)) {
+            throw new Error('The second argument of palette must be an array');
+        }
+        var numColors = colors.length;
+        var palette = new Uint8Array(numColors * 4);
+        for (var i = 0; i < numColors; i++) {
+            var candidate = colors[i];
+            /**
+             * @type {import('../color.js').Color}
+             */
+            var color = void 0;
+            if (typeof candidate === 'string') {
+                color = (0,_color_js__WEBPACK_IMPORTED_MODULE_0__.fromString)(candidate);
+            }
+            else {
+                if (!Array.isArray(candidate)) {
+                    throw new Error('The second argument of palette must be an array of strings or colors');
+                }
+                var length_1 = candidate.length;
+                if (length_1 === 4) {
+                    color = candidate;
+                }
+                else {
+                    if (length_1 !== 3) {
+                        throw new Error("Expected palette color to have 3 or 4 values, got ".concat(length_1));
+                    }
+                    color = [candidate[0], candidate[1], candidate[2], 1];
+                }
+            }
+            var offset = i * 4;
+            palette[offset] = color[0];
+            palette[offset + 1] = color[1];
+            palette[offset + 2] = color[2];
+            palette[offset + 3] = color[3] * 255;
+        }
+        if (!context.paletteTextures) {
+            context.paletteTextures = [];
+        }
+        var paletteName = "".concat(PALETTE_TEXTURE_ARRAY, "[").concat(context.paletteTextures.length, "]");
+        var paletteTexture = new _webgl_PaletteTexture_js__WEBPACK_IMPORTED_MODULE_2__["default"](paletteName, palette);
+        context.paletteTextures.push(paletteTexture);
+        return "texture2D(".concat(paletteName, ", vec2((").concat(index, " + 0.5) / ").concat(numColors, ".0, 0.5))");
+    },
+};
+var GET_BAND_VALUE_FUNC = 'getBandValue';
+Operators['band'] = {
+    getReturnType: function (args) {
+        return ValueTypes.NUMBER;
+    },
+    toGlsl: function (context, args) {
+        assertArgsMinCount(args, 1);
+        assertArgsMaxCount(args, 3);
+        var band = args[0];
+        if (!(GET_BAND_VALUE_FUNC in context.functions)) {
+            var ifBlocks = '';
+            var bandCount = context.bandCount || 1;
+            for (var i = 0; i < bandCount; i++) {
+                var colorIndex = Math.floor(i / 4);
+                var bandIndex = i % 4;
+                if (bandIndex === bandCount - 1 && bandIndex === 1) {
+                    // LUMINANCE_ALPHA - band 1 assigned to rgb and band 2 assigned to alpha
+                    bandIndex = 3;
+                }
+                var textureName = "".concat(_renderer_webgl_TileLayer_js__WEBPACK_IMPORTED_MODULE_3__.Uniforms.TILE_TEXTURE_ARRAY, "[").concat(colorIndex, "]");
+                ifBlocks += "\n          if (band == ".concat(i + 1, ".0) {\n            return texture2D(").concat(textureName, ", v_textureCoord + vec2(dx, dy))[").concat(bandIndex, "];\n          }\n        ");
+            }
+            context.functions[GET_BAND_VALUE_FUNC] = "\n        float getBandValue(float band, float xOffset, float yOffset) {\n          float dx = xOffset / ".concat(_renderer_webgl_TileLayer_js__WEBPACK_IMPORTED_MODULE_3__.Uniforms.TEXTURE_PIXEL_WIDTH, ";\n          float dy = yOffset / ").concat(_renderer_webgl_TileLayer_js__WEBPACK_IMPORTED_MODULE_3__.Uniforms.TEXTURE_PIXEL_HEIGHT, ";\n          ").concat(ifBlocks, "\n        }\n      ");
+        }
+        var bandExpression = expressionToGlsl(context, band);
+        var xOffsetExpression = expressionToGlsl(context, args[1] || 0);
+        var yOffsetExpression = expressionToGlsl(context, args[2] || 0);
+        return "".concat(GET_BAND_VALUE_FUNC, "(").concat(bandExpression, ", ").concat(xOffsetExpression, ", ").concat(yOffsetExpression, ")");
+    },
+};
+Operators['time'] = {
+    getReturnType: function (args) {
+        return ValueTypes.NUMBER;
+    },
+    toGlsl: function (context, args) {
+        assertArgsCount(args, 0);
+        return 'u_time';
+    },
+};
+Operators['zoom'] = {
+    getReturnType: function (args) {
+        return ValueTypes.NUMBER;
+    },
+    toGlsl: function (context, args) {
+        assertArgsCount(args, 0);
+        return 'u_zoom';
+    },
+};
+Operators['resolution'] = {
+    getReturnType: function (args) {
+        return ValueTypes.NUMBER;
+    },
+    toGlsl: function (context, args) {
+        assertArgsCount(args, 0);
+        return 'u_resolution';
+    },
+};
+Operators['*'] = {
+    getReturnType: function (args) {
+        return ValueTypes.NUMBER;
+    },
+    toGlsl: function (context, args) {
+        assertArgsCount(args, 2);
+        assertNumbers(args);
+        return "(".concat(expressionToGlsl(context, args[0]), " * ").concat(expressionToGlsl(context, args[1]), ")");
+    },
+};
+Operators['/'] = {
+    getReturnType: function (args) {
+        return ValueTypes.NUMBER;
+    },
+    toGlsl: function (context, args) {
+        assertArgsCount(args, 2);
+        assertNumbers(args);
+        return "(".concat(expressionToGlsl(context, args[0]), " / ").concat(expressionToGlsl(context, args[1]), ")");
+    },
+};
+Operators['+'] = {
+    getReturnType: function (args) {
+        return ValueTypes.NUMBER;
+    },
+    toGlsl: function (context, args) {
+        assertArgsCount(args, 2);
+        assertNumbers(args);
+        return "(".concat(expressionToGlsl(context, args[0]), " + ").concat(expressionToGlsl(context, args[1]), ")");
+    },
+};
+Operators['-'] = {
+    getReturnType: function (args) {
+        return ValueTypes.NUMBER;
+    },
+    toGlsl: function (context, args) {
+        assertArgsCount(args, 2);
+        assertNumbers(args);
+        return "(".concat(expressionToGlsl(context, args[0]), " - ").concat(expressionToGlsl(context, args[1]), ")");
+    },
+};
+Operators['clamp'] = {
+    getReturnType: function (args) {
+        return ValueTypes.NUMBER;
+    },
+    toGlsl: function (context, args) {
+        assertArgsCount(args, 3);
+        assertNumbers(args);
+        var min = expressionToGlsl(context, args[1]);
+        var max = expressionToGlsl(context, args[2]);
+        return "clamp(".concat(expressionToGlsl(context, args[0]), ", ").concat(min, ", ").concat(max, ")");
+    },
+};
+Operators['%'] = {
+    getReturnType: function (args) {
+        return ValueTypes.NUMBER;
+    },
+    toGlsl: function (context, args) {
+        assertArgsCount(args, 2);
+        assertNumbers(args);
+        return "mod(".concat(expressionToGlsl(context, args[0]), ", ").concat(expressionToGlsl(context, args[1]), ")");
+    },
+};
+Operators['^'] = {
+    getReturnType: function (args) {
+        return ValueTypes.NUMBER;
+    },
+    toGlsl: function (context, args) {
+        assertArgsCount(args, 2);
+        assertNumbers(args);
+        return "pow(".concat(expressionToGlsl(context, args[0]), ", ").concat(expressionToGlsl(context, args[1]), ")");
+    },
+};
+Operators['abs'] = {
+    getReturnType: function (args) {
+        return ValueTypes.NUMBER;
+    },
+    toGlsl: function (context, args) {
+        assertArgsCount(args, 1);
+        assertNumbers(args);
+        return "abs(".concat(expressionToGlsl(context, args[0]), ")");
+    },
+};
+Operators['floor'] = {
+    getReturnType: function (args) {
+        return ValueTypes.NUMBER;
+    },
+    toGlsl: function (context, args) {
+        assertArgsCount(args, 1);
+        assertNumbers(args);
+        return "floor(".concat(expressionToGlsl(context, args[0]), ")");
+    },
+};
+Operators['round'] = {
+    getReturnType: function (args) {
+        return ValueTypes.NUMBER;
+    },
+    toGlsl: function (context, args) {
+        assertArgsCount(args, 1);
+        assertNumbers(args);
+        return "floor(".concat(expressionToGlsl(context, args[0]), " + 0.5)");
+    },
+};
+Operators['ceil'] = {
+    getReturnType: function (args) {
+        return ValueTypes.NUMBER;
+    },
+    toGlsl: function (context, args) {
+        assertArgsCount(args, 1);
+        assertNumbers(args);
+        return "ceil(".concat(expressionToGlsl(context, args[0]), ")");
+    },
+};
+Operators['sin'] = {
+    getReturnType: function (args) {
+        return ValueTypes.NUMBER;
+    },
+    toGlsl: function (context, args) {
+        assertArgsCount(args, 1);
+        assertNumbers(args);
+        return "sin(".concat(expressionToGlsl(context, args[0]), ")");
+    },
+};
+Operators['cos'] = {
+    getReturnType: function (args) {
+        return ValueTypes.NUMBER;
+    },
+    toGlsl: function (context, args) {
+        assertArgsCount(args, 1);
+        assertNumbers(args);
+        return "cos(".concat(expressionToGlsl(context, args[0]), ")");
+    },
+};
+Operators['atan'] = {
+    getReturnType: function (args) {
+        return ValueTypes.NUMBER;
+    },
+    toGlsl: function (context, args) {
+        assertArgsMinCount(args, 1);
+        assertArgsMaxCount(args, 2);
+        assertNumbers(args);
+        return args.length === 2
+            ? "atan(".concat(expressionToGlsl(context, args[0]), ", ").concat(expressionToGlsl(context, args[1]), ")")
+            : "atan(".concat(expressionToGlsl(context, args[0]), ")");
+    },
+};
+Operators['>'] = {
+    getReturnType: function (args) {
+        return ValueTypes.BOOLEAN;
+    },
+    toGlsl: function (context, args) {
+        assertArgsCount(args, 2);
+        assertNumbers(args);
+        return "(".concat(expressionToGlsl(context, args[0]), " > ").concat(expressionToGlsl(context, args[1]), ")");
+    },
+};
+Operators['>='] = {
+    getReturnType: function (args) {
+        return ValueTypes.BOOLEAN;
+    },
+    toGlsl: function (context, args) {
+        assertArgsCount(args, 2);
+        assertNumbers(args);
+        return "(".concat(expressionToGlsl(context, args[0]), " >= ").concat(expressionToGlsl(context, args[1]), ")");
+    },
+};
+Operators['<'] = {
+    getReturnType: function (args) {
+        return ValueTypes.BOOLEAN;
+    },
+    toGlsl: function (context, args) {
+        assertArgsCount(args, 2);
+        assertNumbers(args);
+        return "(".concat(expressionToGlsl(context, args[0]), " < ").concat(expressionToGlsl(context, args[1]), ")");
+    },
+};
+Operators['<='] = {
+    getReturnType: function (args) {
+        return ValueTypes.BOOLEAN;
+    },
+    toGlsl: function (context, args) {
+        assertArgsCount(args, 2);
+        assertNumbers(args);
+        return "(".concat(expressionToGlsl(context, args[0]), " <= ").concat(expressionToGlsl(context, args[1]), ")");
+    },
+};
+function getEqualOperator(operator) {
+    return {
+        getReturnType: function (args) {
+            return ValueTypes.BOOLEAN;
+        },
+        toGlsl: function (context, args) {
+            assertArgsCount(args, 2);
+            // find common type
+            var type = ValueTypes.ANY;
+            for (var i = 0; i < args.length; i++) {
+                type &= getValueType(args[i]);
+            }
+            if (type === ValueTypes.NONE) {
+                throw new Error("All arguments should be of compatible type, got ".concat(JSON.stringify(args), " instead"));
+            }
+            // Since it's not possible to have color types here, we can leave it out
+            // This fixes issues in case the value type is ambiguously detected as a color (e.g. the string 'red')
+            type &= ~ValueTypes.COLOR;
+            return "(".concat(expressionToGlsl(context, args[0], type), " ").concat(operator, " ").concat(expressionToGlsl(context, args[1], type), ")");
+        },
+    };
+}
+Operators['=='] = getEqualOperator('==');
+Operators['!='] = getEqualOperator('!=');
+Operators['!'] = {
+    getReturnType: function (args) {
+        return ValueTypes.BOOLEAN;
+    },
+    toGlsl: function (context, args) {
+        assertArgsCount(args, 1);
+        assertBoolean(args[0]);
+        return "(!".concat(expressionToGlsl(context, args[0]), ")");
+    },
+};
+function getDecisionOperator(operator) {
+    return {
+        getReturnType: function (args) {
+            return ValueTypes.BOOLEAN;
+        },
+        toGlsl: function (context, args) {
+            assertArgsMinCount(args, 2);
+            for (var i = 0; i < args.length; i++) {
+                assertBoolean(args[i]);
+            }
+            var result = '';
+            result = args
+                .map(function (arg) { return expressionToGlsl(context, arg); })
+                .join(" ".concat(operator, " "));
+            result = "(".concat(result, ")");
+            return result;
+        },
+    };
+}
+Operators['all'] = getDecisionOperator('&&');
+Operators['any'] = getDecisionOperator('||');
+Operators['between'] = {
+    getReturnType: function (args) {
+        return ValueTypes.BOOLEAN;
+    },
+    toGlsl: function (context, args) {
+        assertArgsCount(args, 3);
+        assertNumbers(args);
+        var min = expressionToGlsl(context, args[1]);
+        var max = expressionToGlsl(context, args[2]);
+        var value = expressionToGlsl(context, args[0]);
+        return "(".concat(value, " >= ").concat(min, " && ").concat(value, " <= ").concat(max, ")");
+    },
+};
+Operators['array'] = {
+    getReturnType: function (args) {
+        return ValueTypes.NUMBER_ARRAY;
+    },
+    toGlsl: function (context, args) {
+        assertArgsMinCount(args, 2);
+        assertArgsMaxCount(args, 4);
+        assertNumbers(args);
+        var parsedArgs = args.map(function (val) {
+            return expressionToGlsl(context, val, ValueTypes.NUMBER);
+        });
+        return "vec".concat(args.length, "(").concat(parsedArgs.join(', '), ")");
+    },
+};
+Operators['color'] = {
+    getReturnType: function (args) {
+        return ValueTypes.COLOR;
+    },
+    toGlsl: function (context, args) {
+        assertArgsMinCount(args, 3);
+        assertArgsMaxCount(args, 4);
+        assertNumbers(args);
+        var array = /** @type {Array<number>} */ (args);
+        if (args.length === 3) {
+            array.push(1);
+        }
+        var parsedArgs = args.map(function (val, i) {
+            return (expressionToGlsl(context, val, ValueTypes.NUMBER) +
+                (i < 3 ? ' / 255.0' : ''));
+        });
+        return "vec".concat(args.length, "(").concat(parsedArgs.join(', '), ")");
+    },
+};
+Operators['interpolate'] = {
+    getReturnType: function (args) {
+        var type = ValueTypes.COLOR | ValueTypes.NUMBER;
+        for (var i = 3; i < args.length; i += 2) {
+            type = type & getValueType(args[i]);
+        }
+        return type;
+    },
+    toGlsl: function (context, args, opt_typeHint) {
+        assertArgsEven(args);
+        assertArgsMinCount(args, 6);
+        // validate interpolation type
+        var type = args[0];
+        var interpolation;
+        switch (type[0]) {
+            case 'linear':
+                interpolation = 1;
+                break;
+            case 'exponential':
+                interpolation = type[1];
+                break;
+            default:
+                interpolation = null;
+        }
+        if (!interpolation) {
+            throw new Error("Invalid interpolation type for \"interpolate\" operator, received: ".concat(JSON.stringify(type)));
+        }
+        // compute input/output types
+        var typeHint = opt_typeHint !== undefined ? opt_typeHint : ValueTypes.ANY;
+        var outputType = Operators['interpolate'].getReturnType(args) & typeHint;
+        assertUniqueInferredType(args, outputType);
+        var input = expressionToGlsl(context, args[1]);
+        var exponent = numberToGlsl(interpolation);
+        var result = '';
+        for (var i = 2; i < args.length - 2; i += 2) {
+            var stop1 = expressionToGlsl(context, args[i]);
+            var output1 = result || expressionToGlsl(context, args[i + 1], outputType);
+            var stop2 = expressionToGlsl(context, args[i + 2]);
+            var output2 = expressionToGlsl(context, args[i + 3], outputType);
+            result = "mix(".concat(output1, ", ").concat(output2, ", pow(clamp((").concat(input, " - ").concat(stop1, ") / (").concat(stop2, " - ").concat(stop1, "), 0.0, 1.0), ").concat(exponent, "))");
+        }
+        return result;
+    },
+};
+Operators['match'] = {
+    getReturnType: function (args) {
+        var type = ValueTypes.ANY;
+        for (var i = 2; i < args.length; i += 2) {
+            type = type & getValueType(args[i]);
+        }
+        type = type & getValueType(args[args.length - 1]);
+        return type;
+    },
+    toGlsl: function (context, args, opt_typeHint) {
+        assertArgsEven(args);
+        assertArgsMinCount(args, 4);
+        var typeHint = opt_typeHint !== undefined ? opt_typeHint : ValueTypes.ANY;
+        var outputType = Operators['match'].getReturnType(args) & typeHint;
+        assertUniqueInferredType(args, outputType);
+        var input = expressionToGlsl(context, args[0]);
+        var fallback = expressionToGlsl(context, args[args.length - 1], outputType);
+        var result = null;
+        for (var i = args.length - 3; i >= 1; i -= 2) {
+            var match = expressionToGlsl(context, args[i]);
+            var output = expressionToGlsl(context, args[i + 1], outputType);
+            result = "(".concat(input, " == ").concat(match, " ? ").concat(output, " : ").concat(result || fallback, ")");
+        }
+        return result;
+    },
+};
+Operators['case'] = {
+    getReturnType: function (args) {
+        var type = ValueTypes.ANY;
+        for (var i = 1; i < args.length; i += 2) {
+            type = type & getValueType(args[i]);
+        }
+        type = type & getValueType(args[args.length - 1]);
+        return type;
+    },
+    toGlsl: function (context, args, opt_typeHint) {
+        assertArgsOdd(args);
+        assertArgsMinCount(args, 3);
+        var typeHint = opt_typeHint !== undefined ? opt_typeHint : ValueTypes.ANY;
+        var outputType = Operators['case'].getReturnType(args) & typeHint;
+        assertUniqueInferredType(args, outputType);
+        for (var i = 0; i < args.length - 1; i += 2) {
+            assertBoolean(args[i]);
+        }
+        var fallback = expressionToGlsl(context, args[args.length - 1], outputType);
+        var result = null;
+        for (var i = args.length - 3; i >= 0; i -= 2) {
+            var condition = expressionToGlsl(context, args[i]);
+            var output = expressionToGlsl(context, args[i + 1], outputType);
+            result = "(".concat(condition, " ? ").concat(output, " : ").concat(result || fallback, ")");
+        }
+        return result;
+    },
+};
+//# sourceMappingURL=expressions.js.map
+
+/***/ }),
+
 /***/ "./node_modules/ol/tilecoord.js":
 /*!**************************************!*\
   !*** ./node_modules/ol/tilecoord.js ***!
@@ -101166,6 +106152,2669 @@ function getUid(obj) {
  */
 var VERSION = '6.14.1';
 //# sourceMappingURL=util.js.map
+
+/***/ }),
+
+/***/ "./node_modules/ol/vec/mat4.js":
+/*!*************************************!*\
+  !*** ./node_modules/ol/vec/mat4.js ***!
+  \*************************************/
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "create": () => (/* binding */ create),
+/* harmony export */   "fromTransform": () => (/* binding */ fromTransform)
+/* harmony export */ });
+/**
+ * @module ol/vec/mat4
+ */
+/**
+ * @return {Array<number>} "4x4 matrix representing a 3D identity transform."
+ */
+function create() {
+    return [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1];
+}
+/**
+ * @param {Array<number>} mat4 Flattened 4x4 matrix receiving the result.
+ * @param {import("../transform.js").Transform} transform Transformation matrix.
+ * @return {Array<number>} "2D transformation matrix as flattened 4x4 matrix."
+ */
+function fromTransform(mat4, transform) {
+    mat4[0] = transform[0];
+    mat4[1] = transform[1];
+    mat4[4] = transform[2];
+    mat4[5] = transform[3];
+    mat4[12] = transform[4];
+    mat4[13] = transform[5];
+    return mat4;
+}
+//# sourceMappingURL=mat4.js.map
+
+/***/ }),
+
+/***/ "./node_modules/ol/webgl.js":
+/*!**********************************!*\
+  !*** ./node_modules/ol/webgl.js ***!
+  \**********************************/
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "ARRAY_BUFFER": () => (/* binding */ ARRAY_BUFFER),
+/* harmony export */   "DYNAMIC_DRAW": () => (/* binding */ DYNAMIC_DRAW),
+/* harmony export */   "ELEMENT_ARRAY_BUFFER": () => (/* binding */ ELEMENT_ARRAY_BUFFER),
+/* harmony export */   "FLOAT": () => (/* binding */ FLOAT),
+/* harmony export */   "STATIC_DRAW": () => (/* binding */ STATIC_DRAW),
+/* harmony export */   "STREAM_DRAW": () => (/* binding */ STREAM_DRAW),
+/* harmony export */   "UNSIGNED_BYTE": () => (/* binding */ UNSIGNED_BYTE),
+/* harmony export */   "UNSIGNED_INT": () => (/* binding */ UNSIGNED_INT),
+/* harmony export */   "UNSIGNED_SHORT": () => (/* binding */ UNSIGNED_SHORT),
+/* harmony export */   "getContext": () => (/* binding */ getContext),
+/* harmony export */   "getSupportedExtensions": () => (/* binding */ getSupportedExtensions)
+/* harmony export */ });
+/* harmony import */ var _has_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./has.js */ "./node_modules/ol/has.js");
+/* harmony import */ var _obj_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./obj.js */ "./node_modules/ol/obj.js");
+/**
+ * @module ol/webgl
+ */
+
+
+/**
+ * Constants taken from goog.webgl
+ */
+/**
+ * Used by {@link module:ol/webgl/Helper~WebGLHelper} for buffers containing vertices data, such as
+ * position, color, texture coordinate, etc. These vertices are then referenced by an index buffer
+ * to be drawn on screen (see {@link module:ol/webgl.ELEMENT_ARRAY_BUFFER}).
+ * @const
+ * @type {number}
+ * @api
+ */
+var ARRAY_BUFFER = 0x8892;
+/**
+ * Used by {@link module:ol/webgl/Helper~WebGLHelper} for buffers containing indices data.
+ * Index buffers are essentially lists of references to vertices defined in a vertex buffer
+ * (see {@link module:ol/webgl.ARRAY_BUFFER}), and define the primitives (triangles) to be drawn.
+ * @const
+ * @type {number}
+ * @api
+ */
+var ELEMENT_ARRAY_BUFFER = 0x8893;
+/**
+ * Used by {link module:ol/webgl/Buffer~WebGLArrayBuffer}.
+ * @const
+ * @type {number}
+ * @api
+ */
+var STREAM_DRAW = 0x88e0;
+/**
+ * Used by {link module:ol/webgl/Buffer~WebGLArrayBuffer}.
+ * @const
+ * @type {number}
+ * @api
+ */
+var STATIC_DRAW = 0x88e4;
+/**
+ * Used by {link module:ol/webgl/Buffer~WebGLArrayBuffer}.
+ * @const
+ * @type {number}
+ * @api
+ */
+var DYNAMIC_DRAW = 0x88e8;
+/**
+ * @const
+ * @type {number}
+ */
+var UNSIGNED_BYTE = 0x1401;
+/**
+ * @const
+ * @type {number}
+ */
+var UNSIGNED_SHORT = 0x1403;
+/**
+ * @const
+ * @type {number}
+ */
+var UNSIGNED_INT = 0x1405;
+/**
+ * @const
+ * @type {number}
+ */
+var FLOAT = 0x1406;
+/** end of goog.webgl constants
+ */
+/**
+ * @const
+ * @type {Array<string>}
+ */
+var CONTEXT_IDS = ['experimental-webgl', 'webgl', 'webkit-3d', 'moz-webgl'];
+/**
+ * @param {HTMLCanvasElement} canvas Canvas.
+ * @param {Object} [opt_attributes] Attributes.
+ * @return {WebGLRenderingContext} WebGL rendering context.
+ */
+function getContext(canvas, opt_attributes) {
+    var attributes = (0,_obj_js__WEBPACK_IMPORTED_MODULE_0__.assign)({
+        preserveDrawingBuffer: true,
+        antialias: _has_js__WEBPACK_IMPORTED_MODULE_1__.SAFARI_BUG_237906 ? false : true, // https://bugs.webkit.org/show_bug.cgi?id=237906
+    }, opt_attributes);
+    var ii = CONTEXT_IDS.length;
+    for (var i = 0; i < ii; ++i) {
+        try {
+            var context = canvas.getContext(CONTEXT_IDS[i], attributes);
+            if (context) {
+                return /** @type {!WebGLRenderingContext} */ (context);
+            }
+        }
+        catch (e) {
+            // pass
+        }
+    }
+    return null;
+}
+/**
+ * @type {Array<string>}
+ */
+var supportedExtensions;
+/**
+ * @return {Array<string>} List of supported WebGL extensions.
+ */
+function getSupportedExtensions() {
+    if (!supportedExtensions) {
+        var canvas = document.createElement('canvas');
+        var gl = getContext(canvas);
+        if (gl) {
+            supportedExtensions = gl.getSupportedExtensions();
+        }
+    }
+    return supportedExtensions;
+}
+//# sourceMappingURL=webgl.js.map
+
+/***/ }),
+
+/***/ "./node_modules/ol/webgl/Buffer.js":
+/*!*****************************************!*\
+  !*** ./node_modules/ol/webgl/Buffer.js ***!
+  \*****************************************/
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "BufferUsage": () => (/* binding */ BufferUsage),
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__),
+/* harmony export */   "getArrayClassForType": () => (/* binding */ getArrayClassForType)
+/* harmony export */ });
+/* harmony import */ var _webgl_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../webgl.js */ "./node_modules/ol/webgl.js");
+/* harmony import */ var _asserts_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../asserts.js */ "./node_modules/ol/asserts.js");
+/**
+ * @module ol/webgl/Buffer
+ */
+
+
+/**
+ * Used to describe the intended usage for the data: `STATIC_DRAW`, `STREAM_DRAW`
+ * or `DYNAMIC_DRAW`.
+ * @enum {number}
+ */
+var BufferUsage = {
+    STATIC_DRAW: _webgl_js__WEBPACK_IMPORTED_MODULE_0__.STATIC_DRAW,
+    STREAM_DRAW: _webgl_js__WEBPACK_IMPORTED_MODULE_0__.STREAM_DRAW,
+    DYNAMIC_DRAW: _webgl_js__WEBPACK_IMPORTED_MODULE_0__.DYNAMIC_DRAW,
+};
+/**
+ * @classdesc
+ * Object used to store an array of data as well as usage information for that data.
+ * Stores typed arrays internally, either Float32Array or Uint16/32Array depending on
+ * the buffer type (ARRAY_BUFFER or ELEMENT_ARRAY_BUFFER) and available extensions.
+ *
+ * To populate the array, you can either use:
+ * * A size using `#ofSize(buffer)`
+ * * An `ArrayBuffer` object using `#fromArrayBuffer(buffer)`
+ * * A plain array using `#fromArray(array)`
+ *
+ * Note:
+ * See the documentation of [WebGLRenderingContext.bufferData](https://developer.mozilla.org/en-US/docs/Web/API/WebGLRenderingContext/bufferData)
+ * for more info on buffer usage.
+ * @api
+ */
+var WebGLArrayBuffer = /** @class */ (function () {
+    /**
+     * @param {number} type Buffer type, either ARRAY_BUFFER or ELEMENT_ARRAY_BUFFER.
+     * @param {number} [opt_usage] Intended usage, either `STATIC_DRAW`, `STREAM_DRAW` or `DYNAMIC_DRAW`.
+     * Default is `DYNAMIC_DRAW`.
+     */
+    function WebGLArrayBuffer(type, opt_usage) {
+        /**
+         * @private
+         * @type {Float32Array|Uint32Array}
+         */
+        this.array = null;
+        /**
+         * @private
+         * @type {number}
+         */
+        this.type = type;
+        (0,_asserts_js__WEBPACK_IMPORTED_MODULE_1__.assert)(type === _webgl_js__WEBPACK_IMPORTED_MODULE_0__.ARRAY_BUFFER || type === _webgl_js__WEBPACK_IMPORTED_MODULE_0__.ELEMENT_ARRAY_BUFFER, 62);
+        /**
+         * @private
+         * @type {number}
+         */
+        this.usage = opt_usage !== undefined ? opt_usage : BufferUsage.STATIC_DRAW;
+    }
+    /**
+     * Populates the buffer with an array of the given size (all values will be zeroes).
+     * @param {number} size Array size
+     */
+    WebGLArrayBuffer.prototype.ofSize = function (size) {
+        this.array = new (getArrayClassForType(this.type))(size);
+    };
+    /**
+     * Populates the buffer with an array of the given size (all values will be zeroes).
+     * @param {Array<number>} array Numerical array
+     */
+    WebGLArrayBuffer.prototype.fromArray = function (array) {
+        var arrayClass = getArrayClassForType(this.type);
+        this.array = arrayClass.from
+            ? arrayClass.from(array)
+            : new arrayClass(array);
+    };
+    /**
+     * Populates the buffer with a raw binary array buffer.
+     * @param {ArrayBuffer} buffer Raw binary buffer to populate the array with. Note that this buffer must have been
+     * initialized for the same typed array class.
+     */
+    WebGLArrayBuffer.prototype.fromArrayBuffer = function (buffer) {
+        this.array = new (getArrayClassForType(this.type))(buffer);
+    };
+    /**
+     * @return {number} Buffer type.
+     */
+    WebGLArrayBuffer.prototype.getType = function () {
+        return this.type;
+    };
+    /**
+     * Will return null if the buffer was not initialized
+     * @return {Float32Array|Uint32Array} Array.
+     */
+    WebGLArrayBuffer.prototype.getArray = function () {
+        return this.array;
+    };
+    /**
+     * @return {number} Usage.
+     */
+    WebGLArrayBuffer.prototype.getUsage = function () {
+        return this.usage;
+    };
+    /**
+     * Will return 0 if the buffer is not initialized
+     * @return {number} Array size
+     */
+    WebGLArrayBuffer.prototype.getSize = function () {
+        return this.array ? this.array.length : 0;
+    };
+    return WebGLArrayBuffer;
+}());
+/**
+ * Returns a typed array constructor based on the given buffer type
+ * @param {number} type Buffer type, either ARRAY_BUFFER or ELEMENT_ARRAY_BUFFER.
+ * @return {Float32ArrayConstructor|Uint32ArrayConstructor} The typed array class to use for this buffer.
+ */
+function getArrayClassForType(type) {
+    switch (type) {
+        case _webgl_js__WEBPACK_IMPORTED_MODULE_0__.ARRAY_BUFFER:
+            return Float32Array;
+        case _webgl_js__WEBPACK_IMPORTED_MODULE_0__.ELEMENT_ARRAY_BUFFER:
+            return Uint32Array;
+        default:
+            return Float32Array;
+    }
+}
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (WebGLArrayBuffer);
+//# sourceMappingURL=Buffer.js.map
+
+/***/ }),
+
+/***/ "./node_modules/ol/webgl/ContextEventType.js":
+/*!***************************************************!*\
+  !*** ./node_modules/ol/webgl/ContextEventType.js ***!
+  \***************************************************/
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/**
+ * @module ol/webgl/ContextEventType
+ */
+/**
+ * @enum {string}
+ */
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+    LOST: 'webglcontextlost',
+    RESTORED: 'webglcontextrestored',
+});
+//# sourceMappingURL=ContextEventType.js.map
+
+/***/ }),
+
+/***/ "./node_modules/ol/webgl/Helper.js":
+/*!*****************************************!*\
+  !*** ./node_modules/ol/webgl/Helper.js ***!
+  \*****************************************/
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "AttributeType": () => (/* binding */ AttributeType),
+/* harmony export */   "DefaultUniform": () => (/* binding */ DefaultUniform),
+/* harmony export */   "ShaderType": () => (/* binding */ ShaderType),
+/* harmony export */   "computeAttributesStride": () => (/* binding */ computeAttributesStride),
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _webgl_ContextEventType_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../webgl/ContextEventType.js */ "./node_modules/ol/webgl/ContextEventType.js");
+/* harmony import */ var _Disposable_js__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../Disposable.js */ "./node_modules/ol/Disposable.js");
+/* harmony import */ var _PostProcessingPass_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./PostProcessingPass.js */ "./node_modules/ol/webgl/PostProcessingPass.js");
+/* harmony import */ var _webgl_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../webgl.js */ "./node_modules/ol/webgl.js");
+/* harmony import */ var _obj_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../obj.js */ "./node_modules/ol/obj.js");
+/* harmony import */ var _transform_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../transform.js */ "./node_modules/ol/transform.js");
+/* harmony import */ var _vec_mat4_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../vec/mat4.js */ "./node_modules/ol/vec/mat4.js");
+/* harmony import */ var _util_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../util.js */ "./node_modules/ol/util.js");
+var __extends = (undefined && undefined.__extends) || (function () {
+    var extendStatics = function (d, b) {
+        extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (Object.prototype.hasOwnProperty.call(b, p)) d[p] = b[p]; };
+        return extendStatics(d, b);
+    };
+    return function (d, b) {
+        if (typeof b !== "function" && b !== null)
+            throw new TypeError("Class extends value " + String(b) + " is not a constructor or null");
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+/**
+ * @module ol/webgl/Helper
+ */
+
+
+
+
+
+
+
+
+/**
+ * @typedef {Object} BufferCacheEntry
+ * @property {import("./Buffer.js").default} buffer Buffer.
+ * @property {WebGLBuffer} webGlBuffer WebGlBuffer.
+ */
+/**
+ * Shader types, either `FRAGMENT_SHADER` or `VERTEX_SHADER`.
+ * @enum {number}
+ */
+var ShaderType = {
+    FRAGMENT_SHADER: 0x8b30,
+    VERTEX_SHADER: 0x8b31,
+};
+/**
+ * Uniform names used in the default shaders: `PROJECTION_MATRIX`, `OFFSET_SCALE_MATRIX`.
+ * and `OFFSET_ROTATION_MATRIX`.
+ * @enum {string}
+ */
+var DefaultUniform = {
+    PROJECTION_MATRIX: 'u_projectionMatrix',
+    OFFSET_SCALE_MATRIX: 'u_offsetScaleMatrix',
+    OFFSET_ROTATION_MATRIX: 'u_offsetRotateMatrix',
+    TIME: 'u_time',
+    ZOOM: 'u_zoom',
+    RESOLUTION: 'u_resolution',
+};
+/**
+ * Attribute types, either `UNSIGNED_BYTE`, `UNSIGNED_SHORT`, `UNSIGNED_INT` or `FLOAT`
+ * Note: an attribute stored in a `Float32Array` should be of type `FLOAT`.
+ * @enum {number}
+ */
+var AttributeType = {
+    UNSIGNED_BYTE: _webgl_js__WEBPACK_IMPORTED_MODULE_0__.UNSIGNED_BYTE,
+    UNSIGNED_SHORT: _webgl_js__WEBPACK_IMPORTED_MODULE_0__.UNSIGNED_SHORT,
+    UNSIGNED_INT: _webgl_js__WEBPACK_IMPORTED_MODULE_0__.UNSIGNED_INT,
+    FLOAT: _webgl_js__WEBPACK_IMPORTED_MODULE_0__.FLOAT,
+};
+/**
+ * Description of an attribute in a buffer
+ * @typedef {Object} AttributeDescription
+ * @property {string} name Attribute name to use in shaders
+ * @property {number} size Number of components per attributes
+ * @property {AttributeType} [type] Attribute type, i.e. number of bytes used to store the value. This is
+ * determined by the class of typed array which the buffer uses (eg. `Float32Array` for a `FLOAT` attribute).
+ * Default is `FLOAT`.
+ */
+/**
+ * @typedef {number|Array<number>|HTMLCanvasElement|HTMLImageElement|ImageData|import("../transform").Transform} UniformLiteralValue
+ */
+/**
+ * Uniform value can be a number, array of numbers (2 to 4), canvas element or a callback returning
+ * one of the previous types.
+ * @typedef {UniformLiteralValue|function(import("../PluggableMap.js").FrameState):UniformLiteralValue} UniformValue
+ */
+/**
+ * @typedef {Object} PostProcessesOptions
+ * @property {number} [scaleRatio] Scale ratio; if < 1, the post process will render to a texture smaller than
+ * the main canvas which will then be sampled up (useful for saving resource on blur steps).
+ * @property {string} [vertexShader] Vertex shader source
+ * @property {string} [fragmentShader] Fragment shader source
+ * @property {Object<string,UniformValue>} [uniforms] Uniform definitions for the post process step
+ */
+/**
+ * @typedef {Object} Options
+ * @property {Object<string,UniformValue>} [uniforms] Uniform definitions; property names must match the uniform
+ * names in the provided or default shaders.
+ * @property {Array<PostProcessesOptions>} [postProcesses] Post-processes definitions
+ * @property {string} [canvasCacheKey] The cache key for the canvas.
+ */
+/**
+ * @typedef {Object} UniformInternalDescription
+ * @property {string} name Name
+ * @property {UniformValue} [value] Value
+ * @property {WebGLTexture} [texture] Texture
+ * @private
+ */
+/**
+ * @typedef {Object} CanvasCacheItem
+ * @property {HTMLCanvasElement} canvas Canvas element.
+ * @property {number} users The count of users of this canvas.
+ */
+/**
+ * @type {Object<string,CanvasCacheItem>}
+ */
+var canvasCache = {};
+/**
+ * @param {string} key The cache key for the canvas.
+ * @return {string} The shared cache key.
+ */
+function getSharedCanvasCacheKey(key) {
+    return 'shared/' + key;
+}
+var uniqueCanvasCacheKeyCount = 0;
+/**
+ * @return {string} The unique cache key.
+ */
+function getUniqueCanvasCacheKey() {
+    var key = 'unique/' + uniqueCanvasCacheKeyCount;
+    uniqueCanvasCacheKeyCount += 1;
+    return key;
+}
+/**
+ * @param {string} key The cache key for the canvas.
+ * @return {HTMLCanvasElement} The canvas.
+ */
+function getCanvas(key) {
+    var cacheItem = canvasCache[key];
+    if (!cacheItem) {
+        var canvas = document.createElement('canvas');
+        canvas.style.position = 'absolute';
+        canvas.style.left = '0';
+        cacheItem = { users: 0, canvas: canvas };
+        canvasCache[key] = cacheItem;
+    }
+    cacheItem.users += 1;
+    return cacheItem.canvas;
+}
+/**
+ * @param {string} key The cache key for the canvas.
+ */
+function releaseCanvas(key) {
+    var cacheItem = canvasCache[key];
+    if (!cacheItem) {
+        return;
+    }
+    cacheItem.users -= 1;
+    if (cacheItem.users > 0) {
+        return;
+    }
+    var canvas = cacheItem.canvas;
+    var gl = (0,_webgl_js__WEBPACK_IMPORTED_MODULE_0__.getContext)(canvas);
+    var extension = gl.getExtension('WEBGL_lose_context');
+    if (extension) {
+        extension.loseContext();
+    }
+    delete canvasCache[key];
+}
+/**
+ * @classdesc
+ * This class is intended to provide low-level functions related to WebGL rendering, so that accessing
+ * directly the WebGL API should not be required anymore.
+ *
+ * Several operations are handled by the `WebGLHelper` class:
+ *
+ * ### Define custom shaders and uniforms
+ *
+ *   *Shaders* are low-level programs executed on the GPU and written in GLSL. There are two types of shaders:
+ *
+ *   Vertex shaders are used to manipulate the position and attribute of *vertices* of rendered primitives (ie. corners of a square).
+ *   Outputs are:
+ *
+ *   * `gl_Position`: position of the vertex in screen space
+ *
+ *   * Varyings usually prefixed with `v_` are passed on to the fragment shader
+ *
+ *   Fragment shaders are used to control the actual color of the pixels drawn on screen. Their only output is `gl_FragColor`.
+ *
+ *   Both shaders can take *uniforms* or *attributes* as input. Attributes are explained later. Uniforms are common, read-only values that
+ *   can be changed at every frame and can be of type float, arrays of float or images.
+ *
+ *   Shaders must be compiled and assembled into a program like so:
+ *   ```js
+ *   // here we simply create two shaders and assemble them in a program which is then used
+ *   // for subsequent rendering calls
+ *   const vertexShader = new WebGLVertex(VERTEX_SHADER);
+ *   const fragmentShader = new WebGLFragment(FRAGMENT_SHADER);
+ *   const program = this.context.getProgram(fragmentShader, vertexShader);
+ *   helper.useProgram(this.program);
+ *   ```
+ *
+ *   Uniforms are defined using the `uniforms` option and can either be explicit values or callbacks taking the frame state as argument.
+ *   You can also change their value along the way like so:
+ *   ```js
+ *   helper.setUniformFloatValue('u_value', valueAsNumber);
+ *   ```
+ *
+ * ### Defining post processing passes
+ *
+ *   *Post processing* describes the act of rendering primitives to a texture, and then rendering this texture to the final canvas
+ *   while applying special effects in screen space.
+ *   Typical uses are: blurring, color manipulation, depth of field, filtering...
+ *
+ *   The `WebGLHelper` class offers the possibility to define post processes at creation time using the `postProcesses` option.
+ *   A post process step accepts the following options:
+ *
+ *   * `fragmentShader` and `vertexShader`: text literals in GLSL language that will be compiled and used in the post processing step.
+ *   * `uniforms`: uniforms can be defined for the post processing steps just like for the main render.
+ *   * `scaleRatio`: allows using an intermediate texture smaller or higher than the final canvas in the post processing step.
+ *     This is typically used in blur steps to reduce the performance overhead by using an already downsampled texture as input.
+ *
+ *   The {@link module:ol/webgl/PostProcessingPass~WebGLPostProcessingPass} class is used internally, refer to its documentation for more info.
+ *
+ * ### Binding WebGL buffers and flushing data into them
+ *
+ *   Data that must be passed to the GPU has to be transferred using {@link module:ol/webgl/Buffer~WebGLArrayBuffer} objects.
+ *   A buffer has to be created only once, but must be bound every time the buffer content will be used for rendering.
+ *   This is done using {@link bindBuffer}.
+ *   When the buffer's array content has changed, the new data has to be flushed to the GPU memory; this is done using
+ *   {@link flushBufferData}. Note: this operation is expensive and should be done as infrequently as possible.
+ *
+ *   When binding an array buffer, a `target` parameter must be given: it should be either {@link module:ol/webgl.ARRAY_BUFFER}
+ *   (if the buffer contains vertices data) or {@link module:ol/webgl.ELEMENT_ARRAY_BUFFER} (if the buffer contains indices data).
+ *
+ *   Examples below:
+ *   ```js
+ *   // at initialization phase
+ *   const verticesBuffer = new WebGLArrayBuffer([], DYNAMIC_DRAW);
+ *   const indicesBuffer = new WebGLArrayBuffer([], DYNAMIC_DRAW);
+ *
+ *   // when array values have changed
+ *   helper.flushBufferData(ARRAY_BUFFER, this.verticesBuffer);
+ *   helper.flushBufferData(ELEMENT_ARRAY_BUFFER, this.indicesBuffer);
+ *
+ *   // at rendering phase
+ *   helper.bindBuffer(ARRAY_BUFFER, this.verticesBuffer);
+ *   helper.bindBuffer(ELEMENT_ARRAY_BUFFER, this.indicesBuffer);
+ *   ```
+ *
+ * ### Specifying attributes
+ *
+ *   The GPU only receives the data as arrays of numbers. These numbers must be handled differently depending on what it describes (position, texture coordinate...).
+ *   Attributes are used to specify these uses. Specify the attribute names with
+ *   {@link module:ol/webgl/Helper~WebGLHelper#enableAttributes enableAttributes()} (see code snippet below).
+ *
+ *   Please note that you will have to specify the type and offset of the attributes in the data array. You can refer to the documentation of [WebGLRenderingContext.vertexAttribPointer](https://developer.mozilla.org/en-US/docs/Web/API/WebGLRenderingContext/vertexAttribPointer) for more explanation.
+ *   ```js
+ *   // here we indicate that the data array has the following structure:
+ *   // [posX, posY, offsetX, offsetY, texCoordU, texCoordV, posX, posY, ...]
+ *   helper.enableAttributes([
+ *     {
+ *        name: 'a_position',
+ *        size: 2
+ *     },
+ *     {
+ *       name: 'a_offset',
+ *       size: 2
+ *     },
+ *     {
+ *       name: 'a_texCoord',
+ *       size: 2
+ *     }
+ *   ])
+ *   ```
+ *
+ * ### Rendering primitives
+ *
+ *   Once all the steps above have been achieved, rendering primitives to the screen is done using {@link prepareDraw}, {@link drawElements} and {@link finalizeDraw}.
+ *   ```js
+ *   // frame preparation step
+ *   helper.prepareDraw(frameState);
+ *
+ *   // call this for every data array that has to be rendered on screen
+ *   helper.drawElements(0, this.indicesBuffer.getArray().length);
+ *
+ *   // finalize the rendering by applying post processes
+ *   helper.finalizeDraw(frameState);
+ *   ```
+ *
+ * For an example usage of this class, refer to {@link module:ol/renderer/webgl/PointsLayer~WebGLPointsLayerRenderer}.
+ *
+ * @api
+ */
+var WebGLHelper = /** @class */ (function (_super) {
+    __extends(WebGLHelper, _super);
+    /**
+     * @param {Options} [opt_options] Options.
+     */
+    function WebGLHelper(opt_options) {
+        var _this = _super.call(this) || this;
+        var options = opt_options || {};
+        /** @private */
+        _this.boundHandleWebGLContextLost_ = _this.handleWebGLContextLost.bind(_this);
+        /** @private */
+        _this.boundHandleWebGLContextRestored_ =
+            _this.handleWebGLContextRestored.bind(_this);
+        /**
+         * @private
+         * @type {string}
+         */
+        _this.canvasCacheKey_ = options.canvasCacheKey
+            ? getSharedCanvasCacheKey(options.canvasCacheKey)
+            : getUniqueCanvasCacheKey();
+        /**
+         * @private
+         * @type {HTMLCanvasElement}
+         */
+        _this.canvas_ = getCanvas(_this.canvasCacheKey_);
+        /**
+         * @private
+         * @type {WebGLRenderingContext}
+         */
+        _this.gl_ = (0,_webgl_js__WEBPACK_IMPORTED_MODULE_0__.getContext)(_this.canvas_);
+        /**
+         * @private
+         * @type {!Object<string, BufferCacheEntry>}
+         */
+        _this.bufferCache_ = {};
+        /**
+         * @private
+         * @type {Object<string, Object>}
+         */
+        _this.extensionCache_ = {};
+        /**
+         * @private
+         * @type {WebGLProgram}
+         */
+        _this.currentProgram_ = null;
+        _this.canvas_.addEventListener(_webgl_ContextEventType_js__WEBPACK_IMPORTED_MODULE_1__["default"].LOST, _this.boundHandleWebGLContextLost_);
+        _this.canvas_.addEventListener(_webgl_ContextEventType_js__WEBPACK_IMPORTED_MODULE_1__["default"].RESTORED, _this.boundHandleWebGLContextRestored_);
+        /**
+         * @private
+         * @type {import("../transform.js").Transform}
+         */
+        _this.offsetRotateMatrix_ = (0,_transform_js__WEBPACK_IMPORTED_MODULE_2__.create)();
+        /**
+         * @private
+         * @type {import("../transform.js").Transform}
+         */
+        _this.offsetScaleMatrix_ = (0,_transform_js__WEBPACK_IMPORTED_MODULE_2__.create)();
+        /**
+         * @private
+         * @type {Array<number>}
+         */
+        _this.tmpMat4_ = (0,_vec_mat4_js__WEBPACK_IMPORTED_MODULE_3__.create)();
+        /**
+         * @private
+         * @type {Object<string, WebGLUniformLocation>}
+         */
+        _this.uniformLocations_ = {};
+        /**
+         * @private
+         * @type {Object<string, number>}
+         */
+        _this.attribLocations_ = {};
+        /**
+         * Holds info about custom uniforms used in the post processing pass.
+         * If the uniform is a texture, the WebGL Texture object will be stored here.
+         * @type {Array<UniformInternalDescription>}
+         * @private
+         */
+        _this.uniforms_ = [];
+        if (options.uniforms) {
+            _this.setUniforms(options.uniforms);
+        }
+        var gl = _this.getGL();
+        /**
+         * An array of PostProcessingPass objects is kept in this variable, built from the steps provided in the
+         * options. If no post process was given, a default one is used (so as not to have to make an exception to
+         * the frame buffer logic).
+         * @type {Array<WebGLPostProcessingPass>}
+         * @private
+         */
+        _this.postProcessPasses_ = options.postProcesses
+            ? options.postProcesses.map(function (options) {
+                return new _PostProcessingPass_js__WEBPACK_IMPORTED_MODULE_4__["default"]({
+                    webGlContext: gl,
+                    scaleRatio: options.scaleRatio,
+                    vertexShader: options.vertexShader,
+                    fragmentShader: options.fragmentShader,
+                    uniforms: options.uniforms,
+                });
+            })
+            : [new _PostProcessingPass_js__WEBPACK_IMPORTED_MODULE_4__["default"]({ webGlContext: gl })];
+        /**
+         * @type {string|null}
+         * @private
+         */
+        _this.shaderCompileErrors_ = null;
+        /**
+         * @type {number}
+         * @private
+         */
+        _this.startTime_ = Date.now();
+        return _this;
+    }
+    /**
+     * @param {Object<string, UniformValue>} uniforms Uniform definitions.
+     */
+    WebGLHelper.prototype.setUniforms = function (uniforms) {
+        this.uniforms_ = [];
+        for (var name_1 in uniforms) {
+            this.uniforms_.push({
+                name: name_1,
+                value: uniforms[name_1],
+            });
+        }
+        this.uniformLocations_ = {};
+    };
+    /**
+     * @param {string} canvasCacheKey The canvas cache key.
+     * @return {boolean} The provided key matches the one this helper was constructed with.
+     */
+    WebGLHelper.prototype.canvasCacheKeyMatches = function (canvasCacheKey) {
+        return this.canvasCacheKey_ === getSharedCanvasCacheKey(canvasCacheKey);
+    };
+    /**
+     * Get a WebGL extension.  If the extension is not supported, null is returned.
+     * Extensions are cached after they are enabled for the first time.
+     * @param {string} name The extension name.
+     * @return {Object|null} The extension or null if not supported.
+     */
+    WebGLHelper.prototype.getExtension = function (name) {
+        if (name in this.extensionCache_) {
+            return this.extensionCache_[name];
+        }
+        var extension = this.gl_.getExtension(name);
+        this.extensionCache_[name] = extension;
+        return extension;
+    };
+    /**
+     * Just bind the buffer if it's in the cache. Otherwise create
+     * the WebGL buffer, bind it, populate it, and add an entry to
+     * the cache.
+     * @param {import("./Buffer").default} buffer Buffer.
+     * @api
+     */
+    WebGLHelper.prototype.bindBuffer = function (buffer) {
+        var gl = this.getGL();
+        var bufferKey = (0,_util_js__WEBPACK_IMPORTED_MODULE_5__.getUid)(buffer);
+        var bufferCache = this.bufferCache_[bufferKey];
+        if (!bufferCache) {
+            var webGlBuffer = gl.createBuffer();
+            bufferCache = {
+                buffer: buffer,
+                webGlBuffer: webGlBuffer,
+            };
+            this.bufferCache_[bufferKey] = bufferCache;
+        }
+        gl.bindBuffer(buffer.getType(), bufferCache.webGlBuffer);
+    };
+    /**
+     * Update the data contained in the buffer array; this is required for the
+     * new data to be rendered
+     * @param {import("./Buffer").default} buffer Buffer.
+     * @api
+     */
+    WebGLHelper.prototype.flushBufferData = function (buffer) {
+        var gl = this.getGL();
+        this.bindBuffer(buffer);
+        gl.bufferData(buffer.getType(), buffer.getArray(), buffer.getUsage());
+    };
+    /**
+     * @param {import("./Buffer.js").default} buf Buffer.
+     */
+    WebGLHelper.prototype.deleteBuffer = function (buf) {
+        var gl = this.getGL();
+        var bufferKey = (0,_util_js__WEBPACK_IMPORTED_MODULE_5__.getUid)(buf);
+        var bufferCacheEntry = this.bufferCache_[bufferKey];
+        if (bufferCacheEntry && !gl.isContextLost()) {
+            gl.deleteBuffer(bufferCacheEntry.webGlBuffer);
+        }
+        delete this.bufferCache_[bufferKey];
+    };
+    /**
+     * Clean up.
+     */
+    WebGLHelper.prototype.disposeInternal = function () {
+        this.canvas_.removeEventListener(_webgl_ContextEventType_js__WEBPACK_IMPORTED_MODULE_1__["default"].LOST, this.boundHandleWebGLContextLost_);
+        this.canvas_.removeEventListener(_webgl_ContextEventType_js__WEBPACK_IMPORTED_MODULE_1__["default"].RESTORED, this.boundHandleWebGLContextRestored_);
+        releaseCanvas(this.canvasCacheKey_);
+        delete this.gl_;
+        delete this.canvas_;
+    };
+    /**
+     * Clear the buffer & set the viewport to draw.
+     * Post process passes will be initialized here, the first one being bound as a render target for
+     * subsequent draw calls.
+     * @param {import("../PluggableMap.js").FrameState} frameState current frame state
+     * @param {boolean} [opt_disableAlphaBlend] If true, no alpha blending will happen.
+     * @api
+     */
+    WebGLHelper.prototype.prepareDraw = function (frameState, opt_disableAlphaBlend) {
+        var gl = this.getGL();
+        var canvas = this.getCanvas();
+        var size = frameState.size;
+        var pixelRatio = frameState.pixelRatio;
+        canvas.width = size[0] * pixelRatio;
+        canvas.height = size[1] * pixelRatio;
+        canvas.style.width = size[0] + 'px';
+        canvas.style.height = size[1] + 'px';
+        gl.useProgram(this.currentProgram_);
+        // loop backwards in post processes list
+        for (var i = this.postProcessPasses_.length - 1; i >= 0; i--) {
+            this.postProcessPasses_[i].init(frameState);
+        }
+        gl.bindTexture(gl.TEXTURE_2D, null);
+        gl.clearColor(0.0, 0.0, 0.0, 0.0);
+        gl.clear(gl.COLOR_BUFFER_BIT);
+        gl.enable(gl.BLEND);
+        gl.blendFunc(gl.ONE, opt_disableAlphaBlend ? gl.ZERO : gl.ONE_MINUS_SRC_ALPHA);
+        gl.useProgram(this.currentProgram_);
+        this.applyFrameState(frameState);
+        this.applyUniforms(frameState);
+    };
+    /**
+     * Clear the render target & bind it for future draw operations.
+     * This is similar to `prepareDraw`, only post processes will not be applied.
+     * Note: the whole viewport will be drawn to the render target, regardless of its size.
+     * @param {import("../PluggableMap.js").FrameState} frameState current frame state
+     * @param {import("./RenderTarget.js").default} renderTarget Render target to draw to
+     * @param {boolean} [opt_disableAlphaBlend] If true, no alpha blending will happen.
+     */
+    WebGLHelper.prototype.prepareDrawToRenderTarget = function (frameState, renderTarget, opt_disableAlphaBlend) {
+        var gl = this.getGL();
+        var size = renderTarget.getSize();
+        gl.bindFramebuffer(gl.FRAMEBUFFER, renderTarget.getFramebuffer());
+        gl.viewport(0, 0, size[0], size[1]);
+        gl.bindTexture(gl.TEXTURE_2D, renderTarget.getTexture());
+        gl.clearColor(0.0, 0.0, 0.0, 0.0);
+        gl.clear(gl.COLOR_BUFFER_BIT);
+        gl.enable(gl.BLEND);
+        gl.blendFunc(gl.ONE, opt_disableAlphaBlend ? gl.ZERO : gl.ONE_MINUS_SRC_ALPHA);
+        gl.useProgram(this.currentProgram_);
+        this.applyFrameState(frameState);
+        this.applyUniforms(frameState);
+    };
+    /**
+     * Execute a draw call based on the currently bound program, texture, buffers, attributes.
+     * @param {number} start Start index.
+     * @param {number} end End index.
+     * @api
+     */
+    WebGLHelper.prototype.drawElements = function (start, end) {
+        var gl = this.getGL();
+        this.getExtension('OES_element_index_uint');
+        var elementType = gl.UNSIGNED_INT;
+        var elementSize = 4;
+        var numItems = end - start;
+        var offsetInBytes = start * elementSize;
+        gl.drawElements(gl.TRIANGLES, numItems, elementType, offsetInBytes);
+    };
+    /**
+     * Apply the successive post process passes which will eventually render to the actual canvas.
+     * @param {import("../PluggableMap.js").FrameState} frameState current frame state
+     * @param {function(WebGLRenderingContext, import("../PluggableMap.js").FrameState):void} [preCompose] Called before composing.
+     * @param {function(WebGLRenderingContext, import("../PluggableMap.js").FrameState):void} [postCompose] Called before composing.
+     */
+    WebGLHelper.prototype.finalizeDraw = function (frameState, preCompose, postCompose) {
+        // apply post processes using the next one as target
+        for (var i = 0, ii = this.postProcessPasses_.length; i < ii; i++) {
+            if (i === ii - 1) {
+                this.postProcessPasses_[i].apply(frameState, null, preCompose, postCompose);
+            }
+            else {
+                this.postProcessPasses_[i].apply(frameState, this.postProcessPasses_[i + 1]);
+            }
+        }
+    };
+    /**
+     * @return {HTMLCanvasElement} Canvas.
+     * @api
+     */
+    WebGLHelper.prototype.getCanvas = function () {
+        return this.canvas_;
+    };
+    /**
+     * Get the WebGL rendering context
+     * @return {WebGLRenderingContext} The rendering context.
+     * @api
+     */
+    WebGLHelper.prototype.getGL = function () {
+        return this.gl_;
+    };
+    /**
+     * Sets the default matrix uniforms for a given frame state. This is called internally in `prepareDraw`.
+     * @param {import("../PluggableMap.js").FrameState} frameState Frame state.
+     * @private
+     */
+    WebGLHelper.prototype.applyFrameState = function (frameState) {
+        var size = frameState.size;
+        var rotation = frameState.viewState.rotation;
+        var offsetScaleMatrix = (0,_transform_js__WEBPACK_IMPORTED_MODULE_2__.reset)(this.offsetScaleMatrix_);
+        (0,_transform_js__WEBPACK_IMPORTED_MODULE_2__.scale)(offsetScaleMatrix, 2 / size[0], 2 / size[1]);
+        var offsetRotateMatrix = (0,_transform_js__WEBPACK_IMPORTED_MODULE_2__.reset)(this.offsetRotateMatrix_);
+        if (rotation !== 0) {
+            (0,_transform_js__WEBPACK_IMPORTED_MODULE_2__.rotate)(offsetRotateMatrix, -rotation);
+        }
+        this.setUniformMatrixValue(DefaultUniform.OFFSET_SCALE_MATRIX, (0,_vec_mat4_js__WEBPACK_IMPORTED_MODULE_3__.fromTransform)(this.tmpMat4_, offsetScaleMatrix));
+        this.setUniformMatrixValue(DefaultUniform.OFFSET_ROTATION_MATRIX, (0,_vec_mat4_js__WEBPACK_IMPORTED_MODULE_3__.fromTransform)(this.tmpMat4_, offsetRotateMatrix));
+        this.setUniformFloatValue(DefaultUniform.TIME, (Date.now() - this.startTime_) * 0.001);
+        this.setUniformFloatValue(DefaultUniform.ZOOM, frameState.viewState.zoom);
+        this.setUniformFloatValue(DefaultUniform.RESOLUTION, frameState.viewState.resolution);
+    };
+    /**
+     * Sets the custom uniforms based on what was given in the constructor. This is called internally in `prepareDraw`.
+     * @param {import("../PluggableMap.js").FrameState} frameState Frame state.
+     * @private
+     */
+    WebGLHelper.prototype.applyUniforms = function (frameState) {
+        var gl = this.getGL();
+        var value;
+        var textureSlot = 0;
+        this.uniforms_.forEach(function (uniform) {
+            value =
+                typeof uniform.value === 'function'
+                    ? uniform.value(frameState)
+                    : uniform.value;
+            // apply value based on type
+            if (value instanceof HTMLCanvasElement ||
+                value instanceof HTMLImageElement ||
+                value instanceof ImageData) {
+                // create a texture & put data
+                if (!uniform.texture) {
+                    uniform.prevValue = undefined;
+                    uniform.texture = gl.createTexture();
+                }
+                gl.activeTexture(gl["TEXTURE".concat(textureSlot)]);
+                gl.bindTexture(gl.TEXTURE_2D, uniform.texture);
+                gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR);
+                gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE);
+                gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
+                var imageReady = !(value instanceof HTMLImageElement) ||
+                    /** @type {HTMLImageElement} */ (value).complete;
+                if (imageReady && uniform.prevValue !== value) {
+                    uniform.prevValue = value;
+                    gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, value);
+                }
+                // fill texture slots by increasing index
+                gl.uniform1i(this.getUniformLocation(uniform.name), textureSlot++);
+            }
+            else if (Array.isArray(value) && value.length === 6) {
+                this.setUniformMatrixValue(uniform.name, (0,_vec_mat4_js__WEBPACK_IMPORTED_MODULE_3__.fromTransform)(this.tmpMat4_, value));
+            }
+            else if (Array.isArray(value) && value.length <= 4) {
+                switch (value.length) {
+                    case 2:
+                        gl.uniform2f(this.getUniformLocation(uniform.name), value[0], value[1]);
+                        return;
+                    case 3:
+                        gl.uniform3f(this.getUniformLocation(uniform.name), value[0], value[1], value[2]);
+                        return;
+                    case 4:
+                        gl.uniform4f(this.getUniformLocation(uniform.name), value[0], value[1], value[2], value[3]);
+                        return;
+                    default:
+                        return;
+                }
+            }
+            else if (typeof value === 'number') {
+                gl.uniform1f(this.getUniformLocation(uniform.name), value);
+            }
+        }.bind(this));
+    };
+    /**
+     * Use a program.  If the program is already in use, this will return `false`.
+     * @param {WebGLProgram} program Program.
+     * @return {boolean} Changed.
+     * @api
+     */
+    WebGLHelper.prototype.useProgram = function (program) {
+        if (program == this.currentProgram_) {
+            return false;
+        }
+        else {
+            var gl = this.getGL();
+            gl.useProgram(program);
+            this.currentProgram_ = program;
+            this.uniformLocations_ = {};
+            this.attribLocations_ = {};
+            return true;
+        }
+    };
+    /**
+     * Will attempt to compile a vertex or fragment shader based on source
+     * On error, the shader will be returned but
+     * `gl.getShaderParameter(shader, gl.COMPILE_STATUS)` will return `true`
+     * Use `gl.getShaderInfoLog(shader)` to have details
+     * @param {string} source Shader source
+     * @param {ShaderType} type VERTEX_SHADER or FRAGMENT_SHADER
+     * @return {WebGLShader} Shader object
+     */
+    WebGLHelper.prototype.compileShader = function (source, type) {
+        var gl = this.getGL();
+        var shader = gl.createShader(type);
+        gl.shaderSource(shader, source);
+        gl.compileShader(shader);
+        return shader;
+    };
+    /**
+     * Create a program for a vertex and fragment shader.  Throws if shader compilation fails.
+     * @param {string} fragmentShaderSource Fragment shader source.
+     * @param {string} vertexShaderSource Vertex shader source.
+     * @return {WebGLProgram} Program
+     * @api
+     */
+    WebGLHelper.prototype.getProgram = function (fragmentShaderSource, vertexShaderSource) {
+        var gl = this.getGL();
+        var fragmentShader = this.compileShader(fragmentShaderSource, gl.FRAGMENT_SHADER);
+        var vertexShader = this.compileShader(vertexShaderSource, gl.VERTEX_SHADER);
+        var program = gl.createProgram();
+        gl.attachShader(program, fragmentShader);
+        gl.attachShader(program, vertexShader);
+        gl.linkProgram(program);
+        if (!gl.getShaderParameter(fragmentShader, gl.COMPILE_STATUS)) {
+            var message = "Fragment shader compliation failed: ".concat(gl.getShaderInfoLog(fragmentShader));
+            throw new Error(message);
+        }
+        gl.deleteShader(fragmentShader);
+        if (!gl.getShaderParameter(vertexShader, gl.COMPILE_STATUS)) {
+            var message = "Vertex shader compilation failed: ".concat(gl.getShaderInfoLog(vertexShader));
+            throw new Error(message);
+        }
+        gl.deleteShader(vertexShader);
+        if (!gl.getProgramParameter(program, gl.LINK_STATUS)) {
+            var message = "GL program linking failed: ".concat(gl.getShaderInfoLog(vertexShader));
+            throw new Error(message);
+        }
+        return program;
+    };
+    /**
+     * Will get the location from the shader or the cache
+     * @param {string} name Uniform name
+     * @return {WebGLUniformLocation} uniformLocation
+     * @api
+     */
+    WebGLHelper.prototype.getUniformLocation = function (name) {
+        if (this.uniformLocations_[name] === undefined) {
+            this.uniformLocations_[name] = this.getGL().getUniformLocation(this.currentProgram_, name);
+        }
+        return this.uniformLocations_[name];
+    };
+    /**
+     * Will get the location from the shader or the cache
+     * @param {string} name Attribute name
+     * @return {number} attribLocation
+     * @api
+     */
+    WebGLHelper.prototype.getAttributeLocation = function (name) {
+        if (this.attribLocations_[name] === undefined) {
+            this.attribLocations_[name] = this.getGL().getAttribLocation(this.currentProgram_, name);
+        }
+        return this.attribLocations_[name];
+    };
+    /**
+     * Modifies the given transform to apply the rotation/translation/scaling of the given frame state.
+     * The resulting transform can be used to convert world space coordinates to view coordinates.
+     * @param {import("../PluggableMap.js").FrameState} frameState Frame state.
+     * @param {import("../transform").Transform} transform Transform to update.
+     * @return {import("../transform").Transform} The updated transform object.
+     * @api
+     */
+    WebGLHelper.prototype.makeProjectionTransform = function (frameState, transform) {
+        var size = frameState.size;
+        var rotation = frameState.viewState.rotation;
+        var resolution = frameState.viewState.resolution;
+        var center = frameState.viewState.center;
+        (0,_transform_js__WEBPACK_IMPORTED_MODULE_2__.reset)(transform);
+        (0,_transform_js__WEBPACK_IMPORTED_MODULE_2__.compose)(transform, 0, 0, 2 / (resolution * size[0]), 2 / (resolution * size[1]), -rotation, -center[0], -center[1]);
+        return transform;
+    };
+    /**
+     * Give a value for a standard float uniform
+     * @param {string} uniform Uniform name
+     * @param {number} value Value
+     * @api
+     */
+    WebGLHelper.prototype.setUniformFloatValue = function (uniform, value) {
+        this.getGL().uniform1f(this.getUniformLocation(uniform), value);
+    };
+    /**
+     * Give a value for a vec4 uniform
+     * @param {string} uniform Uniform name
+     * @param {Array<number>} value Array of length 4.
+     */
+    WebGLHelper.prototype.setUniformFloatVec4 = function (uniform, value) {
+        this.getGL().uniform4fv(this.getUniformLocation(uniform), value);
+    };
+    /**
+     * Give a value for a standard matrix4 uniform
+     * @param {string} uniform Uniform name
+     * @param {Array<number>} value Matrix value
+     * @api
+     */
+    WebGLHelper.prototype.setUniformMatrixValue = function (uniform, value) {
+        this.getGL().uniformMatrix4fv(this.getUniformLocation(uniform), false, value);
+    };
+    /**
+     * Will set the currently bound buffer to an attribute of the shader program. Used by `#enableAttributes`
+     * internally.
+     * @param {string} attribName Attribute name
+     * @param {number} size Number of components per attributes
+     * @param {number} type UNSIGNED_INT, UNSIGNED_BYTE, UNSIGNED_SHORT or FLOAT
+     * @param {number} stride Stride in bytes (0 means attribs are packed)
+     * @param {number} offset Offset in bytes
+     * @private
+     */
+    WebGLHelper.prototype.enableAttributeArray_ = function (attribName, size, type, stride, offset) {
+        var location = this.getAttributeLocation(attribName);
+        // the attribute has not been found in the shaders; do not enable it
+        if (location < 0) {
+            return;
+        }
+        this.getGL().enableVertexAttribArray(location);
+        this.getGL().vertexAttribPointer(location, size, type, false, stride, offset);
+    };
+    /**
+     * Will enable the following attributes to be read from the currently bound buffer,
+     * i.e. tell the GPU where to read the different attributes in the buffer. An error in the
+     * size/type/order of attributes will most likely break the rendering and throw a WebGL exception.
+     * @param {Array<AttributeDescription>} attributes Ordered list of attributes to read from the buffer
+     * @api
+     */
+    WebGLHelper.prototype.enableAttributes = function (attributes) {
+        var stride = computeAttributesStride(attributes);
+        var offset = 0;
+        for (var i = 0; i < attributes.length; i++) {
+            var attr = attributes[i];
+            this.enableAttributeArray_(attr.name, attr.size, attr.type || _webgl_js__WEBPACK_IMPORTED_MODULE_0__.FLOAT, stride, offset);
+            offset += attr.size * getByteSizeFromType(attr.type);
+        }
+    };
+    /**
+     * WebGL context was lost
+     * @private
+     */
+    WebGLHelper.prototype.handleWebGLContextLost = function () {
+        (0,_obj_js__WEBPACK_IMPORTED_MODULE_6__.clear)(this.bufferCache_);
+        this.currentProgram_ = null;
+    };
+    /**
+     * WebGL context was restored
+     * @private
+     */
+    WebGLHelper.prototype.handleWebGLContextRestored = function () { };
+    /**
+     * Will create or reuse a given webgl texture and apply the given size. If no image data
+     * specified, the texture will be empty, otherwise image data will be used and the `size`
+     * parameter will be ignored.
+     * Note: wrap parameters are set to clamp to edge, min filter is set to linear.
+     * @param {Array<number>} size Expected size of the texture
+     * @param {ImageData|HTMLImageElement|HTMLCanvasElement} [opt_data] Image data/object to bind to the texture
+     * @param {WebGLTexture} [opt_texture] Existing texture to reuse
+     * @return {WebGLTexture} The generated texture
+     * @api
+     */
+    WebGLHelper.prototype.createTexture = function (size, opt_data, opt_texture) {
+        var gl = this.getGL();
+        var texture = opt_texture || gl.createTexture();
+        // set params & size
+        var level = 0;
+        var internalFormat = gl.RGBA;
+        var border = 0;
+        var format = gl.RGBA;
+        var type = gl.UNSIGNED_BYTE;
+        gl.bindTexture(gl.TEXTURE_2D, texture);
+        if (opt_data) {
+            gl.texImage2D(gl.TEXTURE_2D, level, internalFormat, format, type, opt_data);
+        }
+        else {
+            gl.texImage2D(gl.TEXTURE_2D, level, internalFormat, size[0], size[1], border, format, type, null);
+        }
+        gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR);
+        gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE);
+        gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
+        return texture;
+    };
+    return WebGLHelper;
+}(_Disposable_js__WEBPACK_IMPORTED_MODULE_7__["default"]));
+/**
+ * Compute a stride in bytes based on a list of attributes
+ * @param {Array<AttributeDescription>} attributes Ordered list of attributes
+ * @return {number} Stride, ie amount of values for each vertex in the vertex buffer
+ * @api
+ */
+function computeAttributesStride(attributes) {
+    var stride = 0;
+    for (var i = 0; i < attributes.length; i++) {
+        var attr = attributes[i];
+        stride += attr.size * getByteSizeFromType(attr.type);
+    }
+    return stride;
+}
+/**
+ * Computes the size in byte of an attribute type.
+ * @param {AttributeType} type Attribute type
+ * @return {number} The size in bytes
+ */
+function getByteSizeFromType(type) {
+    switch (type) {
+        case AttributeType.UNSIGNED_BYTE:
+            return Uint8Array.BYTES_PER_ELEMENT;
+        case AttributeType.UNSIGNED_SHORT:
+            return Uint16Array.BYTES_PER_ELEMENT;
+        case AttributeType.UNSIGNED_INT:
+            return Uint32Array.BYTES_PER_ELEMENT;
+        case AttributeType.FLOAT:
+        default:
+            return Float32Array.BYTES_PER_ELEMENT;
+    }
+}
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (WebGLHelper);
+//# sourceMappingURL=Helper.js.map
+
+/***/ }),
+
+/***/ "./node_modules/ol/webgl/PaletteTexture.js":
+/*!*************************************************!*\
+  !*** ./node_modules/ol/webgl/PaletteTexture.js ***!
+  \*************************************************/
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/**
+ * @module ol/webgl/PaletteTexture
+ */
+var PaletteTexture = /** @class */ (function () {
+    /**
+     * @param {string} name The name of the texture.
+     * @param {Uint8Array} data The texture data.
+     */
+    function PaletteTexture(name, data) {
+        this.name = name;
+        this.data = data;
+        /**
+         * @type {WebGLTexture}
+         * @private
+         */
+        this.texture_ = null;
+    }
+    /**
+     * @param {WebGLRenderingContext} gl Rendering context.
+     * @return {WebGLTexture} The texture.
+     */
+    PaletteTexture.prototype.getTexture = function (gl) {
+        if (!this.texture_) {
+            var texture = gl.createTexture();
+            gl.bindTexture(gl.TEXTURE_2D, texture);
+            gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE);
+            gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
+            gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.NEAREST);
+            gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.NEAREST);
+            gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, this.data.length / 4, 1, 0, gl.RGBA, gl.UNSIGNED_BYTE, this.data);
+            this.texture_ = texture;
+        }
+        return this.texture_;
+    };
+    return PaletteTexture;
+}());
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (PaletteTexture);
+//# sourceMappingURL=PaletteTexture.js.map
+
+/***/ }),
+
+/***/ "./node_modules/ol/webgl/PostProcessingPass.js":
+/*!*****************************************************!*\
+  !*** ./node_modules/ol/webgl/PostProcessingPass.js ***!
+  \*****************************************************/
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _util_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../util.js */ "./node_modules/ol/util.js");
+/**
+ * @module ol/webgl/PostProcessingPass
+ */
+
+var DEFAULT_VERTEX_SHADER = "\n  precision mediump float;\n  \n  attribute vec2 a_position;\n  varying vec2 v_texCoord;\n  varying vec2 v_screenCoord;\n  \n  uniform vec2 u_screenSize;\n   \n  void main() {\n    v_texCoord = a_position * 0.5 + 0.5;\n    v_screenCoord = v_texCoord * u_screenSize;\n    gl_Position = vec4(a_position, 0.0, 1.0);\n  }\n";
+var DEFAULT_FRAGMENT_SHADER = "\n  precision mediump float;\n   \n  uniform sampler2D u_image;\n  uniform float u_opacity;\n   \n  varying vec2 v_texCoord;\n   \n  void main() {\n    gl_FragColor = texture2D(u_image, v_texCoord) * u_opacity;\n  }\n";
+/**
+ * @typedef {Object} Options
+ * @property {WebGLRenderingContext} webGlContext WebGL context; mandatory.
+ * @property {number} [scaleRatio] Scale ratio; if < 1, the post process will render to a texture smaller than
+ * the main canvas that will then be sampled up (useful for saving resource on blur steps).
+ * @property {string} [vertexShader] Vertex shader source
+ * @property {string} [fragmentShader] Fragment shader source
+ * @property {Object<string,import("./Helper").UniformValue>} [uniforms] Uniform definitions for the post process step
+ */
+/**
+ * @typedef {Object} UniformInternalDescription
+ * @property {import("./Helper").UniformValue} value Value
+ * @property {number} location Location
+ * @property {WebGLTexture} [texture] Texture
+ * @private
+ */
+/**
+ * @classdesc
+ * This class is used to define Post Processing passes with custom shaders and uniforms.
+ * This is used internally by {@link module:ol/webgl/Helper~WebGLHelper}.
+ *
+ * Please note that the final output on the DOM canvas is expected to have premultiplied alpha, which means that
+ * a pixel which is 100% red with an opacity of 50% must have a color of (r=0.5, g=0, b=0, a=0.5).
+ * Failing to provide pixel colors with premultiplied alpha will result in render anomalies.
+ *
+ * The default post-processing pass does *not* multiply color values with alpha value, it expects color values to be
+ * premultiplied.
+ *
+ * Default shaders are shown hereafter:
+ *
+ * * Vertex shader:
+ *
+ *   ```
+ *   precision mediump float;
+ *
+ *   attribute vec2 a_position;
+ *   varying vec2 v_texCoord;
+ *   varying vec2 v_screenCoord;
+ *
+ *   uniform vec2 u_screenSize;
+ *
+ *   void main() {
+ *     v_texCoord = a_position * 0.5 + 0.5;
+ *     v_screenCoord = v_texCoord * u_screenSize;
+ *     gl_Position = vec4(a_position, 0.0, 1.0);
+ *   }
+ *   ```
+ *
+ * * Fragment shader:
+ *
+ *   ```
+ *   precision mediump float;
+ *
+ *   uniform sampler2D u_image;
+ *   uniform float u_opacity;
+ *
+ *   varying vec2 v_texCoord;
+ *
+ *   void main() {
+ *     gl_FragColor = texture2D(u_image, v_texCoord) * u_opacity;
+ *   }
+ *   ```
+ *
+ * @api
+ */
+var WebGLPostProcessingPass = /** @class */ (function () {
+    /**
+     * @param {Options} options Options.
+     */
+    function WebGLPostProcessingPass(options) {
+        this.gl_ = options.webGlContext;
+        var gl = this.gl_;
+        this.scaleRatio_ = options.scaleRatio || 1;
+        this.renderTargetTexture_ = gl.createTexture();
+        this.renderTargetTextureSize_ = null;
+        this.frameBuffer_ = gl.createFramebuffer();
+        // compile the program for the frame buffer
+        // TODO: make compilation errors show up
+        var vertexShader = gl.createShader(gl.VERTEX_SHADER);
+        gl.shaderSource(vertexShader, options.vertexShader || DEFAULT_VERTEX_SHADER);
+        gl.compileShader(vertexShader);
+        var fragmentShader = gl.createShader(gl.FRAGMENT_SHADER);
+        gl.shaderSource(fragmentShader, options.fragmentShader || DEFAULT_FRAGMENT_SHADER);
+        gl.compileShader(fragmentShader);
+        this.renderTargetProgram_ = gl.createProgram();
+        gl.attachShader(this.renderTargetProgram_, vertexShader);
+        gl.attachShader(this.renderTargetProgram_, fragmentShader);
+        gl.linkProgram(this.renderTargetProgram_);
+        // bind the vertices buffer for the frame buffer
+        this.renderTargetVerticesBuffer_ = gl.createBuffer();
+        var verticesArray = [-1, -1, 1, -1, -1, 1, 1, -1, 1, 1, -1, 1];
+        gl.bindBuffer(gl.ARRAY_BUFFER, this.renderTargetVerticesBuffer_);
+        gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(verticesArray), gl.STATIC_DRAW);
+        this.renderTargetAttribLocation_ = gl.getAttribLocation(this.renderTargetProgram_, 'a_position');
+        this.renderTargetUniformLocation_ = gl.getUniformLocation(this.renderTargetProgram_, 'u_screenSize');
+        this.renderTargetOpacityLocation_ = gl.getUniformLocation(this.renderTargetProgram_, 'u_opacity');
+        this.renderTargetTextureLocation_ = gl.getUniformLocation(this.renderTargetProgram_, 'u_image');
+        /**
+         * Holds info about custom uniforms used in the post processing pass
+         * @type {Array<UniformInternalDescription>}
+         * @private
+         */
+        this.uniforms_ = [];
+        options.uniforms &&
+            Object.keys(options.uniforms).forEach(function (name) {
+                this.uniforms_.push({
+                    value: options.uniforms[name],
+                    location: gl.getUniformLocation(this.renderTargetProgram_, name),
+                });
+            }.bind(this));
+    }
+    /**
+     * Get the WebGL rendering context
+     * @return {WebGLRenderingContext} The rendering context.
+     * @api
+     */
+    WebGLPostProcessingPass.prototype.getGL = function () {
+        return this.gl_;
+    };
+    /**
+     * Initialize the render target texture of the post process, make sure it is at the
+     * right size and bind it as a render target for the next draw calls.
+     * The last step to be initialized will be the one where the primitives are rendered.
+     * @param {import("../PluggableMap.js").FrameState} frameState current frame state
+     * @api
+     */
+    WebGLPostProcessingPass.prototype.init = function (frameState) {
+        var gl = this.getGL();
+        var textureSize = [
+            gl.drawingBufferWidth * this.scaleRatio_,
+            gl.drawingBufferHeight * this.scaleRatio_,
+        ];
+        // rendering goes to my buffer
+        gl.bindFramebuffer(gl.FRAMEBUFFER, this.getFrameBuffer());
+        gl.viewport(0, 0, textureSize[0], textureSize[1]);
+        // if size has changed: adjust canvas & render target texture
+        if (!this.renderTargetTextureSize_ ||
+            this.renderTargetTextureSize_[0] !== textureSize[0] ||
+            this.renderTargetTextureSize_[1] !== textureSize[1]) {
+            this.renderTargetTextureSize_ = textureSize;
+            // create a new texture
+            var level = 0;
+            var internalFormat = gl.RGBA;
+            var border = 0;
+            var format = gl.RGBA;
+            var type = gl.UNSIGNED_BYTE;
+            var data = null;
+            gl.bindTexture(gl.TEXTURE_2D, this.renderTargetTexture_);
+            gl.texImage2D(gl.TEXTURE_2D, level, internalFormat, textureSize[0], textureSize[1], border, format, type, data);
+            gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR);
+            gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE);
+            gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
+            // bind the texture to the framebuffer
+            gl.framebufferTexture2D(gl.FRAMEBUFFER, gl.COLOR_ATTACHMENT0, gl.TEXTURE_2D, this.renderTargetTexture_, 0);
+        }
+    };
+    /**
+     * Render to the next postprocessing pass (or to the canvas if final pass).
+     * @param {import("../PluggableMap.js").FrameState} frameState current frame state
+     * @param {WebGLPostProcessingPass} [nextPass] Next pass, optional
+     * @param {function(WebGLRenderingContext, import("../PluggableMap.js").FrameState):void} [preCompose] Called before composing.
+     * @param {function(WebGLRenderingContext, import("../PluggableMap.js").FrameState):void} [postCompose] Called before composing.
+     * @api
+     */
+    WebGLPostProcessingPass.prototype.apply = function (frameState, nextPass, preCompose, postCompose) {
+        var gl = this.getGL();
+        var size = frameState.size;
+        gl.bindFramebuffer(gl.FRAMEBUFFER, nextPass ? nextPass.getFrameBuffer() : null);
+        gl.activeTexture(gl.TEXTURE0);
+        gl.bindTexture(gl.TEXTURE_2D, this.renderTargetTexture_);
+        if (!nextPass) {
+            // clear the canvas if we are the first to render to it
+            // and preserveDrawingBuffer is true
+            var canvasId = (0,_util_js__WEBPACK_IMPORTED_MODULE_0__.getUid)(gl.canvas);
+            if (!frameState.renderTargets[canvasId]) {
+                var attributes = gl.getContextAttributes();
+                if (attributes && attributes.preserveDrawingBuffer) {
+                    gl.clearColor(0.0, 0.0, 0.0, 0.0);
+                    gl.clear(gl.COLOR_BUFFER_BIT);
+                }
+                frameState.renderTargets[canvasId] = true;
+            }
+        }
+        gl.enable(gl.BLEND);
+        gl.blendFunc(gl.ONE, gl.ONE_MINUS_SRC_ALPHA);
+        gl.viewport(0, 0, gl.drawingBufferWidth, gl.drawingBufferHeight);
+        gl.bindBuffer(gl.ARRAY_BUFFER, this.renderTargetVerticesBuffer_);
+        gl.useProgram(this.renderTargetProgram_);
+        gl.enableVertexAttribArray(this.renderTargetAttribLocation_);
+        gl.vertexAttribPointer(this.renderTargetAttribLocation_, 2, gl.FLOAT, false, 0, 0);
+        gl.uniform2f(this.renderTargetUniformLocation_, size[0], size[1]);
+        gl.uniform1i(this.renderTargetTextureLocation_, 0);
+        var opacity = frameState.layerStatesArray[frameState.layerIndex].opacity;
+        gl.uniform1f(this.renderTargetOpacityLocation_, opacity);
+        this.applyUniforms(frameState);
+        if (preCompose) {
+            preCompose(gl, frameState);
+        }
+        gl.drawArrays(gl.TRIANGLES, 0, 6);
+        if (postCompose) {
+            postCompose(gl, frameState);
+        }
+    };
+    /**
+     * @return {WebGLFramebuffer} Frame buffer
+     * @api
+     */
+    WebGLPostProcessingPass.prototype.getFrameBuffer = function () {
+        return this.frameBuffer_;
+    };
+    /**
+     * Sets the custom uniforms based on what was given in the constructor.
+     * @param {import("../PluggableMap.js").FrameState} frameState Frame state.
+     * @private
+     */
+    WebGLPostProcessingPass.prototype.applyUniforms = function (frameState) {
+        var gl = this.getGL();
+        var value;
+        var textureSlot = 1;
+        this.uniforms_.forEach(function (uniform) {
+            value =
+                typeof uniform.value === 'function'
+                    ? uniform.value(frameState)
+                    : uniform.value;
+            // apply value based on type
+            if (value instanceof HTMLCanvasElement || value instanceof ImageData) {
+                // create a texture & put data
+                if (!uniform.texture) {
+                    uniform.texture = gl.createTexture();
+                }
+                gl.activeTexture(gl["TEXTURE".concat(textureSlot)]);
+                gl.bindTexture(gl.TEXTURE_2D, uniform.texture);
+                gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR);
+                gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE);
+                gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
+                if (value instanceof ImageData) {
+                    gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, value.width, value.height, 0, gl.UNSIGNED_BYTE, new Uint8Array(value.data));
+                }
+                else {
+                    gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, value);
+                }
+                // fill texture slots
+                gl.uniform1i(uniform.location, textureSlot++);
+            }
+            else if (Array.isArray(value)) {
+                switch (value.length) {
+                    case 2:
+                        gl.uniform2f(uniform.location, value[0], value[1]);
+                        return;
+                    case 3:
+                        gl.uniform3f(uniform.location, value[0], value[1], value[2]);
+                        return;
+                    case 4:
+                        gl.uniform4f(uniform.location, value[0], value[1], value[2], value[3]);
+                        return;
+                    default:
+                        return;
+                }
+            }
+            else if (typeof value === 'number') {
+                gl.uniform1f(uniform.location, value);
+            }
+        });
+    };
+    return WebGLPostProcessingPass;
+}());
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (WebGLPostProcessingPass);
+//# sourceMappingURL=PostProcessingPass.js.map
+
+/***/ }),
+
+/***/ "./node_modules/ol/webgl/RenderTarget.js":
+/*!***********************************************!*\
+  !*** ./node_modules/ol/webgl/RenderTarget.js ***!
+  \***********************************************/
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _array_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../array.js */ "./node_modules/ol/array.js");
+/**
+ * A wrapper class to simplify rendering to a texture instead of the final canvas
+ * @module ol/webgl/RenderTarget
+ */
+
+// for pixel color reading
+var tmpArray4 = new Uint8Array(4);
+/**
+ * @classdesc
+ * This class is a wrapper around the association of both a `WebGLTexture` and a `WebGLFramebuffer` instances,
+ * simplifying initialization and binding for rendering.
+ * @api
+ */
+var WebGLRenderTarget = /** @class */ (function () {
+    /**
+     * @param {import("./Helper.js").default} helper WebGL helper; mandatory.
+     * @param {Array<number>} [opt_size] Expected size of the render target texture; note: this can be changed later on.
+     */
+    function WebGLRenderTarget(helper, opt_size) {
+        /**
+         * @private
+         * @type {import("./Helper.js").default}
+         */
+        this.helper_ = helper;
+        var gl = helper.getGL();
+        /**
+         * @private
+         * @type {WebGLTexture}
+         */
+        this.texture_ = gl.createTexture();
+        /**
+         * @private
+         * @type {WebGLFramebuffer}
+         */
+        this.framebuffer_ = gl.createFramebuffer();
+        /**
+         * @type {Array<number>}
+         * @private
+         */
+        this.size_ = opt_size || [1, 1];
+        /**
+         * @type {Uint8Array}
+         * @private
+         */
+        this.data_ = new Uint8Array(0);
+        /**
+         * @type {boolean}
+         * @private
+         */
+        this.dataCacheDirty_ = true;
+        this.updateSize_();
+    }
+    /**
+     * Changes the size of the render target texture. Note: will do nothing if the size
+     * is already the same.
+     * @param {Array<number>} size Expected size of the render target texture
+     * @api
+     */
+    WebGLRenderTarget.prototype.setSize = function (size) {
+        if ((0,_array_js__WEBPACK_IMPORTED_MODULE_0__.equals)(size, this.size_)) {
+            return;
+        }
+        this.size_[0] = size[0];
+        this.size_[1] = size[1];
+        this.updateSize_();
+    };
+    /**
+     * Returns the size of the render target texture
+     * @return {Array<number>} Size of the render target texture
+     * @api
+     */
+    WebGLRenderTarget.prototype.getSize = function () {
+        return this.size_;
+    };
+    /**
+     * This will cause following calls to `#readAll` or `#readPixel` to download the content of the
+     * render target into memory, which is an expensive operation.
+     * This content will be kept in cache but should be cleared after each new render.
+     * @api
+     */
+    WebGLRenderTarget.prototype.clearCachedData = function () {
+        this.dataCacheDirty_ = true;
+    };
+    /**
+     * Returns the full content of the frame buffer as a series of r, g, b, a components
+     * in the 0-255 range (unsigned byte).
+     * @return {Uint8Array} Integer array of color values
+     * @api
+     */
+    WebGLRenderTarget.prototype.readAll = function () {
+        if (this.dataCacheDirty_) {
+            var size = this.size_;
+            var gl = this.helper_.getGL();
+            gl.bindFramebuffer(gl.FRAMEBUFFER, this.framebuffer_);
+            gl.readPixels(0, 0, size[0], size[1], gl.RGBA, gl.UNSIGNED_BYTE, this.data_);
+            this.dataCacheDirty_ = false;
+        }
+        return this.data_;
+    };
+    /**
+     * Reads one pixel of the frame buffer as an array of r, g, b, a components
+     * in the 0-255 range (unsigned byte).
+     * If x and/or y are outside of existing data, an array filled with 0 is returned.
+     * @param {number} x Pixel coordinate
+     * @param {number} y Pixel coordinate
+     * @return {Uint8Array} Integer array with one color value (4 components)
+     * @api
+     */
+    WebGLRenderTarget.prototype.readPixel = function (x, y) {
+        if (x < 0 || y < 0 || x > this.size_[0] || y >= this.size_[1]) {
+            tmpArray4[0] = 0;
+            tmpArray4[1] = 0;
+            tmpArray4[2] = 0;
+            tmpArray4[3] = 0;
+            return tmpArray4;
+        }
+        this.readAll();
+        var index = Math.floor(x) + (this.size_[1] - Math.floor(y) - 1) * this.size_[0];
+        tmpArray4[0] = this.data_[index * 4];
+        tmpArray4[1] = this.data_[index * 4 + 1];
+        tmpArray4[2] = this.data_[index * 4 + 2];
+        tmpArray4[3] = this.data_[index * 4 + 3];
+        return tmpArray4;
+    };
+    /**
+     * @return {WebGLTexture} Texture to render to
+     */
+    WebGLRenderTarget.prototype.getTexture = function () {
+        return this.texture_;
+    };
+    /**
+     * @return {WebGLFramebuffer} Frame buffer of the render target
+     */
+    WebGLRenderTarget.prototype.getFramebuffer = function () {
+        return this.framebuffer_;
+    };
+    /**
+     * @private
+     */
+    WebGLRenderTarget.prototype.updateSize_ = function () {
+        var size = this.size_;
+        var gl = this.helper_.getGL();
+        this.texture_ = this.helper_.createTexture(size, null, this.texture_);
+        gl.bindFramebuffer(gl.FRAMEBUFFER, this.framebuffer_);
+        gl.viewport(0, 0, size[0], size[1]);
+        gl.framebufferTexture2D(gl.FRAMEBUFFER, gl.COLOR_ATTACHMENT0, gl.TEXTURE_2D, this.texture_, 0);
+        this.data_ = new Uint8Array(size[0] * size[1] * 4);
+    };
+    return WebGLRenderTarget;
+}());
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (WebGLRenderTarget);
+//# sourceMappingURL=RenderTarget.js.map
+
+/***/ }),
+
+/***/ "./node_modules/ol/webgl/ShaderBuilder.js":
+/*!************************************************!*\
+  !*** ./node_modules/ol/webgl/ShaderBuilder.js ***!
+  \************************************************/
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "ShaderBuilder": () => (/* binding */ ShaderBuilder),
+/* harmony export */   "parseLiteralStyle": () => (/* binding */ parseLiteralStyle)
+/* harmony export */ });
+/* harmony import */ var _style_expressions_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../style/expressions.js */ "./node_modules/ol/style/expressions.js");
+/**
+ * Classes and utilities for generating shaders from literal style objects
+ * @module ol/webgl/ShaderBuilder
+ */
+
+/**
+ * @typedef {Object} VaryingDescription
+ * @property {string} name Varying name, as will be declared in the header.
+ * @property {string} type Varying type, either `float`, `vec2`, `vec4`...
+ * @property {string} expression Expression which will be assigned to the varying in the vertex shader, and
+ * passed on to the fragment shader.
+ */
+/**
+ * @classdesc
+ * This class implements a classic builder pattern for generating many different types of shaders.
+ * Methods can be chained, e. g.:
+ *
+ * ```js
+ * const shader = new ShaderBuilder()
+ *   .addVarying('v_width', 'float', 'a_width')
+ *   .addUniform('u_time')
+ *   .setColorExpression('...')
+ *   .setSizeExpression('...')
+ *   .outputSymbolFragmentShader();
+ * ```
+ */
+var ShaderBuilder = /** @class */ (function () {
+    function ShaderBuilder() {
+        /**
+         * Uniforms; these will be declared in the header (should include the type).
+         * @type {Array<string>}
+         * @private
+         */
+        this.uniforms = [];
+        /**
+         * Attributes; these will be declared in the header (should include the type).
+         * @type {Array<string>}
+         * @private
+         */
+        this.attributes = [];
+        /**
+         * Varyings with a name, a type and an expression.
+         * @type {Array<VaryingDescription>}
+         * @private
+         */
+        this.varyings = [];
+        /**
+         * @type {string}
+         * @private
+         */
+        this.sizeExpression = 'vec2(1.0)';
+        /**
+         * @type {string}
+         * @private
+         */
+        this.rotationExpression = '0.0';
+        /**
+         * @type {string}
+         * @private
+         */
+        this.offsetExpression = 'vec2(0.0)';
+        /**
+         * @type {string}
+         * @private
+         */
+        this.colorExpression = 'vec4(1.0)';
+        /**
+         * @type {string}
+         * @private
+         */
+        this.texCoordExpression = 'vec4(0.0, 0.0, 1.0, 1.0)';
+        /**
+         * @type {string}
+         * @private
+         */
+        this.discardExpression = 'false';
+        /**
+         * @type {boolean}
+         * @private
+         */
+        this.rotateWithView = false;
+    }
+    /**
+     * Adds a uniform accessible in both fragment and vertex shaders.
+     * The given name should include a type, such as `sampler2D u_texture`.
+     * @param {string} name Uniform name
+     * @return {ShaderBuilder} the builder object
+     */
+    ShaderBuilder.prototype.addUniform = function (name) {
+        this.uniforms.push(name);
+        return this;
+    };
+    /**
+     * Adds an attribute accessible in the vertex shader, read from the geometry buffer.
+     * The given name should include a type, such as `vec2 a_position`.
+     * @param {string} name Attribute name
+     * @return {ShaderBuilder} the builder object
+     */
+    ShaderBuilder.prototype.addAttribute = function (name) {
+        this.attributes.push(name);
+        return this;
+    };
+    /**
+     * Adds a varying defined in the vertex shader and accessible from the fragment shader.
+     * The type and expression of the varying have to be specified separately.
+     * @param {string} name Varying name
+     * @param {'float'|'vec2'|'vec3'|'vec4'} type Type
+     * @param {string} expression Expression used to assign a value to the varying.
+     * @return {ShaderBuilder} the builder object
+     */
+    ShaderBuilder.prototype.addVarying = function (name, type, expression) {
+        this.varyings.push({
+            name: name,
+            type: type,
+            expression: expression,
+        });
+        return this;
+    };
+    /**
+     * Sets an expression to compute the size of the shape.
+     * This expression can use all the uniforms and attributes available
+     * in the vertex shader, and should evaluate to a `vec2` value.
+     * @param {string} expression Size expression
+     * @return {ShaderBuilder} the builder object
+     */
+    ShaderBuilder.prototype.setSizeExpression = function (expression) {
+        this.sizeExpression = expression;
+        return this;
+    };
+    /**
+     * Sets an expression to compute the rotation of the shape.
+     * This expression can use all the uniforms and attributes available
+     * in the vertex shader, and should evaluate to a `float` value in radians.
+     * @param {string} expression Size expression
+     * @return {ShaderBuilder} the builder object
+     */
+    ShaderBuilder.prototype.setRotationExpression = function (expression) {
+        this.rotationExpression = expression;
+        return this;
+    };
+    /**
+     * Sets an expression to compute the offset of the symbol from the point center.
+     * This expression can use all the uniforms and attributes available
+     * in the vertex shader, and should evaluate to a `vec2` value.
+     * Note: will only be used for point geometry shaders.
+     * @param {string} expression Offset expression
+     * @return {ShaderBuilder} the builder object
+     */
+    ShaderBuilder.prototype.setSymbolOffsetExpression = function (expression) {
+        this.offsetExpression = expression;
+        return this;
+    };
+    /**
+     * Sets an expression to compute the color of the shape.
+     * This expression can use all the uniforms, varyings and attributes available
+     * in the fragment shader, and should evaluate to a `vec4` value.
+     * @param {string} expression Color expression
+     * @return {ShaderBuilder} the builder object
+     */
+    ShaderBuilder.prototype.setColorExpression = function (expression) {
+        this.colorExpression = expression;
+        return this;
+    };
+    /**
+     * Sets an expression to compute the texture coordinates of the vertices.
+     * This expression can use all the uniforms and attributes available
+     * in the vertex shader, and should evaluate to a `vec4` value.
+     * @param {string} expression Texture coordinate expression
+     * @return {ShaderBuilder} the builder object
+     */
+    ShaderBuilder.prototype.setTextureCoordinateExpression = function (expression) {
+        this.texCoordExpression = expression;
+        return this;
+    };
+    /**
+     * Sets an expression to determine whether a fragment (pixel) should be discarded,
+     * i.e. not drawn at all.
+     * This expression can use all the uniforms, varyings and attributes available
+     * in the fragment shader, and should evaluate to a `bool` value (it will be
+     * used in an `if` statement)
+     * @param {string} expression Fragment discard expression
+     * @return {ShaderBuilder} the builder object
+     */
+    ShaderBuilder.prototype.setFragmentDiscardExpression = function (expression) {
+        this.discardExpression = expression;
+        return this;
+    };
+    /**
+     * Sets whether the symbols should rotate with the view or stay aligned with the map.
+     * Note: will only be used for point geometry shaders.
+     * @param {boolean} rotateWithView Rotate with view
+     * @return {ShaderBuilder} the builder object
+     */
+    ShaderBuilder.prototype.setSymbolRotateWithView = function (rotateWithView) {
+        this.rotateWithView = rotateWithView;
+        return this;
+    };
+    /**
+     * @return {string} Previously set size expression
+     */
+    ShaderBuilder.prototype.getSizeExpression = function () {
+        return this.sizeExpression;
+    };
+    /**
+     * @return {string} Previously set symbol offset expression
+     */
+    ShaderBuilder.prototype.getOffsetExpression = function () {
+        return this.offsetExpression;
+    };
+    /**
+     * @return {string} Previously set color expression
+     */
+    ShaderBuilder.prototype.getColorExpression = function () {
+        return this.colorExpression;
+    };
+    /**
+     * @return {string} Previously set texture coordinate expression
+     */
+    ShaderBuilder.prototype.getTextureCoordinateExpression = function () {
+        return this.texCoordExpression;
+    };
+    /**
+     * @return {string} Previously set fragment discard expression
+     */
+    ShaderBuilder.prototype.getFragmentDiscardExpression = function () {
+        return this.discardExpression;
+    };
+    /**
+     * Generates a symbol vertex shader from the builder parameters,
+     * intended to be used on point geometries.
+     *
+     * Three uniforms are hardcoded in all shaders: `u_projectionMatrix`, `u_offsetScaleMatrix`,
+     * `u_offsetRotateMatrix`, `u_time`.
+     *
+     * The following attributes are hardcoded and expected to be present in the vertex buffers:
+     * `vec2 a_position`, `float a_index` (being the index of the vertex in the quad, 0 to 3).
+     *
+     * The following varyings are hardcoded and gives the coordinate of the pixel both in the quad and on the texture:
+     * `vec2 v_quadCoord`, `vec2 v_texCoord`
+     *
+     * @param {boolean} [forHitDetection] If true, the shader will be modified to include hit detection variables
+     * (namely, hit color with encoded feature id).
+     * @return {string} The full shader as a string.
+     */
+    ShaderBuilder.prototype.getSymbolVertexShader = function (forHitDetection) {
+        var offsetMatrix = this.rotateWithView
+            ? 'u_offsetScaleMatrix * u_offsetRotateMatrix'
+            : 'u_offsetScaleMatrix';
+        var attributes = this.attributes;
+        var varyings = this.varyings;
+        if (forHitDetection) {
+            attributes = attributes.concat('vec4 a_hitColor');
+            varyings = varyings.concat({
+                name: 'v_hitColor',
+                type: 'vec4',
+                expression: 'a_hitColor',
+            });
+        }
+        return "precision mediump float;\nuniform mat4 u_projectionMatrix;\nuniform mat4 u_offsetScaleMatrix;\nuniform mat4 u_offsetRotateMatrix;\nuniform float u_time;\nuniform float u_zoom;\nuniform float u_resolution;\n".concat(this.uniforms
+            .map(function (uniform) {
+            return 'uniform ' + uniform + ';';
+        })
+            .join('\n'), "\nattribute vec2 a_position;\nattribute float a_index;\n").concat(attributes
+            .map(function (attribute) {
+            return 'attribute ' + attribute + ';';
+        })
+            .join('\n'), "\nvarying vec2 v_texCoord;\nvarying vec2 v_quadCoord;\n").concat(varyings
+            .map(function (varying) {
+            return 'varying ' + varying.type + ' ' + varying.name + ';';
+        })
+            .join('\n'), "\nvoid main(void) {\n  mat4 offsetMatrix = ").concat(offsetMatrix, ";\n  vec2 halfSize = ").concat(this.sizeExpression, " * 0.5;\n  vec2 offset = ").concat(this.offsetExpression, ";\n  float angle = ").concat(this.rotationExpression, ";\n  float offsetX;\n  float offsetY;\n  if (a_index == 0.0) {\n    offsetX = (offset.x - halfSize.x) * cos(angle) + (offset.y - halfSize.y) * sin(angle);\n    offsetY = (offset.y - halfSize.y) * cos(angle) - (offset.x - halfSize.x) * sin(angle);\n  } else if (a_index == 1.0) {\n    offsetX = (offset.x + halfSize.x) * cos(angle) + (offset.y - halfSize.y) * sin(angle);\n    offsetY = (offset.y - halfSize.y) * cos(angle) - (offset.x + halfSize.x) * sin(angle);\n  } else if (a_index == 2.0) {\n    offsetX = (offset.x + halfSize.x) * cos(angle) + (offset.y + halfSize.y) * sin(angle);\n    offsetY = (offset.y + halfSize.y) * cos(angle) - (offset.x + halfSize.x) * sin(angle);\n  } else {\n    offsetX = (offset.x - halfSize.x) * cos(angle) + (offset.y + halfSize.y) * sin(angle);\n    offsetY = (offset.y + halfSize.y) * cos(angle) - (offset.x - halfSize.x) * sin(angle);\n  }\n  vec4 offsets = offsetMatrix * vec4(offsetX, offsetY, 0.0, 0.0);\n  gl_Position = u_projectionMatrix * vec4(a_position, 0.0, 1.0) + offsets;\n  vec4 texCoord = ").concat(this.texCoordExpression, ";\n  float u = a_index == 0.0 || a_index == 3.0 ? texCoord.s : texCoord.p;\n  float v = a_index == 2.0 || a_index == 3.0 ? texCoord.t : texCoord.q;\n  v_texCoord = vec2(u, v);\n  u = a_index == 0.0 || a_index == 3.0 ? 0.0 : 1.0;\n  v = a_index == 2.0 || a_index == 3.0 ? 0.0 : 1.0;\n  v_quadCoord = vec2(u, v);\n").concat(varyings
+            .map(function (varying) {
+            return '  ' + varying.name + ' = ' + varying.expression + ';';
+        })
+            .join('\n'), "\n}");
+    };
+    /**
+     * Generates a symbol fragment shader from the builder parameters,
+     * intended to be used on point geometries.
+     *
+     * Expects the following varyings to be transmitted by the vertex shader:
+     * `vec2 v_quadCoord`, `vec2 v_texCoord`
+     *
+     * @param {boolean} [forHitDetection] If true, the shader will be modified to include hit detection variables
+     * (namely, hit color with encoded feature id).
+     * @return {string} The full shader as a string.
+     */
+    ShaderBuilder.prototype.getSymbolFragmentShader = function (forHitDetection) {
+        var hitDetectionBypass = forHitDetection
+            ? '  if (gl_FragColor.a < 0.1) { discard; } gl_FragColor = v_hitColor;'
+            : '';
+        var varyings = this.varyings;
+        if (forHitDetection) {
+            varyings = varyings.concat({
+                name: 'v_hitColor',
+                type: 'vec4',
+                expression: 'a_hitColor',
+            });
+        }
+        return "precision mediump float;\nuniform float u_time;\nuniform float u_zoom;\nuniform float u_resolution;\n".concat(this.uniforms
+            .map(function (uniform) {
+            return 'uniform ' + uniform + ';';
+        })
+            .join('\n'), "\nvarying vec2 v_texCoord;\nvarying vec2 v_quadCoord;\n").concat(varyings
+            .map(function (varying) {
+            return 'varying ' + varying.type + ' ' + varying.name + ';';
+        })
+            .join('\n'), "\nvoid main(void) {\n  if (").concat(this.discardExpression, ") { discard; }\n  gl_FragColor = ").concat(this.colorExpression, ";\n  gl_FragColor.rgb *= gl_FragColor.a;\n").concat(hitDetectionBypass, "\n}");
+    };
+    return ShaderBuilder;
+}());
+
+/**
+ * @typedef {Object} StyleParseResult
+ * @property {ShaderBuilder} builder Shader builder pre-configured according to a given style
+ * @property {Object<string,import("./Helper").UniformValue>} uniforms Uniform definitions.
+ * @property {Array<import("../renderer/webgl/PointsLayer").CustomAttribute>} attributes Attribute descriptions.
+ */
+/**
+ * Parses a {@link import("../style/literal").LiteralStyle} object and returns a {@link ShaderBuilder}
+ * object that has been configured according to the given style, as well as `attributes` and `uniforms`
+ * arrays to be fed to the `WebGLPointsRenderer` class.
+ *
+ * Also returns `uniforms` and `attributes` properties as expected by the
+ * {@link module:ol/renderer/webgl/PointsLayer~WebGLPointsLayerRenderer}.
+ *
+ * @param {import("../style/literal").LiteralStyle} style Literal style.
+ * @return {StyleParseResult} Result containing shader params, attributes and uniforms.
+ */
+function parseLiteralStyle(style) {
+    var symbStyle = style.symbol;
+    var size = symbStyle.size !== undefined ? symbStyle.size : 1;
+    var color = symbStyle.color || 'white';
+    var texCoord = symbStyle.textureCoord || [0, 0, 1, 1];
+    var offset = symbStyle.offset || [0, 0];
+    var opacity = symbStyle.opacity !== undefined ? symbStyle.opacity : 1;
+    var rotation = symbStyle.rotation !== undefined ? symbStyle.rotation : 0;
+    /**
+     * @type {import("../style/expressions.js").ParsingContext}
+     */
+    var vertContext = {
+        inFragmentShader: false,
+        variables: [],
+        attributes: [],
+        stringLiteralsMap: {},
+        functions: {},
+    };
+    var parsedSize = (0,_style_expressions_js__WEBPACK_IMPORTED_MODULE_0__.expressionToGlsl)(vertContext, size, _style_expressions_js__WEBPACK_IMPORTED_MODULE_0__.ValueTypes.NUMBER_ARRAY | _style_expressions_js__WEBPACK_IMPORTED_MODULE_0__.ValueTypes.NUMBER);
+    var parsedOffset = (0,_style_expressions_js__WEBPACK_IMPORTED_MODULE_0__.expressionToGlsl)(vertContext, offset, _style_expressions_js__WEBPACK_IMPORTED_MODULE_0__.ValueTypes.NUMBER_ARRAY);
+    var parsedTexCoord = (0,_style_expressions_js__WEBPACK_IMPORTED_MODULE_0__.expressionToGlsl)(vertContext, texCoord, _style_expressions_js__WEBPACK_IMPORTED_MODULE_0__.ValueTypes.NUMBER_ARRAY);
+    var parsedRotation = (0,_style_expressions_js__WEBPACK_IMPORTED_MODULE_0__.expressionToGlsl)(vertContext, rotation, _style_expressions_js__WEBPACK_IMPORTED_MODULE_0__.ValueTypes.NUMBER);
+    /**
+     * @type {import("../style/expressions.js").ParsingContext}
+     */
+    var fragContext = {
+        inFragmentShader: true,
+        variables: vertContext.variables,
+        attributes: [],
+        stringLiteralsMap: vertContext.stringLiteralsMap,
+        functions: {},
+    };
+    var parsedColor = (0,_style_expressions_js__WEBPACK_IMPORTED_MODULE_0__.expressionToGlsl)(fragContext, color, _style_expressions_js__WEBPACK_IMPORTED_MODULE_0__.ValueTypes.COLOR);
+    var parsedOpacity = (0,_style_expressions_js__WEBPACK_IMPORTED_MODULE_0__.expressionToGlsl)(fragContext, opacity, _style_expressions_js__WEBPACK_IMPORTED_MODULE_0__.ValueTypes.NUMBER);
+    var opacityFilter = '1.0';
+    var visibleSize = "vec2(".concat((0,_style_expressions_js__WEBPACK_IMPORTED_MODULE_0__.expressionToGlsl)(fragContext, size, _style_expressions_js__WEBPACK_IMPORTED_MODULE_0__.ValueTypes.NUMBER_ARRAY | _style_expressions_js__WEBPACK_IMPORTED_MODULE_0__.ValueTypes.NUMBER), ").x");
+    switch (symbStyle.symbolType) {
+        case 'square':
+            break;
+        case 'image':
+            break;
+        // taken from https://thebookofshaders.com/07/
+        case 'circle':
+            opacityFilter = "(1.0-smoothstep(1.-4./".concat(visibleSize, ",1.,dot(v_quadCoord-.5,v_quadCoord-.5)*4.))");
+            break;
+        case 'triangle':
+            var st = '(v_quadCoord*2.-1.)';
+            var a = "(atan(".concat(st, ".x,").concat(st, ".y))");
+            opacityFilter = "(1.0-smoothstep(.5-3./".concat(visibleSize, ",.5,cos(floor(.5+").concat(a, "/2.094395102)*2.094395102-").concat(a, ")*length(").concat(st, ")))");
+            break;
+        default:
+            throw new Error('Unexpected symbol type: ' + symbStyle.symbolType);
+    }
+    var builder = new ShaderBuilder()
+        .setSizeExpression("vec2(".concat(parsedSize, ")"))
+        .setRotationExpression(parsedRotation)
+        .setSymbolOffsetExpression(parsedOffset)
+        .setTextureCoordinateExpression(parsedTexCoord)
+        .setSymbolRotateWithView(!!symbStyle.rotateWithView)
+        .setColorExpression("vec4(".concat(parsedColor, ".rgb, ").concat(parsedColor, ".a * ").concat(parsedOpacity, " * ").concat(opacityFilter, ")"));
+    if (style.filter) {
+        var parsedFilter = (0,_style_expressions_js__WEBPACK_IMPORTED_MODULE_0__.expressionToGlsl)(fragContext, style.filter, _style_expressions_js__WEBPACK_IMPORTED_MODULE_0__.ValueTypes.BOOLEAN);
+        builder.setFragmentDiscardExpression("!".concat(parsedFilter));
+    }
+    /** @type {Object<string,import("../webgl/Helper").UniformValue>} */
+    var uniforms = {};
+    // define one uniform per variable
+    fragContext.variables.forEach(function (varName) {
+        var uniformName = (0,_style_expressions_js__WEBPACK_IMPORTED_MODULE_0__.uniformNameForVariable)(varName);
+        builder.addUniform("float ".concat(uniformName));
+        uniforms[uniformName] = function () {
+            if (!style.variables || style.variables[varName] === undefined) {
+                throw new Error("The following variable is missing from the style: ".concat(varName));
+            }
+            var value = style.variables[varName];
+            if (typeof value === 'string') {
+                value = (0,_style_expressions_js__WEBPACK_IMPORTED_MODULE_0__.getStringNumberEquivalent)(vertContext, value);
+            }
+            return value !== undefined ? value : -9999999; // to avoid matching with the first string literal
+        };
+    });
+    if (symbStyle.symbolType === 'image' && symbStyle.src) {
+        var texture = new Image();
+        texture.crossOrigin =
+            symbStyle.crossOrigin === undefined ? 'anonymous' : symbStyle.crossOrigin;
+        texture.src = symbStyle.src;
+        builder
+            .addUniform('sampler2D u_texture')
+            .setColorExpression(builder.getColorExpression() + ' * texture2D(u_texture, v_texCoord)');
+        uniforms['u_texture'] = texture;
+    }
+    // for each feature attribute used in the fragment shader, define a varying that will be used to pass data
+    // from the vertex to the fragment shader, as well as an attribute in the vertex shader (if not already present)
+    fragContext.attributes.forEach(function (attrName) {
+        if (vertContext.attributes.indexOf(attrName) === -1) {
+            vertContext.attributes.push(attrName);
+        }
+        builder.addVarying("v_".concat(attrName), 'float', "a_".concat(attrName));
+    });
+    // for each feature attribute used in the vertex shader, define an attribute in the vertex shader.
+    vertContext.attributes.forEach(function (attrName) {
+        builder.addAttribute("float a_".concat(attrName));
+    });
+    return {
+        builder: builder,
+        attributes: vertContext.attributes.map(function (attributeName) {
+            return {
+                name: attributeName,
+                callback: function (feature, props) {
+                    var value = props[attributeName];
+                    if (typeof value === 'string') {
+                        value = (0,_style_expressions_js__WEBPACK_IMPORTED_MODULE_0__.getStringNumberEquivalent)(vertContext, value);
+                    }
+                    return value !== undefined ? value : -9999999; // to avoid matching with the first string literal
+                },
+            };
+        }),
+        uniforms: uniforms,
+    };
+}
+//# sourceMappingURL=ShaderBuilder.js.map
+
+/***/ }),
+
+/***/ "./node_modules/ol/webgl/TileTexture.js":
+/*!**********************************************!*\
+  !*** ./node_modules/ol/webgl/TileTexture.js ***!
+  \**********************************************/
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _DataTile_js__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../DataTile.js */ "./node_modules/ol/DataTile.js");
+/* harmony import */ var _events_Target_js__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../events/Target.js */ "./node_modules/ol/events/Target.js");
+/* harmony import */ var _events_EventType_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../events/EventType.js */ "./node_modules/ol/events/EventType.js");
+/* harmony import */ var _ImageTile_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../ImageTile.js */ "./node_modules/ol/ImageTile.js");
+/* harmony import */ var _reproj_Tile_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../reproj/Tile.js */ "./node_modules/ol/reproj/Tile.js");
+/* harmony import */ var _TileState_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../TileState.js */ "./node_modules/ol/TileState.js");
+/* harmony import */ var _Buffer_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Buffer.js */ "./node_modules/ol/webgl/Buffer.js");
+/* harmony import */ var _webgl_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../webgl.js */ "./node_modules/ol/webgl.js");
+/* harmony import */ var _renderer_canvas_common_js__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../renderer/canvas/common.js */ "./node_modules/ol/renderer/canvas/common.js");
+/* harmony import */ var _obj_js__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../obj.js */ "./node_modules/ol/obj.js");
+/* harmony import */ var _dom_js__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../dom.js */ "./node_modules/ol/dom.js");
+/* harmony import */ var _size_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../size.js */ "./node_modules/ol/size.js");
+/**
+ * @module ol/webgl/TileTexture
+ */
+var __extends = (undefined && undefined.__extends) || (function () {
+    var extendStatics = function (d, b) {
+        extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (Object.prototype.hasOwnProperty.call(b, p)) d[p] = b[p]; };
+        return extendStatics(d, b);
+    };
+    return function (d, b) {
+        if (typeof b !== "function" && b !== null)
+            throw new TypeError("Class extends value " + String(b) + " is not a constructor or null");
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+
+
+
+
+
+
+
+
+
+
+
+
+/**
+ * @param {WebGLRenderingContext} gl The WebGL context.
+ * @param {WebGLTexture} texture The texture.
+ * @param {boolean} interpolate Interpolate when resampling.
+ */
+function bindAndConfigure(gl, texture, interpolate) {
+    var resampleFilter = interpolate ? gl.LINEAR : gl.NEAREST;
+    gl.bindTexture(gl.TEXTURE_2D, texture);
+    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE);
+    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
+    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, resampleFilter);
+    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, resampleFilter);
+}
+/**
+ * @param {WebGLRenderingContext} gl The WebGL context.
+ * @param {WebGLTexture} texture The texture.
+ * @param {HTMLImageElement|HTMLCanvasElement|HTMLVideoElement} image The image.
+ * @param {boolean} interpolate Interpolate when resampling.
+ */
+function uploadImageTexture(gl, texture, image, interpolate) {
+    bindAndConfigure(gl, texture, interpolate);
+    gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, image);
+}
+/**
+ * @param {import("./Helper.js").default} helper The WebGL helper.
+ * @param {WebGLTexture} texture The texture.
+ * @param {import("../DataTile.js").Data} data The pixel data.
+ * @param {import("../size.js").Size} size The pixel size.
+ * @param {number} bandCount The band count.
+ * @param {boolean} interpolate Interpolate when resampling.
+ */
+function uploadDataTexture(helper, texture, data, size, bandCount, interpolate) {
+    var gl = helper.getGL();
+    var textureType;
+    var canInterpolate;
+    if (data instanceof Float32Array) {
+        textureType = gl.FLOAT;
+        helper.getExtension('OES_texture_float');
+        var extension = helper.getExtension('OES_texture_float_linear');
+        canInterpolate = extension !== null;
+    }
+    else {
+        textureType = gl.UNSIGNED_BYTE;
+        canInterpolate = true;
+    }
+    bindAndConfigure(gl, texture, interpolate && canInterpolate);
+    var bytesPerRow = data.byteLength / size[1];
+    var unpackAlignment = 1;
+    if (bytesPerRow % 8 === 0) {
+        unpackAlignment = 8;
+    }
+    else if (bytesPerRow % 4 === 0) {
+        unpackAlignment = 4;
+    }
+    else if (bytesPerRow % 2 === 0) {
+        unpackAlignment = 2;
+    }
+    var format;
+    switch (bandCount) {
+        case 1: {
+            format = gl.LUMINANCE;
+            break;
+        }
+        case 2: {
+            format = gl.LUMINANCE_ALPHA;
+            break;
+        }
+        case 3: {
+            format = gl.RGB;
+            break;
+        }
+        case 4: {
+            format = gl.RGBA;
+            break;
+        }
+        default: {
+            throw new Error("Unsupported number of bands: ".concat(bandCount));
+        }
+    }
+    var oldUnpackAlignment = gl.getParameter(gl.UNPACK_ALIGNMENT);
+    gl.pixelStorei(gl.UNPACK_ALIGNMENT, unpackAlignment);
+    gl.texImage2D(gl.TEXTURE_2D, 0, format, size[0], size[1], 0, format, textureType, data);
+    gl.pixelStorei(gl.UNPACK_ALIGNMENT, oldUnpackAlignment);
+}
+/**
+ * @type {CanvasRenderingContext2D}
+ */
+var pixelContext = null;
+function createPixelContext() {
+    var canvas = document.createElement('canvas');
+    canvas.width = 1;
+    canvas.height = 1;
+    pixelContext = canvas.getContext('2d');
+}
+/**
+ * @typedef {import("../DataTile.js").default|ImageTile|ReprojTile} TileType
+ */
+/**
+ * @typedef {Object} Options
+ * @property {TileType} tile The tile.
+ * @property {import("../tilegrid/TileGrid.js").default} grid Tile grid.
+ * @property {import("../webgl/Helper.js").default} helper WebGL helper.
+ * @property {number} [tilePixelRatio=1] Tile pixel ratio.
+ * @property {number} [gutter=0] The size in pixels of the gutter around image tiles to ignore.
+ */
+var TileTexture = /** @class */ (function (_super) {
+    __extends(TileTexture, _super);
+    /**
+     * @param {Options} options The tile texture options.
+     */
+    function TileTexture(options) {
+        var _this = _super.call(this) || this;
+        /**
+         * @type {TileType}
+         */
+        _this.tile;
+        /**
+         * @type {Array<WebGLTexture>}
+         */
+        _this.textures = [];
+        _this.handleTileChange_ = _this.handleTileChange_.bind(_this);
+        /**
+         * @type {import("../size.js").Size}
+         */
+        _this.size = (0,_size_js__WEBPACK_IMPORTED_MODULE_0__.toSize)(options.grid.getTileSize(options.tile.tileCoord[0]));
+        /**
+         * @type {number}
+         * @private
+         */
+        _this.tilePixelRatio_ = options.tilePixelRatio || 1;
+        /**
+         * @type {number}
+         * @private
+         */
+        _this.gutter_ = options.gutter || 0;
+        /**
+         * @type {number}
+         */
+        _this.bandCount = NaN;
+        /**
+         * @type {import("../webgl/Helper.js").default}
+         * @private
+         */
+        _this.helper_ = options.helper;
+        var coords = new _Buffer_js__WEBPACK_IMPORTED_MODULE_1__["default"](_webgl_js__WEBPACK_IMPORTED_MODULE_2__.ARRAY_BUFFER, _webgl_js__WEBPACK_IMPORTED_MODULE_2__.STATIC_DRAW);
+        coords.fromArray([
+            0,
+            1,
+            1,
+            1,
+            1,
+            0,
+            0,
+            0,
+        ]);
+        _this.helper_.flushBufferData(coords);
+        /**
+         * @type {WebGLArrayBuffer}
+         */
+        _this.coords = coords;
+        _this.setTile(options.tile);
+        return _this;
+    }
+    /**
+     * @param {TileType} tile Tile.
+     */
+    TileTexture.prototype.setTile = function (tile) {
+        if (tile !== this.tile) {
+            if (this.tile) {
+                this.tile.removeEventListener(_events_EventType_js__WEBPACK_IMPORTED_MODULE_3__["default"].CHANGE, this.handleTileChange_);
+            }
+            this.tile = tile;
+            this.textures.length = 0;
+            this.loaded = tile.getState() === _TileState_js__WEBPACK_IMPORTED_MODULE_4__["default"].LOADED;
+            if (this.loaded) {
+                this.uploadTile_();
+            }
+            else {
+                if (tile instanceof _ImageTile_js__WEBPACK_IMPORTED_MODULE_5__["default"]) {
+                    var image = tile.getImage();
+                    if (image instanceof Image && !image.crossOrigin) {
+                        image.crossOrigin = 'anonymous';
+                    }
+                }
+                tile.addEventListener(_events_EventType_js__WEBPACK_IMPORTED_MODULE_3__["default"].CHANGE, this.handleTileChange_);
+            }
+        }
+    };
+    TileTexture.prototype.uploadTile_ = function () {
+        var helper = this.helper_;
+        var gl = helper.getGL();
+        var tile = this.tile;
+        if (tile instanceof _ImageTile_js__WEBPACK_IMPORTED_MODULE_5__["default"] || tile instanceof _reproj_Tile_js__WEBPACK_IMPORTED_MODULE_6__["default"]) {
+            var image = tile.getImage();
+            if (this.gutter_ !== 0) {
+                var gutter = this.tilePixelRatio_ * this.gutter_;
+                var width = Math.round(image.width - 2 * gutter);
+                var height = Math.round(image.height - 2 * gutter);
+                var context = (0,_dom_js__WEBPACK_IMPORTED_MODULE_7__.createCanvasContext2D)(width, height);
+                if (!tile.interpolate) {
+                    (0,_obj_js__WEBPACK_IMPORTED_MODULE_8__.assign)(context, _renderer_canvas_common_js__WEBPACK_IMPORTED_MODULE_9__.IMAGE_SMOOTHING_DISABLED);
+                }
+                context.drawImage(image, gutter, gutter, width, height, 0, 0, width, height);
+                image = context.canvas;
+            }
+            var texture = gl.createTexture();
+            this.textures.push(texture);
+            this.bandCount = 4;
+            uploadImageTexture(gl, texture, image, tile.interpolate);
+            return;
+        }
+        var pixelSize = [
+            this.size[0] * this.tilePixelRatio_,
+            this.size[1] * this.tilePixelRatio_,
+        ];
+        var data = tile.getData();
+        var isFloat = data instanceof Float32Array;
+        var pixelCount = pixelSize[0] * pixelSize[1];
+        var DataType = isFloat ? Float32Array : Uint8Array;
+        var bytesPerElement = DataType.BYTES_PER_ELEMENT;
+        var bytesPerRow = data.byteLength / pixelSize[1];
+        this.bandCount = Math.floor(bytesPerRow / bytesPerElement / pixelSize[0]);
+        var textureCount = Math.ceil(this.bandCount / 4);
+        if (textureCount === 1) {
+            var texture = gl.createTexture();
+            this.textures.push(texture);
+            uploadDataTexture(helper, texture, data, pixelSize, this.bandCount, tile.interpolate);
+            return;
+        }
+        var textureDataArrays = new Array(textureCount);
+        for (var textureIndex = 0; textureIndex < textureCount; ++textureIndex) {
+            var texture = gl.createTexture();
+            this.textures.push(texture);
+            var bandCount = textureIndex < textureCount - 1 ? 4 : this.bandCount % 4;
+            textureDataArrays[textureIndex] = new DataType(pixelCount * bandCount);
+        }
+        var dataIndex = 0;
+        var rowOffset = 0;
+        var colCount = pixelSize[0] * this.bandCount;
+        for (var rowIndex = 0; rowIndex < pixelSize[1]; ++rowIndex) {
+            for (var colIndex = 0; colIndex < colCount; ++colIndex) {
+                var dataValue = data[rowOffset + colIndex];
+                var pixelIndex = Math.floor(dataIndex / this.bandCount);
+                var bandIndex = colIndex % this.bandCount;
+                var textureIndex = Math.floor(bandIndex / 4);
+                var textureData = textureDataArrays[textureIndex];
+                var bandCount = textureData.length / pixelCount;
+                var textureBandIndex = bandIndex % 4;
+                textureData[pixelIndex * bandCount + textureBandIndex] = dataValue;
+                ++dataIndex;
+            }
+            rowOffset += bytesPerRow / bytesPerElement;
+        }
+        for (var textureIndex = 0; textureIndex < textureCount; ++textureIndex) {
+            var texture = this.textures[textureIndex];
+            var textureData = textureDataArrays[textureIndex];
+            var bandCount = textureData.length / pixelCount;
+            uploadDataTexture(helper, texture, textureData, pixelSize, bandCount, tile.interpolate);
+        }
+    };
+    TileTexture.prototype.handleTileChange_ = function () {
+        if (this.tile.getState() === _TileState_js__WEBPACK_IMPORTED_MODULE_4__["default"].LOADED) {
+            this.loaded = true;
+            this.uploadTile_();
+            this.dispatchEvent(_events_EventType_js__WEBPACK_IMPORTED_MODULE_3__["default"].CHANGE);
+        }
+    };
+    TileTexture.prototype.disposeInternal = function () {
+        var gl = this.helper_.getGL();
+        this.helper_.deleteBuffer(this.coords);
+        for (var i = 0; i < this.textures.length; ++i) {
+            gl.deleteTexture(this.textures[i]);
+        }
+        this.tile.removeEventListener(_events_EventType_js__WEBPACK_IMPORTED_MODULE_3__["default"].CHANGE, this.handleTileChange_);
+    };
+    /**
+     * Get data for a pixel.  If the tile is not loaded, null is returned.
+     * @param {number} col The column index.
+     * @param {number} row The row index.
+     * @return {import("../DataTile.js").Data|null} The data.
+     */
+    TileTexture.prototype.getPixelData = function (col, row) {
+        if (!this.loaded) {
+            return null;
+        }
+        col = Math.floor(this.tilePixelRatio_ * col);
+        row = Math.floor(this.tilePixelRatio_ * row);
+        if (this.tile instanceof _DataTile_js__WEBPACK_IMPORTED_MODULE_10__["default"]) {
+            var data_1 = this.tile.getData();
+            var pixelsPerRow = Math.floor(this.tilePixelRatio_ * this.size[0]);
+            if (data_1 instanceof DataView) {
+                var bytesPerPixel = data_1.byteLength / (this.size[0] * this.size[1]);
+                var offset_1 = row * pixelsPerRow * bytesPerPixel + col * bytesPerPixel;
+                var buffer = data_1.buffer.slice(offset_1, offset_1 + bytesPerPixel);
+                return new DataView(buffer);
+            }
+            var offset = row * pixelsPerRow * this.bandCount + col * this.bandCount;
+            return data_1.slice(offset, offset + this.bandCount);
+        }
+        if (!pixelContext) {
+            createPixelContext();
+        }
+        pixelContext.clearRect(0, 0, 1, 1);
+        var data;
+        var image = this.tile.getImage();
+        try {
+            pixelContext.drawImage(image, col, row, 1, 1, 0, 0, 1, 1);
+            data = pixelContext.getImageData(0, 0, 1, 1).data;
+        }
+        catch (err) {
+            return null;
+        }
+        return data;
+    };
+    return TileTexture;
+}(_events_Target_js__WEBPACK_IMPORTED_MODULE_11__["default"]));
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (TileTexture);
+//# sourceMappingURL=TileTexture.js.map
+
+/***/ }),
+
+/***/ "./node_modules/ol/worker/webgl.js":
+/*!*****************************************!*\
+  !*** ./node_modules/ol/worker/webgl.js ***!
+  \*****************************************/
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "create": () => (/* binding */ create)
+/* harmony export */ });
+/* provided dependency */ var Buffer = __webpack_require__(/*! buffer */ "./node_modules/buffer/index.js")["Buffer"];
+function create() {
+    var source = "var e=\"function\"==typeof Object.assign?Object.assign:function(e,n){if(null==e)throw new TypeError(\"Cannot convert undefined or null to object\");for(var t=Object(e),r=1,o=arguments.length;r<o;++r){var i=arguments[r];if(null!=i)for(var f in i)i.hasOwnProperty(f)&&(t[f]=i[f])}return t},n=\"GENERATE_BUFFERS\",t=[],r={vertexPosition:0,indexPosition:0};function o(e,n,t,r,o){e[n+0]=t,e[n+1]=r,e[n+2]=o}function i(e,n,i,f,s,a){var u=3+s,l=e[n+0],v=e[n+1],c=t;c.length=s;for(var g=0;g<c.length;g++)c[g]=e[n+2+g];var b=a?a.vertexPosition:0,h=a?a.indexPosition:0,d=b/u;return o(i,b,l,v,0),c.length&&i.set(c,b+3),o(i,b+=u,l,v,1),c.length&&i.set(c,b+3),o(i,b+=u,l,v,2),c.length&&i.set(c,b+3),o(i,b+=u,l,v,3),c.length&&i.set(c,b+3),b+=u,f[h++]=d,f[h++]=d+1,f[h++]=d+3,f[h++]=d+1,f[h++]=d+2,f[h++]=d+3,r.vertexPosition=b,r.indexPosition=h,r}var f=self;f.onmessage=function(t){var r=t.data;if(r.type===n){for(var o,s=r.customAttributesCount,a=2+s,u=new Float32Array(r.renderInstructions),l=u.length/a,v=4*l*(s+3),c=new Uint32Array(6*l),g=new Float32Array(v),b=0;b<u.length;b+=a)o=i(u,b,g,c,s,o);var h=e({vertexBuffer:g.buffer,indexBuffer:c.buffer,renderInstructions:u.buffer},r);f.postMessage(h,[g.buffer,c.buffer,u.buffer])}};";
+    return new Worker(typeof Blob === 'undefined'
+        ? 'data:application/javascript;base64,' + Buffer.from(source, 'binary').toString('base64')
+        : URL.createObjectURL(new Blob([source], { type: 'application/javascript' })));
+}
+//# sourceMappingURL=webgl.js.map
 
 /***/ }),
 

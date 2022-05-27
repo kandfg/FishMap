@@ -1,6 +1,6 @@
 <template>
 <div>
-<button type="button" v-on:click="getLocation" class="btn btn-primary">取得您目前所在位置的經緯度</button>
+<button type="button" v-on:click="getLocation" class="btn btn-primary">取得目前位置經緯度(誤差值1000公尺內)</button>
 
 </div>
 </template>
@@ -22,8 +22,8 @@ export default {
         function showPosition(position) {
         const lo= document.getElementById("longitude");
         const la= document.getElementById("latitude");
-        lo.value =position.coords.latitude;
-        la.value=position.coords.longitude;
+        lo.value =position.coords.latitude.toFixed(6);
+        la.value=position.coords.longitude.toFixed(6);
         }
     }
   }

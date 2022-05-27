@@ -10,7 +10,6 @@
           <option :value="cla.id" v-for="(cla, index) in fishdata.data.class[this.selclass-1].fishs" :key="index">{{cla.name}}</option>
       </select>
     </div>
-    {{fishcoordinate.data.fishcoordinates}}
     <div id="map" class="ol-map">
       <div id="popup" class="ol-popup"></div>
     </div>
@@ -18,12 +17,14 @@
 </template>
 <script>
 import 'ol/ol.css';
-import {Circle, Fill, Style} from 'ol/style';
+import {Circle, Stroke,Fill, Style} from 'ol/style';
 import {Feature, Map, Overlay, View} from 'ol/index';
 import {OSM, Vector as VectorSource} from 'ol/source';
 import {Point} from 'ol/geom';
-import {Tile as TileLayer, Vector as VectorLayer} from 'ol/layer';
+import {Vector} from 'ol/source';
+import {Tile as TileLayer} from 'ol/layer';
 import {fromLonLat, useGeographic} from 'ol/proj';
+import WebGLPointsLayer from 'ol/layer/WebGLPoints';
 useGeographic();
 export default {
   data() {
@@ -46,9 +47,10 @@ export default {
       },
       fishcoordinate:{
         data:{
-          fishcoordinates:[
-            
-          ]
+          fishCoordinates:[
+            "latitude",
+            "longitude",
+          ],
         }
       }
     };
@@ -56,41 +58,101 @@ export default {
   methods:{
     
     initMap(){
-      const element = document.getElementById('popup');
       const place = [120.863887,24.657074];
-      const cordinates=[
-        
-      ];
-      const point = new Point(place);
-      const feature=new Feature({
-        geometry:new Point(
-          fromLonLat([]),
-        )
-      });
       const map = new Map({
       target: "map", //對應div id
       view: new View({
           projection: "EPSG:4326",    //使用这个坐标系
           center: [120.863887,24.657074],  //台灣台一座標
-          zoom: 14
+          zoom: 8
         
         }),
       layers: [
         new TileLayer({
           source: new OSM() //圖片源頭OpenStreetMap
         }),
-        new VectorLayer({
-          source: new VectorSource({
-            features: [new Feature(point)],
-          }),
-          style: new Style({
-            image: new Circle({
-              radius: 4,
-              fill: new Fill({color: 'black'}),
-            }),
-          }),
-        }),
       ]
+      });
+      const vectorSource = new Vector({
+        features: [],
+        attributions: 'Fish Coordinate',
+      });
+      ;(async () => {
+        const fishcoordinate = await axios({
+          url: 'http://localhost:8000/get-coordinate',
+          method: 'get'
+        })
+      const features = [];
+      Object.values(fishcoordinate.data.fishCoordinates).forEach(element => {
+        const coords = [element.longitude,element.latitude];
+        features.push(
+          new Feature({
+            fishName:element.fishs.name,
+            place:element.survey_place,
+            geometry: new Point(coords),
+          })
+        );
+      });
+      vectorSource.addFeatures(features);
+      })()
+      const style = {
+        variables: {
+          filterShape: 'all',
+        },
+        filter: [
+          'case',
+          ['!=', ['var', 'filterShape'], 'all'],
+          ['==', ['get', 'shape'], ['var', 'filterShape']],
+          true,
+        ],
+        symbol: {
+          symbolType: 'circle',
+          size: 14,
+          color: 'rgb(255, 0, 0)',
+          opacity: 0.5,
+        },
+      };
+      const shapeSelect = document.getElementById('selectfish');
+      const shapeTypes = {
+        all: 0,
+      };
+      shapeSelect.addEventListener('input', function () {
+        style.variables.filterShape =shapeSelect.options[shapeSelect.selectedIndex].value;
+        map.render();
+      });
+      // console.log(style);
+      map.addLayer(
+        new WebGLPointsLayer({
+        source: vectorSource,
+        style:style,
+      })
+      );
+
+      map.on('moveend', function () {
+        const info = document.getElementById('info');
+        const view = map.getView();
+        const center = view.getCenter();
+      });
+      const element = document.getElementById('popup');
+      map.on('click', function (event) {
+        $(element).popover('dispose');
+        const feature = map.getFeaturesAtPixel(event.pixel)[0];
+        if (feature) {
+          const coordinate = feature.getGeometry().getCoordinates();
+          const a=feature.getGeometry().get('flatCoordinates');
+          popup.setPosition([
+            coordinate[0] + Math.round(event.coordinate[0] / 360) * 360,
+            coordinate[1],
+          ]);
+          $(element).popover({
+            container: element,
+            html: true,
+            sanitize: false,
+            content: content(feature.get('fishName'),feature.get('place'),coordinate),
+            placement: 'top',
+          });
+          $(element).popover('show');
+        }
       });
       const popup = new Overlay({
         element: element,
@@ -98,33 +160,18 @@ export default {
         stopEvent: false,
         offset: [0, -10],
       });
+      function content(name,place,coordinate) {
+        return `
+          <table>
+            <tbody>
+              <tr><th>魚名</th><td>${name}</td></tr>
+              <tr><th>縣市</th><td>${place}</td></tr>
+              <tr><th>經度</th><td>${coordinate[0]}</td></tr>
+              <tr><th>緯度</th><td>${coordinate[1]}</td></tr>
+            </tbody>
+          </table>`;
+      }
       map.addOverlay(popup);
-
-      map.on('moveend', function () {
-        const info = document.getElementById('info');
-        const view = map.getView();
-        const center = view.getCenter();
-      });
-
-      map.on('click', function (event) {
-        $(element).popover('dispose');
-        const feature = map.getFeaturesAtPixel(event.pixel)[0];
-        if (feature) {
-          const coordinate = feature.getGeometry().getCoordinates();
-          popup.setPosition([
-            coordinate[0] + Math.round(event.coordinate[0] / 360) * 360,
-            coordinate[1],
-          ]);
-          $(element).popover({
-            container: element.parentElement,
-            html: true,
-            sanitize: false,
-            content: formatCoordinate(coordinate),
-            placement: 'top',
-          });
-          $(element).popover('show');
-        }
-      });
       map.on('pointermove', function (event) {
         if (map.hasFeatureAtPixel(event.pixel)) {
           map.getViewport().style.cursor = 'pointer';
@@ -138,25 +185,9 @@ export default {
       map.on('loadend', function () {
         map.getTargetElement().classList.remove('spinner');
       });
-      function formatCoordinate(coordinate) {
-        return `
-          <table>
-            <tbody>
-              <tr><th>魚名</th><td>飯島式銀鮈</td></tr>
-              <tr><th>縣市</th><td>苗栗</td></tr>
-              <tr><th>經度</th><td>${coordinate[0].toFixed(6)}</td></tr>
-              <tr><th>緯度</th><td>${coordinate[1].toFixed(6)}</td></tr>
-            </tbody>
-          </table>`;
-      }
     },
+
     async loadData() {
-      await axios
-      .get('http://localhost:8000/get-coordinate')
-      .then(response => (this.fishcoordinate = response))
-      .catch(function (error) { // 请求失败处理
-        console.log(error);
-      });
       await axios
       .get('http://localhost:8000/get-fish')
       .then(response => (this.fishdata = response))
@@ -182,6 +213,9 @@ export default {
         to {
           transform: rotate(360deg);
         }
+      }
+      .ol-popup {
+        min-width: 280px;
       }
 
       .spinner:after {

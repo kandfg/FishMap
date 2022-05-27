@@ -12,6 +12,9 @@ class MapController extends Controller
     }
     public function getCoordinate(){
         $fishCoordinates=FishCoordinate::all();
+        foreach($fishCoordinates as $fishCoordinate){
+            $fishCoordinate->fishs;
+        }
         return response()->json(['fishCoordinates' => $fishCoordinates]);
     }
 }
