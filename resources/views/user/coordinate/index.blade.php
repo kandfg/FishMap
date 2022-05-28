@@ -45,7 +45,7 @@
                         </div>
                         <div class="input-group mb-3">
                             <label class="input-group-text" for="inputGroupFile01">圖片</label>
-                            <input type="file" class="form-control" id="inputGroupFile01">
+                            <input type="file" class="form-control" id="inputGroupFile01" name="image">
                         </div>
                         <button type="submit" class="btn btn-primary">建立</button>
                         
