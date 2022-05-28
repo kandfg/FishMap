@@ -43,6 +43,10 @@
                             <input type="text" id="latitude" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" name="longitude">
                             <gecord></gecord>
                         </div>
+                        <div class="input-group mb-3">
+                            <label class="input-group-text" for="inputGroupFile01">圖片</label>
+                            <input type="file" class="form-control" id="inputGroupFile01">
+                        </div>
                         <button type="submit" class="btn btn-primary">建立</button>
                         
                     </form>

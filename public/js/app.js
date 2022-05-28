@@ -5313,6 +5313,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
 
 
 
@@ -5414,9 +5415,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       };
       var fishSelect = document.getElementById('selectfish');
       var fishClass = document.getElementById('selectclass');
-      var shapeTypes = {
-        all: 0
-      };
       fishClass.addEventListener('change', function () {
         style.variables.filterFish = 'all';
         map.render();

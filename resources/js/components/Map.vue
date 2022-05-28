@@ -5,10 +5,10 @@
       <select class="form-select" aria-label="Default select example" v-model="selclass" id="selectclass" name="class_id">
               <option :value="cla.id" v-for="(cla, index) in fishdata.data.class" :key="index">{{cla.section_name}}</option>
       </select>
-      {{fishdata.data.class}}
+
       <span class="input-group-text" id="inputGroup-sizing-default">選擇魚類</span>
       <select class="form-select" aria-label="Default select example" v-model="selfish" id="selectfish" name="fish_id">
-          <option :value="cla.id" v-for="(cla, index) in fishdata.data.class[this.selclass].fishs" :key="index">{{cla.name}}</option>
+          <option :value="cla.id" v-for="(cla, index) in fishdata.data.class[this.selclass-1].fishs" :key="index">{{cla.name}}</option>
       </select>
     </div>
     <div id="map" class="ol-map">
@@ -116,9 +116,6 @@ export default {
       };
       const fishSelect = document.getElementById('selectfish');
       const fishClass = document.getElementById('selectclass');
-      const shapeTypes = {
-        all: 0,
-      };
       fishClass.addEventListener('change', function () {
         style.variables.filterFish ='all';
         map.render();
