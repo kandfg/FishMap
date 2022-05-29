@@ -13,7 +13,7 @@
                 </p>
                 <div class="collapse" id="collapseExample">
                 <div class="card card-body">
-                    <form action="{{ route('create_coordinate') }}" method="post">
+                    <form action="{{ route('create_coordinate') }}" method="post" enctype="multipart/form-data">
                         @csrf
                         <selfish></selfish>
                         <div class="input-group mb-3">
@@ -45,7 +45,7 @@
                         </div>
                         <div class="input-group mb-3">
                             <label class="input-group-text" for="inputGroupFile01">圖片</label>
-                            <input type="file" class="form-control" id="inputGroupFile01" name="image">
+                            <input type="file" accept="image/*" class="form-control" id="inputGroupFile01" name="cord_image">
                         </div>
                         <button type="submit" class="btn btn-primary">建立</button>
                         

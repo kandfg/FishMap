@@ -1,7 +1,7 @@
 <template>
 <div class="input-group mb-3">
   <span class="input-group-text" id="inputGroup-sizing-default">選擇科名</span>
-  <select class="form-select" aria-label="Default select example" v-model="selclass" name="class_id">
+  <select class="form-select" aria-label="Default select example" v-model="selclass" id="selectclass" name="class_id">
           <option :value="cla.id" v-for="(cla, index) in fishdata.data.class" :key="index">{{cla.section_name}}</option>
   </select>
   <span class="input-group-text" id="inputGroup-sizing-default">選擇魚類</span>
@@ -15,7 +15,7 @@ export default {
   data() {
     return {
       selclass:1,
-      selfish:1,
+      selfish:0,
       fishdata: {
         data:{
           class:[
@@ -23,10 +23,10 @@ export default {
               fishs:[
               "id",
               "name"
-              ]
+              ],
+              id:0,
+              section_name:''
             },
-            "id",
-            "section_name"
           ],
         }
       }
@@ -41,6 +41,7 @@ export default {
         console.log(error);
       });
     },
+    
   },
   mounted() {
     this.loadData();

@@ -7,6 +7,7 @@ use App\Models\Fish;
 use App\Models\FishCoordinate;
 use App\Http\Controllers\Controller;
 use App\Models\FishClass;
+use App\Models\User;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 class CoordinateController extends Controller
@@ -30,7 +31,32 @@ class CoordinateController extends Controller
     }
     public function create(Request $request)
     {
-        return response($request->all());
+        $user_id=Auth::user()->id;
+        $user=User::find($user_id);
+        $result=$user->fishCoordinates()->create([
+            'fish_id'=>$request->fish_id,
+            'surveyor'=>$request->surveyor,
+            'survey_method'=>$request->survey_method,
+            'survey_hours'=>$request->survey_hours,
+            'survey_day'=>$request->survey_day,
+            'abundance'=>$request->abundance,
+            'survey_place'=>$request->survey_place,
+            'longitude'=>$request->longitude,
+            'latitude'=>$request->latitude,
+        ]);
+        //$file = $request->cord_image;
+        // if (is_null($productId)) {
+        //     return redirect()->back()->withErrors(['msg' => '參數錯誤']);
+        // }
+        // $product = Product::create();
+        // $path = $file->store('public/images');
+        // $product->images()->create([
+        //     'filename' => $file->getClientOriginalName(),
+        //     'path' => $path,
+        // ]);
+        return response($request);
+        //return response(time().'.'.$request->cord_image->extension());
+        //return redirect()->back();
     }
 
     /**

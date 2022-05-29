@@ -5313,7 +5313,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
-//
 
 
 
@@ -5415,6 +5414,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       };
       var fishSelect = document.getElementById('selectfish');
       var fishClass = document.getElementById('selectclass');
+      var shapeTypes = {
+        all: 0
+      };
       fishClass.addEventListener('change', function () {
         style.variables.filterFish = 'all';
         map.render();
@@ -5589,12 +5591,14 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   data: function data() {
     return {
       selclass: 1,
-      selfish: 1,
+      selfish: 0,
       fishdata: {
         data: {
           "class": [{
-            fishs: ["id", "name"]
-          }, "id", "section_name"]
+            fishs: ["id", "name"],
+            id: 0,
+            section_name: ''
+          }]
         }
       }
     };
@@ -42801,7 +42805,11 @@ var render = function () {
           },
         ],
         staticClass: "form-select",
-        attrs: { "aria-label": "Default select example", name: "class_id" },
+        attrs: {
+          "aria-label": "Default select example",
+          id: "selectclass",
+          name: "class_id",
+        },
         on: {
           change: function ($event) {
             var $$selectedVal = Array.prototype.filter
