@@ -113,6 +113,8 @@ class CoordinateController extends Controller
      */
     public function destroy($id)
     {
-        return response($id);
+        $coordinate=FishCoordinate::find($id);
+        $coordinate->delete();
+        return Redirect(route('coordinate'));
     }
 }

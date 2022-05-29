@@ -39,8 +39,8 @@
         <input type="hidden" name="_method" value="DELETE">
         <input type="hidden" name="_token" value="{{ csrf_token() }}">
         <button class="btn btn-primary" type="submit">刪除</button>
+        <a class="btn btn-primary" href="{{ route('coordinate') }}" role="button">回上頁</a>
     </form>
-    <a class="btn btn-primary" href="{{ route('coordinate') }}" role="button">回上頁</a>
     
 </div>
 @endsection
