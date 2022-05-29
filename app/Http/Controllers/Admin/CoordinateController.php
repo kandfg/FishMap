@@ -54,9 +54,8 @@ class CoordinateController extends Controller
         //     'filename' => $file->getClientOriginalName(),
         //     'path' => $path,
         // ]);
-        return response($request);
         //return response(time().'.'.$request->cord_image->extension());
-        //return redirect()->back();
+        return redirect()->back();
     }
 
     /**
