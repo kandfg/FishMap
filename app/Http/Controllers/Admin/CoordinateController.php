@@ -113,6 +113,6 @@ class CoordinateController extends Controller
      */
     public function destroy($id)
     {
-        return 123;
+        return response($id);
     }
 }

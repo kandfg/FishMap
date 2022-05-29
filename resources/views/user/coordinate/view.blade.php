@@ -35,7 +35,11 @@
                 <td colspan=4><img src="{{$coordinate->images}}/{{$coordinate->images}}" alt="捕獲地點照片"></td>
             </tr>
     </table>
-    <a class="btn btn-primary" href="{{ route('destory_coordinate',$coordinate->id) }}" role="button">刪除</a>
+    <form action="{{ route('destory_coordinate',$coordinate->id) }}" method="POST">
+        <input type="hidden" name="_method" value="DELETE">
+        <input type="hidden" name="_token" value="{{ csrf_token() }}">
+        <button class="btn btn-primary" type="submit">刪除</button>
+    </form>
     <a class="btn btn-primary" href="{{ route('coordinate') }}" role="button">回上頁</a>
     
 </div>
