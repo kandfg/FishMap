@@ -32,7 +32,7 @@
                 <td colspan=3>{{$coordinate->created_at}}</td>
             <tr>
             <tr>
-                <td colspan=4><img src="{{$coordinate->images}}/{{$coordinate->images}}" alt="捕獲地點照片"></td>
+                <td colspan=4><img src="{{$coordinate->image_url}}" alt="捕獲地點照片"></td>
             </tr>
     </table>
     <form action="{{ route('destory_coordinate',$coordinate->id) }}" method="POST">

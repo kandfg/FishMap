@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Storage;
 
 class FishCoordinate extends Model
 {
@@ -19,5 +20,12 @@ class FishCoordinate extends Model
     public function images()
     {
         return $this->morphMany(Image::class,'attachable');
+    }
+    public function getImageUrlAttribute()
+    {
+        $images = $this->images;
+        if ($images->isNotEmpty()) {
+            return Storage::url($images->last()->path);
+        }
     }
 }

@@ -44,17 +44,13 @@ class CoordinateController extends Controller
             'longitude'=>$request->longitude,
             'latitude'=>$request->latitude,
         ]);
-        //$file = $request->cord_image;
-        // if (is_null($productId)) {
-        //     return redirect()->back()->withErrors(['msg' => '參數錯誤']);
-        // }
-        // $product = Product::create();
-        // $path = $file->store('public/images');
-        // $product->images()->create([
-        //     'filename' => $file->getClientOriginalName(),
-        //     'path' => $path,
-        // ]);
-        //return response(time().'.'.$request->cord_image->extension());
+        $coordinate=FishCoordinate::find($result->id);
+        $file = $request->file('cord_image');
+        $path = $file->store('public/images');
+        $coordinate->images()->create([
+            'filename' => $file->getClientOriginalName(),
+            'path' => $path,
+        ]);
         return redirect()->back();
     }
 

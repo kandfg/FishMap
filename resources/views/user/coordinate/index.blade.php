@@ -44,7 +44,7 @@
                             <gecord></gecord>
                         </div>
                         <div class="input-group mb-3">
-                            <label class="input-group-text" for="inputGroupFile01">圖片</label>
+                            <label class="input-group-text" for="inputGroupFile01">現場環境圖片</label>
                             <input type="file" accept="image/*" class="form-control" id="inputGroupFile01" name="cord_image">
                         </div>
                         <button type="submit" class="btn btn-primary">建立</button>
