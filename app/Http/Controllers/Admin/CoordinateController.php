@@ -26,7 +26,7 @@ class CoordinateController extends Controller
         $user=Auth::user()->id;
         $fishClasses=FishClass::all();
         $fishs=Fish::select('id','name')->get();
-        $fishCoordinates=FishCoordinate::where('user_id','=',$user)->get();
+        $fishCoordinates=FishCoordinate::where('user_id','=',$user)->orderBy('id','desc')->get();
         return view('user.coordinate.index',['fishCoordinates'=>$fishCoordinates,'fishs'=>$fishs,'fishClasses'=>$fishClasses]);
     }
     public function create(Request $request)
